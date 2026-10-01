@@ -1,0 +1,2593 @@
+[
+  {
+    "id": "dc_001",
+    "universe": "DC",
+    "title": "Ace o Bate-Cão",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/ace_o_bate_cão.webp",
+    "format": "STL",
+    "fileSize": "26.4 MB",
+    "downloadsCount": 120,
+    "driveId": "1F2wj0XJuSO-4egwJYxHVEqNSPlBUVVzR",
+    "driveLink": "https://drive.google.com/drive/folders/1F2wj0XJuSO-4egwJYxHVEqNSPlBUVVzR?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "capa_ace.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_002",
+    "universe": "DC",
+    "title": "Bat-Mirim (Batmite)",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/bat_mirim_batmite.webp",
+    "format": "STL",
+    "fileSize": "134.4 MB",
+    "downloadsCount": 137,
+    "driveId": "1By1c8AYdjjlPywHk2teRxyIJQvYmqc1z",
+    "driveLink": "https://drive.google.com/drive/folders/1By1c8AYdjjlPywHk2teRxyIJQvYmqc1z?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "braco_esquerdo_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "capa_b.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "pernas.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco_2.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_003",
+    "universe": "DC",
+    "title": "Batman",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman.jpg",
+    "format": "STL + AMS",
+    "fileSize": "26.4 MB",
+    "downloadsCount": 154,
+    "driveId": "1584Wx-MleIlhSu7d-hV8tDKXaLwbzH_1",
+    "driveLink": "https://drive.google.com/drive/folders/1584Wx-MleIlhSu7d-hV8tDKXaLwbzH_1?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "[500%] Batman - DC - 2013 - Arctic Version",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[500%] Batman - DC - 2017 Version with Belt",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[500%] Batman - DC - 2017 Version with Wings",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "H2-Series _ Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Split Wings _ Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Wings for 256mm bed A1 P1 X1 Batman",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Wings for 256mm bed A1 P1 X1 Batman.3mf",
+        "size": "5.8 MB",
+        "type": "stl"
+      },
+      {
+        "name": "Wings for 256mm bed A1 P1 X1 Batman.jpg",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "[500%] Batman - DC - 2026 Version 20 Years",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[500%] Batman - DC - Battle Armor Stand - for 500% Figs",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Peças Separadas (Sem AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[Batman] Modelo 1812604",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[Batman] Modelo 1902206",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[Batman] Modelo 1903146",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[Batman] Modelo 1919612",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[Batman] Modelo 1936857",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[Batman] Modelo 1950163",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[Batman] Modelo 1995526",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[Batman] Modelo 2012732",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[Batman] Modelo 2030976",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[Batman] Modelo 2079018",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "[Batman] Modelo 2478399",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_004",
+    "universe": "DC",
+    "title": "Batman Armadura",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_armadura.webp",
+    "format": "STL",
+    "fileSize": "170.4 MB",
+    "downloadsCount": 171,
+    "driveId": "11YmEx8LCYuLVDwkiWiKH9a4QHz5ya-0J",
+    "driveLink": "https://drive.google.com/drive/folders/11YmEx8LCYuLVDwkiWiKH9a4QHz5ya-0J?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "10113batman_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "98721_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "capa_armor_b.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "montagem.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "tronco_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco_1_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_005",
+    "universe": "DC",
+    "title": "Batman Clássico",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_clássico.webp",
+    "format": "STL",
+    "fileSize": "158.4 MB",
+    "downloadsCount": 188,
+    "driveId": "1FT8eIMwEEQVbO2lMcnk0abs19II_iGVR",
+    "driveLink": "https://drive.google.com/drive/folders/1FT8eIMwEEQVbO2lMcnk0abs19II_iGVR?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "10113batman_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "56630.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "Batman_Clássico_Projeto_Impressao.3mf",
+        "size": "5.8 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_006",
+    "universe": "DC",
+    "title": "Batman com Capa Impressa 2019 (24cm)",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_com_capa_impressa_2019_24cm.webp",
+    "format": "STL",
+    "fileSize": "134.4 MB",
+    "downloadsCount": 205,
+    "driveId": "1x2kKskvzefE6N6HvpXQ6cAb2foVH6xjV",
+    "driveLink": "https://drive.google.com/drive/folders/1x2kKskvzefE6N6HvpXQ6cAb2foVH6xjV?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "98721.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_007",
+    "universe": "DC",
+    "title": "Batman Darth Vader",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_darth_vader.webp",
+    "format": "STL",
+    "fileSize": "170.4 MB",
+    "downloadsCount": 222,
+    "driveId": "1YwpQDfv9r3sqbPBkG-6MR5ew4BxHm0mP",
+    "driveLink": "https://drive.google.com/drive/folders/1YwpQDfv9r3sqbPBkG-6MR5ew4BxHm0mP?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "56630.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "lightsaberblade_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_1_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_008",
+    "universe": "DC",
+    "title": "Batman Fada Rosa",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_fada_rosa.webp",
+    "format": "STL",
+    "fileSize": "158.4 MB",
+    "downloadsCount": 239,
+    "driveId": "10XNtbnoigyH72i3oxFFhtU5F717Dl7O2",
+    "driveLink": "https://drive.google.com/drive/folders/10XNtbnoigyH72i3oxFFhtU5F717Dl7O2?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "10113batman_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "6124_fixed_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_009",
+    "universe": "DC",
+    "title": "Batman Traje Ártico",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_traje_ártico.webp",
+    "format": "STL",
+    "fileSize": "158.4 MB",
+    "downloadsCount": 256,
+    "driveId": "1kxnpFhb2JghpsP2xvyERQe667RgHj0Lf",
+    "driveLink": "https://drive.google.com/drive/folders/1kxnpFhb2JghpsP2xvyERQe667RgHj0Lf?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "10113batman_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "56630.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "98721.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_010",
+    "universe": "DC",
+    "title": "Batman V07",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_v07.webp",
+    "format": "STL",
+    "fileSize": "170.4 MB",
+    "downloadsCount": 273,
+    "driveId": "1dDjlV5bD2ZH1zcECzKCI2zfi28R2AKzD",
+    "driveLink": "https://drive.google.com/drive/folders/1dDjlV5bD2ZH1zcECzKCI2zfi28R2AKzD?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "10113batman_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "56630.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "98721.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "Batman_V07_Projeto_Impressao.3mf",
+        "size": "5.8 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_011",
+    "universe": "DC",
+    "title": "Batman V17",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_v17.webp",
+    "format": "STL",
+    "fileSize": "170.4 MB",
+    "downloadsCount": 290,
+    "driveId": "11SQSPJt5-sMupI75C7gD7vh7iAAAlwsp",
+    "driveLink": "https://drive.google.com/drive/folders/11SQSPJt5-sMupI75C7gD7vh7iAAAlwsp?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "10113batman_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "56630.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "98721.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "belt_2.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_012",
+    "universe": "DC",
+    "title": "Batman V19",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_v19.webp",
+    "format": "STL",
+    "fileSize": "146.4 MB",
+    "downloadsCount": 307,
+    "driveId": "15jGRQRmhvU0_CWrIGoJU1FKcA5D-b5T4",
+    "driveLink": "https://drive.google.com/drive/folders/15jGRQRmhvU0_CWrIGoJU1FKcA5D-b5T4?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "56630.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "98721.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "batman_cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_013",
+    "universe": "DC",
+    "title": "Batman V26",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_v26.webp",
+    "format": "STL",
+    "fileSize": "134.4 MB",
+    "downloadsCount": 324,
+    "driveId": "1wpwlTVbkx0Tt1VZcwpcWsmwHOZVQ7bCK",
+    "driveLink": "https://drive.google.com/drive/folders/1wpwlTVbkx0Tt1VZcwpcWsmwHOZVQ7bCK?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "bathelmet_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_014",
+    "universe": "DC",
+    "title": "Batman V26 Sem Asas",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_v26_sem_asas.webp",
+    "format": "STL",
+    "fileSize": "134.4 MB",
+    "downloadsCount": 341,
+    "driveId": "1XByjuWkmlH_3cSJMR6HMOv5WfMhdphvC",
+    "driveLink": "https://drive.google.com/drive/folders/1XByjuWkmlH_3cSJMR6HMOv5WfMhdphvC?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "bathelmet_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_015",
+    "universe": "DC",
+    "title": "Batman V39",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_v39.webp",
+    "format": "STL",
+    "fileSize": "146.4 MB",
+    "downloadsCount": 358,
+    "driveId": "1aqMBIfLH-p463qg-wBNpBcGgnDaRStpU",
+    "driveLink": "https://drive.google.com/drive/folders/1aqMBIfLH-p463qg-wBNpBcGgnDaRStpU?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "56630.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "98721.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "batman_cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_016",
+    "universe": "DC",
+    "title": "Batman Versão 2013 (24cm)",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/batman_versão_2013_24cm.webp",
+    "format": "STL",
+    "fileSize": "170.4 MB",
+    "downloadsCount": 375,
+    "driveId": "1Pe1Ji-dW0FZXJed8HLcMEDcXpvZ9TNqU",
+    "driveLink": "https://drive.google.com/drive/folders/1Pe1Ji-dW0FZXJed8HLcMEDcXpvZ9TNqU?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "56630.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "Batman_Versão_2013_24cm_Projeto_Impressao.3mf",
+        "size": "5.8 MB",
+        "type": "stl"
+      },
+      {
+        "name": "belt_2.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "rabbit_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_017",
+    "universe": "DC",
+    "title": "Coringa (Joker)",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/coringa_joker.webp",
+    "format": "STL",
+    "fileSize": "158.4 MB",
+    "downloadsCount": 392,
+    "driveId": "1PnVeALx5Vt-wiQm2LqE2YxW_QaREYKyS",
+    "driveLink": "https://drive.google.com/drive/folders/1PnVeALx5Vt-wiQm2LqE2YxW_QaREYKyS?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "55707b_fixed_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabelo_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_018",
+    "universe": "DC",
+    "title": "Espantalho (Com AMS)",
+    "category": "Batman & Gotham",
+    "imageUrl": "/models/dc/espantalho_com_ams.webp",
+    "format": "STL + AMS",
+    "fileSize": "146.4 MB",
+    "downloadsCount": 409,
+    "driveId": "1qrX7TapUzQbKm-HyaX4gCSGDiEQ_OF26",
+    "driveLink": "https://drive.google.com/drive/folders/1qrX7TapUzQbKm-HyaX4gCSGDiEQ_OF26?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "braco_direito.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "Espantalho_Com_AMS_Com_AMS_Projeto_Impressao.3mf",
+        "size": "5.8 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "scarecrow_cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "scarecrow_tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_019",
+    "universe": "DC",
+    "title": "Flash Barry Allen (Com AMS)",
+    "category": "The Flash",
+    "imageUrl": "/models/dc/flash_barry_allen_com_ams.webp",
+    "format": "STL + AMS",
+    "fileSize": "134.4 MB",
+    "downloadsCount": 426,
+    "driveId": "17rlMQlEXNAU1G0MzSpFrkZxksnM0Gf8L",
+    "driveLink": "https://drive.google.com/drive/folders/17rlMQlEXNAU1G0MzSpFrkZxksnM0Gf8L?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "braco_direito.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "flash.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "flash_cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco_flash.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_020",
+    "universe": "DC",
+    "title": "Flash Jay Garrick (Com AMS)",
+    "category": "The Flash",
+    "imageUrl": "/models/dc/flash_jay_garrick_com_ams.webp",
+    "format": "STL + AMS",
+    "fileSize": "170.4 MB",
+    "downloadsCount": 133,
+    "driveId": "1dRNyzbx65dPUDmw0N3xTFFv8sB56XvS8",
+    "driveLink": "https://drive.google.com/drive/folders/1dRNyzbx65dPUDmw0N3xTFFv8sB56XvS8?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "18986_fixed_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "27256_1_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "27256_1_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_direito.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "capacete_flash_1_a_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco_flashjay.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_021",
+    "universe": "DC",
+    "title": "Flash Reverso (Com AMS)",
+    "category": "The Flash",
+    "imageUrl": "/models/dc/flash_reverso_com_ams.webp",
+    "format": "STL + AMS",
+    "fileSize": "134.4 MB",
+    "downloadsCount": 150,
+    "driveId": "1elXCfgA0gd6Im8RXDYUX_1T7lS5Q6DU6",
+    "driveLink": "https://drive.google.com/drive/folders/1elXCfgA0gd6Im8RXDYUX_1T7lS5Q6DU6?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "braco_direito.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "flash.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "flash_cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco_flash.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_022",
+    "universe": "DC",
+    "title": "Godspeed (Com AMS)",
+    "category": "The Flash",
+    "imageUrl": "/models/dc/godspeed_com_ams.webp",
+    "format": "STL + AMS",
+    "fileSize": "134.4 MB",
+    "downloadsCount": 167,
+    "driveId": "1oe9OY45ZBevEspbwaADrelyT6prmI_8p",
+    "driveLink": "https://drive.google.com/drive/folders/1oe9OY45ZBevEspbwaADrelyT6prmI_8p?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "flash_cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mascara.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_023",
+    "universe": "DC",
+    "title": "Invencível",
+    "category": "Invincible",
+    "imageUrl": "/models/dc/invencível.png",
+    "format": "STL",
+    "fileSize": "674.4 MB",
+    "downloadsCount": 184,
+    "driveId": "10nlugDJ48882ifwETr4QYRv6QrdydwUU",
+    "driveLink": "https://drive.google.com/drive/folders/10nlugDJ48882ifwETr4QYRv6QrdydwUU?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "Invencível",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": ".DS_Store",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "obj_10_Small joints.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_11_Body .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_12_Arm 2 .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_13_Arm 1 .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_14_Legs .stl_A.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_15_Legs .stl_B.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_16_Legs cover.stl_A.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_17_Legs cover.stl_B.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_18_Foot cover.stl_A.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_19_Foot cover.stl_B.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_1_Hands Yellow .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_20_Head base .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_21_Head top .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_22_Hair Black.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_23_Arm 1 .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_24_Arm 2 .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_25_Front plate .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_26_Back plate .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_27_Head top with hair .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_28_Eyes .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_29_Eyes .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_2_Hands Yellow .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_30_Head top with eyes  .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_31_Head top with hair .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_3_Hands Joint Black.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_4_Hands Joint Black.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_5_Hands Joint Black.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_6_Hands Joint Black.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_7_Leg Joint 1 Black .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_8_Leg Joint 2 Black .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_9_Big Joints .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.png",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "Omni-Man",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": ".DS_Store",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "obj_10_Small joints.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_11_Arm 2 .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_12_Arm 1 .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_13_Arm 1 .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_14_Arm 2 .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_15_Body .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_16_Back Omin man.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_17_Front  Omin man.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_18_Legs.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_19_Leg cover s.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_1_Hands Red.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_20_Foot cover s.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_21_Head Base.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_22_Head top with hair .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_23_Head top.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_24_Hair.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_2_Hands Red.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_3_Hands Joint Red.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_4_Hands Joint  Red.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_5_Hands Joint Red.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_6_Hands Joint Red.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_7_Leg Joint 1 Red .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_8_Leg Joint 2 Red.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_9_Big Joints .stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.png",
+        "size": "1.1 MB",
+        "type": "img"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_024",
+    "universe": "DC",
+    "title": "Krypto o Super-Cão",
+    "category": "Superman & Metrópolis",
+    "imageUrl": "/models/dc/krypto_o_super_cão.webp",
+    "format": "STL",
+    "fileSize": "62.4 MB",
+    "downloadsCount": 201,
+    "driveId": "1WQsdO_IAtwauU-R4aUuNHAafRUMpyKQK",
+    "driveLink": "https://drive.google.com/drive/folders/1WQsdO_IAtwauU-R4aUuNHAafRUMpyKQK?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "101658_b.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "hund_tronco_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "krypto_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "Krypto_o_Super-Cão_Projeto_Impressao.3mf",
+        "size": "5.8 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_025",
+    "universe": "DC",
+    "title": "Superman (Com AMS)",
+    "category": "Superman & Metrópolis",
+    "imageUrl": "/models/dc/superman_com_ams.webp",
+    "format": "STL + AMS",
+    "fileSize": "134.4 MB",
+    "downloadsCount": 218,
+    "driveId": "1_ak77Xi9qNnJmGlJsO5zhNV0lnkbAuLe",
+    "driveLink": "https://drive.google.com/drive/folders/1_ak77Xi9qNnJmGlJsO5zhNV0lnkbAuLe?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "braco_direito.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "capa.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "obj_3_Arm l",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "superman_cabelo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "superman_tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_026",
+    "universe": "DC",
+    "title": "Superman 2025 (David Corenswet)",
+    "category": "Superman & Metrópolis",
+    "imageUrl": "/models/dc/superman_2025_david_corenswet.webp",
+    "format": "STL",
+    "fileSize": "146.4 MB",
+    "downloadsCount": 235,
+    "driveId": "1m1TcD2H1AlNR-s8s2vdO4fzspS4NPeFj",
+    "driveLink": "https://drive.google.com/drive/folders/1m1TcD2H1AlNR-s8s2vdO4fzspS4NPeFj?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "braco_direito_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "cabelo_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "capa.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco_5.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_027",
+    "universe": "DC",
+    "title": "Superman 2025 David Corenswet - 500 %",
+    "category": "Superman & Metrópolis",
+    "imageUrl": "/models/dc/superman_2025_david_corenswet___500_.jpg",
+    "format": "STL + AMS",
+    "fileSize": "26.4 MB",
+    "downloadsCount": 252,
+    "driveId": "1mNk9cCU1ajTFTeB1yTZ9aL9qui-4iQkM",
+    "driveLink": "https://drive.google.com/drive/folders/1mNk9cCU1ajTFTeB1yTZ9aL9qui-4iQkM?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "0.2mm Camada, A1 Mini, 1 Colorido (Com AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Camada 0.2mm - Colorido (1 AMS)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Scaled 50% (Smaller)",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": "Scaled 50% (Smaller).3mf",
+        "size": "5.8 MB",
+        "type": "stl"
+      },
+      {
+        "name": "Scaled 50% (Smaller).jpg",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "Size 50% - 0.2mm Camada, 3 Paredes, 7% Preenchimento",
+        "size": "1.1 MB",
+        "type": "pdf"
+      },
+      {
+        "name": ".DS_Store",
+        "size": "1.1 MB",
+        "type": "pdf"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  },
+  {
+    "id": "dc_028",
+    "universe": "DC",
+    "title": "Zoom",
+    "category": "The Flash",
+    "imageUrl": "/models/dc/zoom.webp",
+    "format": "STL",
+    "fileSize": "134.4 MB",
+    "downloadsCount": 269,
+    "driveId": "1NIIf5YNc0P9BR7jiZ8Uu78fyYFmaKrus",
+    "driveLink": "https://drive.google.com/drive/folders/1NIIf5YNc0P9BR7jiZ8Uu78fyYFmaKrus?usp=drive_link",
+    "isFavorite": false,
+    "dateAdded": "2026-09-30",
+    "files": [
+      {
+        "name": "braco_esquerdo.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "braco_esquerdo_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "flash_cabeca.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mao_a_a_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "mascara.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "perna_direita_1.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "preview.webp",
+        "size": "1.1 MB",
+        "type": "img"
+      },
+      {
+        "name": "quadril.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      },
+      {
+        "name": "tronco.stl",
+        "size": "24.5 MB",
+        "type": "stl"
+      }
+    ],
+    "printSettings": {
+      "layerHeight": "0.12mm (0.16mm base)",
+      "infill": "15% Gyroid",
+      "supports": "Árvore (Tree) Orgânico",
+      "material": "PLA / PLA Silk / PETG"
+    }
+  }
+]
