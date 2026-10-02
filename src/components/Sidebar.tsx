@@ -1,280 +1,212 @@
 import React from 'react';
 import { 
-  Home, 
-  Heart, 
-  Download, 
-  Sparkles, 
-  Layers, 
-  Flame, 
-  Gamepad2, 
-  Sparkle, 
-  Palette, 
-  Ghost, 
-  Tv, 
-  Dog, 
-  Baby, 
-  BookOpen, 
-  Compass,
-  X,
-  Shield,
-  Sword,
-  Box,
-  Zap,
-  Smile,
-  Gift,
-  TreePine
+  Home, Zap, Coffee, Plane, Shield, Flame, 
+  Puzzle, Trophy, Smile, Heart, Download, 
+  Folder, Calculator, Box
 } from 'lucide-react';
-import { Category } from '../types';
-import { CATEGORIES } from '../data/mockData';
+import { VIP_DRIVE_MAIN_URL, SECTIONS } from '../data/modelsData';
+
+export type TabKey = 'catalog' | 'favorites' | 'downloads' | 'calculator';
 
 interface SidebarProps {
-  selectedCategory: Category;
-  onSelectCategory: (cat: Category) => void;
+  activeTab: TabKey;
+  onSelectTab: (tab: TabKey) => void;
+  selectedCategoryFilter: string;
+  onSelectCategoryFilter: (catId: string) => void;
   favoritesCount: number;
-  onOpenFavorites: () => void;
-  onOpenDownloads: () => void;
-  onOpenBonus: () => void;
-  isMobileOpen?: boolean;
-  onCloseMobile?: () => void;
+  downloadsCount: number;
 }
 
-// Icon mapping for categories to give domain authenticity
-const getCategoryIcon = (cat: Category) => {
-  switch (cat) {
-    case 'Todos':
-      return <Compass className="w-4 h-4" />;
-    case 'Terror & Cinema':
-      return <Ghost className="w-4 h-4 text-purple-400" />;
-    case 'Pokémon':
-      return <Zap className="w-4 h-4 text-yellow-400" />;
-    case 'Papai Noel':
-      return <Gift className="w-4 h-4 text-red-500" />;
-    case 'Árvores & Enfeites':
-      return <TreePine className="w-4 h-4 text-emerald-400" />;
-    case 'Renas & Cervos':
-      return <Sparkles className="w-4 h-4 text-amber-300" />;
-    case 'Personagens':
-      return <Smile className="w-4 h-4 text-pink-400" />;
-    case 'Presépio & Fé':
-      return <Heart className="w-4 h-4 text-yellow-300" />;
-    case 'Mortal Kombat':
-      return <Sword className="w-4 h-4 text-red-500" />;
-    case 'Street Fighter':
-      return <Flame className="w-4 h-4 text-red-500" />;
-    case 'Power Rangers':
-      return <Zap className="w-4 h-4 text-amber-400" />;
-    case 'Tartarugas Ninja':
-      return <Shield className="w-4 h-4 text-emerald-400" />;
-    case 'ThunderCats':
-      return <Sword className="w-4 h-4 text-orange-400" />;
-    case 'Corrida Maluca':
-      return <Gamepad2 className="w-4 h-4 text-purple-400" />;
-    case 'Filmes & Séries':
-      return <Tv className="w-4 h-4 text-cyan-400" />;
-    case 'Games':
-      return <Gamepad2 className="w-4 h-4 text-indigo-400" />;
-    case 'Bob Esponja':
-      return <Smile className="w-4 h-4 text-yellow-400" />;
-    case 'Dragon Ball':
-      return <Flame className="w-4 h-4 text-orange-400" />;
-    case 'Com AMS':
-      return <Sparkles className="w-4 h-4" />;
-    case 'Batman & Gotham':
-      return <Shield className="w-4 h-4" />;
-    case 'Superman & Metrópolis':
-      return <Zap className="w-4 h-4" />;
-    case 'The Flash':
-      return <Flame className="w-4 h-4" />;
-    case 'Liga da Justiça':
-      return <Shield className="w-4 h-4" />;
-    case 'Invincible':
-      return <Sword className="w-4 h-4" />;
-    case 'Vingadores':
-      return <Shield className="w-4 h-4" />;
-    case 'X-Men':
-      return <Flame className="w-4 h-4" />;
-    case 'Homem-Aranha':
-      return <Sparkle className="w-4 h-4" />;
-    case 'Deadpool & Wolverine':
-      return <Sword className="w-4 h-4" />;
-    case 'Quarteto Fantástico':
-      return <Box className="w-4 h-4" />;
-    case 'Hulk & Vingadores':
-      return <Zap className="w-4 h-4" />;
-    case 'Vilões':
-      return <Ghost className="w-4 h-4" />;
-    case 'Colecionáveis':
-      return <Flame className="w-4 h-4" />;
-    default:
-      return <Layers className="w-4 h-4" />;
-  }
-};
-
 export const Sidebar: React.FC<SidebarProps> = ({
-  selectedCategory,
-  onSelectCategory,
+  activeTab,
+  onSelectTab,
+  selectedCategoryFilter,
+  onSelectCategoryFilter,
   favoritesCount,
-  onOpenFavorites,
-  onOpenDownloads,
-  onOpenBonus,
-  isMobileOpen,
-  onCloseMobile,
+  downloadsCount
 }) => {
+  // Navigation categories automatically synchronized with SECTIONS from modelsData
+  const getSectionIcon = (iconType: string) => {
+    switch (iconType) {
+      case 'sparkles': return Flame;
+      case 'zap': return Zap;
+      case 'shield': return Shield;
+      case 'gamepad': return Puzzle;
+      case 'sword': return Trophy;
+      default: return Folder;
+    }
+  };
+
+  const navCategories = SECTIONS.slice(0, 18).map(sec => ({
+    id: sec.id,
+    label: sec.shortTitle,
+    icon: getSectionIcon(sec.iconType),
+    count: sec.count
+  }));
+
+  const handleSelectHome = () => {
+    onSelectTab('catalog');
+    onSelectCategoryFilter('all');
+  };
+
+  const handleSelectCategory = (catId: string) => {
+    onSelectTab('catalog');
+    onSelectCategoryFilter(catId);
+  };
+
   return (
-    <>
-      {/* Mobile backdrop */}
-      {isMobileOpen && (
-        <div 
-          onClick={onCloseMobile} 
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 lg:hidden"
-        />
-      )}
+    <aside className="w-64 shrink-0 bg-[#0C0C0C] border-r border-[#242424] flex flex-col h-full select-none text-left">
+      {/* Brand / Logo Header (Preto e Branco / Xadrez) */}
+      <div className="p-4 border-b border-[#242424] flex items-center gap-3">
+        <div className="w-9 h-9 rounded-lg bg-white text-black flex items-center justify-center shrink-0 shadow-md">
+          <Box className="w-5 h-5 stroke-[2.5]" />
+        </div>
+        <div>
+          <h2 className="text-sm font-black text-white tracking-tight leading-tight">
+            Biblioteca Central 3D
+          </h2>
+          <span className="text-[9px] font-mono font-black text-white/90 tracking-wider uppercase block">
+            O MAIOR ACERVO STL
+          </span>
+        </div>
+      </div>
 
-      <aside
-        className={`fixed lg:sticky top-0 lg:top-[65px] left-0 h-screen lg:h-[calc(100vh-65px)] w-64 bg-[#09090b] border-r border-[#27272a] z-50 lg:z-30 flex flex-col justify-between py-4 px-3 overflow-y-auto transition-transform duration-200 ease-in-out ${
-          isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-        }`}
-      >
-        <div className="space-y-6">
-          {/* Mobile Header Close */}
-          <div className="flex lg:hidden items-center justify-between pb-3 border-b border-zinc-800">
-            <span className="text-sm font-bold text-white tracking-wide uppercase">Menu de Navegação</span>
-            <button 
-              onClick={onCloseMobile}
-              className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
+      {/* Navigation List */}
+      <div className="flex-1 overflow-y-auto p-3 space-y-1 scrollbar-none">
+        {/* Início (Home) */}
+        <button
+          type="button"
+          onClick={handleSelectHome}
+          className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-black transition-all text-left cursor-pointer ${
+            activeTab === 'catalog' && selectedCategoryFilter === 'all'
+              ? 'bg-white text-black shadow-md'
+              : 'text-neutral-400 hover:text-white hover:bg-[#181818]'
+          }`}
+        >
+          <Home className={`w-4 h-4 ${activeTab === 'catalog' && selectedCategoryFilter === 'all' ? 'text-black stroke-[2.5]' : 'text-neutral-400'}`} />
+          <span>Início / Catálogo Geral</span>
+        </button>
 
-          {/* Primary Home Section */}
-          <div className="space-y-1">
+        {/* Categories Section Header */}
+        <div className="pt-3 pb-1 px-3">
+          <span className="text-[10px] font-mono font-black uppercase tracking-wider text-neutral-400">
+            Coleções Oficiais
+          </span>
+        </div>
+
+        {/* Real Categories from modelsData */}
+        {navCategories.map((item) => {
+          const Icon = item.icon;
+          const isSelected = activeTab === 'catalog' && selectedCategoryFilter === item.id;
+          return (
             <button
-              onClick={() => {
-                onSelectCategory('Todos');
-                onCloseMobile?.();
-              }}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all ${
-                selectedCategory === 'Todos'
-                  ? 'bg-white text-black shadow-md font-bold'
-                  : 'text-zinc-300 hover:text-white hover:bg-zinc-900/90'
+              key={item.id}
+              type="button"
+              onClick={() => handleSelectCategory(item.id)}
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold transition-all text-left cursor-pointer ${
+                isSelected
+                  ? 'bg-white text-black font-black shadow-md'
+                  : 'text-neutral-400 hover:text-white hover:bg-[#181818]'
               }`}
             >
-              <Home className={`w-4 h-4 ${selectedCategory === 'Todos' ? 'text-black' : 'text-zinc-400'}`} />
-              <span>Início</span>
+              <div className="flex items-center gap-3 truncate">
+                <Icon className={`w-4 h-4 shrink-0 ${isSelected ? 'text-black stroke-[2.5]' : 'text-neutral-400'}`} />
+                <span className="truncate">{item.label}</span>
+              </div>
+              <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${
+                isSelected ? 'bg-black/10 text-black' : 'bg-[#181818] text-neutral-400 border border-[#2a2a2a]'
+              }`}>
+                {item.count}
+              </span>
             </button>
-          </div>
+          );
+        })}
 
-          {/* Categories Section */}
-          <div>
-            <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-zinc-500">
-              Categorias
+        {/* Divider */}
+        <div className="pt-4 pb-2 border-t border-[#242424] my-2" />
+
+        {/* User Library Shortcuts */}
+        <div className="space-y-1">
+          <button
+            type="button"
+            onClick={() => onSelectTab('favorites')}
+            className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold transition-all text-left cursor-pointer ${
+              activeTab === 'favorites'
+                ? 'bg-white text-black font-black shadow-md'
+                : 'text-neutral-400 hover:text-white hover:bg-[#181818]'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <Heart className={`w-4 h-4 ${activeTab === 'favorites' ? 'text-black fill-black' : 'text-neutral-400'}`} />
+              <span>Meus Favoritos</span>
             </div>
-            <div className="space-y-0.5">
-              {CATEGORIES.filter(c => c !== 'Todos').map((cat) => {
-                const isSelected = selectedCategory === cat;
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => {
-                      onSelectCategory(cat);
-                      onCloseMobile?.();
-                    }}
-                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all ${
-                      isSelected
-                        ? 'bg-zinc-100 text-black font-bold shadow'
-                        : 'text-zinc-300 hover:text-white hover:bg-zinc-900/80 font-medium'
-                    }`}
-                  >
-                    <span className="flex items-center gap-3 truncate">
-                      <span className={isSelected ? 'text-black' : 'text-zinc-400'}>
-                        {getCategoryIcon(cat)}
-                      </span>
-                      <span className="truncate">{cat}</span>
-                    </span>
-                    {cat === 'Com AMS' && (
-                      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${
-                        isSelected ? 'bg-black text-white' : 'bg-white text-black'
-                      }`}>
-                        AMS
-                      </span>
-                    )}
-                    {cat === 'Vingadores' && (
-                      <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                        isSelected ? 'bg-black text-white' : 'bg-zinc-800 text-zinc-300'
-                      }`}>
-                        14
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
+            {favoritesCount > 0 && (
+              <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-black ${
+                activeTab === 'favorites' ? 'bg-black text-white' : 'bg-white text-black'
+              }`}>
+                {favoritesCount}
+              </span>
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onSelectTab('downloads')}
+            className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold transition-all text-left cursor-pointer ${
+              activeTab === 'downloads'
+                ? 'bg-white text-black font-black shadow-md'
+                : 'text-neutral-400 hover:text-white hover:bg-[#181818]'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <Download className={`w-4 h-4 ${activeTab === 'downloads' ? 'text-black stroke-[2.5]' : 'text-neutral-400'}`} />
+              <span>Meus Downloads</span>
             </div>
-          </div>
+            {downloadsCount > 0 && (
+              <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-black ${
+                activeTab === 'downloads' ? 'bg-black text-white' : 'bg-white text-black'
+              }`}>
+                {downloadsCount}
+              </span>
+            )}
+          </button>
 
-          {/* Thin Divider */}
-          <div className="h-px bg-zinc-800/80 mx-1" />
+          <button
+            type="button"
+            onClick={() => onSelectTab('calculator')}
+            className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-bold transition-all text-left cursor-pointer ${
+              activeTab === 'calculator'
+                ? 'bg-white text-black font-black shadow-md'
+                : 'text-neutral-400 hover:text-white hover:bg-[#181818]'
+            }`}
+          >
+            <Calculator className={`w-4 h-4 ${activeTab === 'calculator' ? 'text-black stroke-[2.5]' : 'text-neutral-400'}`} />
+            <span>Calculadora 3D</span>
+          </button>
 
-          {/* User Section */}
-          <div>
-            <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-zinc-500">
-              Painel do Usuário
+          {/* Planos e Bônus (Direct Drive Link) */}
+          <a
+            href={VIP_DRIVE_MAIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold text-neutral-400 hover:text-white hover:bg-[#181818] transition-all text-left"
+          >
+            <div className="flex items-center gap-3">
+              <Folder className="w-4 h-4 text-white" />
+              <span>Planos e Bônus</span>
             </div>
-            <div className="space-y-1">
-              <button
-                onClick={() => {
-                  onOpenFavorites();
-                  onCloseMobile?.();
-                }}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-900 transition-colors"
-              >
-                <span className="flex items-center gap-3">
-                  <Heart className="w-4 h-4 text-zinc-400" />
-                  <span>Meus Favoritos</span>
-                </span>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-200 border border-zinc-700/60 font-semibold">
-                  {favoritesCount}
-                </span>
-              </button>
-
-              <button
-                onClick={() => {
-                  onOpenDownloads();
-                  onCloseMobile?.();
-                }}
-                className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-900 transition-colors"
-              >
-                <Download className="w-4 h-4 text-zinc-400" />
-                <span>Meus Downloads</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  onOpenBonus();
-                  onCloseMobile?.();
-                }}
-                className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-900 transition-colors"
-              >
-                <Sparkles className="w-4 h-4 text-zinc-400" />
-                <span>Planos e Bônus</span>
-              </button>
-            </div>
-          </div>
+            <span className="text-[9px] font-mono text-white font-black px-1.5 py-0.5 rounded bg-[#202020] border border-white/20">
+              VIP
+            </span>
+          </a>
         </div>
+      </div>
 
-        {/* Footer / Chess Badge in Sidebar */}
-        <div className="pt-4 border-t border-zinc-800/80">
-          <div className="p-3 bg-zinc-900/90 border border-zinc-800 rounded-xl relative overflow-hidden">
-            <div className="absolute -right-4 -bottom-4 w-16 h-16 chess-pattern-sm opacity-20 rounded-full" />
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-              <p className="text-[11px] font-bold text-white uppercase tracking-wider">Acervo 100% Liberado</p>
-            </div>
-            <p className="text-[10px] text-zinc-400 mt-1">Downloads ilimitados de arquivos STL em alta resolução.</p>
-          </div>
-        </div>
-
-      </aside>
-    </>
+      {/* Footer Info in Sidebar */}
+      <div className="p-3 border-t border-[#242424] bg-[#080808] text-[11px] font-mono text-center">
+        <p className="font-black text-white">Membro VIP Ativo</p>
+        <p className="text-[10px] text-neutral-400 font-bold">Acesso Ilimitado ao Drive</p>
+      </div>
+    </aside>
   );
 };

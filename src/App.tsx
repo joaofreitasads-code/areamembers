@@ -1,330 +1,577 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Category, ModelItem, SortOption, Universe } from './types';
-import { INITIAL_MODELS } from './data/mockData';
-import { Header } from './components/Header';
-import { Sidebar } from './components/Sidebar';
-import { HeroBanner } from './components/HeroBanner';
-import { FilterBar } from './components/FilterBar';
-import { CardGrid } from './components/CardGrid';
-import { FolderModal } from './components/FolderModal';
-import { SearchModal } from './components/SearchModal';
-import { FilterModal } from './components/FilterModal';
-import { DownloadsModal, BonusModal } from './components/UserDrawers';
-import { ToastContainer, ToastMessage } from './components/Toast';
+import React, { useState, useMemo, useEffect, useRef, useDeferredValue } from 'react';
+import { 
+  Search, Bell, HardDrive, Heart, Download, Calculator, 
+  ExternalLink, ChevronDown, Menu, X, ArrowUpDown, Box
+} from 'lucide-react';
+import { 
+  SECTIONS, ALL_MODELS, VIP_DRIVE_MAIN_URL,
+  ModelItem 
+} from './data/modelsData';
+import { ModelCard } from './components/ModelCard';
+import { ModelDetailModal } from './components/ModelDetailModal';
+import { NotificationsModal } from './components/NotificationsModal';
+import { ProfitCalculator } from './components/ProfitCalculator';
+import { DownloadsTab } from './components/DownloadsTab';
+import { Sidebar, TabKey } from './components/Sidebar';
+import { preloadImageBatch, getOptimizedCardImageUrl } from './utils/imageOptimizer';
 
 export default function App() {
-  const [models, setModels] = useState<ModelItem[]>(INITIAL_MODELS);
-  const [selectedUniverse, setSelectedUniverse] = useState<Universe>('Todos');
-  const [selectedCategory, setSelectedCategory] = useState<Category>('Todos');
+  const [activeTab, setActiveTab] = useState<TabKey>('catalog');
   const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState<SortOption>('recentes');
+  const deferredSearchQuery = useDeferredValue(searchQuery);
+  const [selectedSessionFilter, setSelectedSessionFilter] = useState<string>('all');
+  const [onlyPhotosFilter, setOnlyPhotosFilter] = useState(false);
+  const [sortBy, setSortBy] = useState<'recent' | 'name' | 'margin' | 'printTime'>('recent');
+  const [visibleCount, setVisibleCount] = useState<number>(36);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
-  // Advanced filters
-  const [formatFilter, setFormatFilter] = useState('todos');
-  const [badgeFilter, setBadgeFilter] = useState('todos');
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-  // Modals & Panels
-  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
-  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
-  const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
+  // Favorites state
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('universo3d_favorites');
+      return saved ? JSON.parse(saved) : ['poke-charizard', 'poke-gengar', 'funko-oferta-10'];
+    } catch {
+      return ['poke-charizard'];
+    }
+  });
+
+  // Downloads history state
+  const [downloads, setDownloads] = useState<ModelItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('universo3d_downloads');
+      if (saved) return JSON.parse(saved);
+      const s1 = ALL_MODELS.find(m => m.id === 'poke-charizard');
+      const s2 = ALL_MODELS.find(m => m.id === 'poke-blastoise');
+      return [s1, s2].filter(Boolean) as ModelItem[];
+    } catch {
+      return [];
+    }
+  });
+
+  // Modals state
   const [selectedModel, setSelectedModel] = useState<ModelItem | null>(null);
-  const [isDownloadsModalOpen, setIsDownloadsModalOpen] = useState(false);
-  const [isBonusModalOpen, setIsBonusModalOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [isNotificationsModalOpen, setIsNotificationsModalOpen] = useState(false);
 
-  // History & Toasts
-  const [downloadsHistory, setDownloadsHistory] = useState<ModelItem[]>([]);
-  const [toasts, setToasts] = useState<ToastMessage[]>([]);
+  // Sync favorites
+  useEffect(() => {
+    try {
+      localStorage.setItem('universo3d_favorites', JSON.stringify(favorites));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [favorites]);
 
-  // Add toast helper
-  const addToast = (toast: Omit<ToastMessage, 'id'>) => {
-    const id = Date.now().toString() + Math.random().toString();
-    setToasts((prev) => [...prev, { ...toast, id }]);
-  };
+  // Sync downloads
+  useEffect(() => {
+    try {
+      localStorage.setItem('universo3d_downloads', JSON.stringify(downloads));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [downloads]);
 
-  const removeToast = (id: string) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
-  };
+  // Reset pagination on filter change
+  useEffect(() => {
+    setVisibleCount(36);
+  }, [deferredSearchQuery, selectedSessionFilter, onlyPhotosFilter, sortBy]);
 
-  // Keyboard shortcut for Ctrl + K
+  // Global Ctrl + K / Cmd + K shortcut to focus search input
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
-        setIsSearchModalOpen((prev) => !prev);
+        searchInputRef.current?.focus();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Universe counts
-  const marvelCount = useMemo(() => models.filter((m) => m.universe === 'Marvel').length, [models]);
-  const dcCount = useMemo(() => models.filter((m) => m.universe === 'DC').length, [models]);
-  const dragonBallCount = useMemo(() => models.filter((m) => m.universe === 'Dragon Ball').length, [models]);
-  const spongebobCount = useMemo(() => models.filter((m) => m.universe === 'Bob Esponja').length, [models]);
-  const geekCount = useMemo(() => models.filter((m) => m.universe === 'Geek & Pop Culture').length, [models]);
-  const natalCount = useMemo(() => models.filter((m) => m.universe === 'Especial de Natal').length, [models]);
-
-  // Filter & Sort models
-  const filteredModels = useMemo(() => {
-    return models
-      .filter((model) => {
-        // Universe filter
-        if (selectedUniverse !== 'Todos' && model.universe !== selectedUniverse) {
-          return false;
-        }
-
-        // Category filter
-        if (selectedCategory !== 'Todos' && model.category !== selectedCategory) {
-          return false;
-        }
-
-        // Search text
-        if (searchQuery.trim()) {
-          const q = searchQuery.toLowerCase();
-          const matchTitle = model.title.toLowerCase().includes(q);
-          const matchCategory = model.category.toLowerCase().includes(q);
-          const matchFormat = model.format.toLowerCase().includes(q);
-          if (!matchTitle && !matchCategory && !matchFormat) return false;
-        }
-
-        // Format filter
-        if (formatFilter !== 'todos' && model.format !== formatFilter) {
-          return false;
-        }
-
-        // Badge filter
-        if (badgeFilter !== 'todos' && model.badge !== badgeFilter) {
-          return false;
-        }
-
-        return true;
-      })
-      .sort((a, b) => {
-        if (sortBy === 'recentes') {
-          return new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime();
-        }
-        if (sortBy === 'populares') {
-          return b.downloadsCount - a.downloadsCount;
-        }
-        if (sortBy === 'az') {
-          return a.title.localeCompare(b.title);
-        }
-        if (sortBy === 'tamanho') {
-          return parseFloat(b.fileSize) - parseFloat(a.fileSize);
-        }
-        return 0;
-      });
-  }, [models, selectedCategory, searchQuery, sortBy, formatFilter, badgeFilter]);
-
-  // Favorites count
-  const favoritesCount = useMemo(() => {
-    return models.filter((m) => m.isFavorite).length;
-  }, [models]);
-
-  // Handlers
   const handleToggleFavorite = (id: string) => {
-    setModels((prev) =>
-      prev.map((item) => {
-        if (item.id === id) {
-          const nextState = !item.isFavorite;
-          addToast({
-            title: nextState ? 'Adicionado aos Favoritos' : 'Removido dos Favoritos',
-            description: item.title,
-            type: 'favorite',
-          });
-          return { ...item, isFavorite: nextState };
-        }
-        return item;
-      })
+    setFavorites(prev => 
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
     );
   };
 
-  const handleOpenFolder = (model: ModelItem) => {
+  const handleRecordDownload = (model: ModelItem) => {
+    setDownloads(prev => {
+      const filtered = prev.filter(item => item.id !== model.id);
+      return [model, ...filtered];
+    });
+  };
+
+  const handleOpenModel = (model: ModelItem) => {
     setSelectedModel(model);
-    setIsFolderModalOpen(true);
+    setIsDetailModalOpen(true);
   };
 
-  const handleQuickDownload = (model: ModelItem) => {
-    // Add to downloads history
-    setDownloadsHistory((prev) => {
-      if (prev.find((item) => item.id === model.id)) return prev;
-      return [model, ...prev];
-    });
-
-    addToast({
-      title: 'Download do Drive Iniciado',
-      description: `${model.title} (${model.fileSize})`,
-      type: 'download',
-    });
+  const handleDirectDownload = (model: ModelItem) => {
+    handleRecordDownload(model);
+    if (model.downloadUrl) {
+      window.open(model.downloadUrl, '_blank', 'noopener,noreferrer');
+    } else {
+      window.open(model.driveUrl, '_blank', 'noopener,noreferrer');
+    }
   };
 
-  const handleDownloadAllFromModal = (model: ModelItem) => {
-    setDownloadsHistory((prev) => {
-      if (prev.find((item) => item.id === model.id)) return prev;
-      return [model, ...prev];
-    });
+  // Horizontal filter pills (Black & White, based on actual collections)
+  const categoryPills = [
+    { id: 'all', label: 'Todos os Modelos' },
+    { id: 'sec-natal', label: 'Especial Natal (41)' },
+    { id: 'sec-series', label: 'Séries & TV (148)' },
+    { id: 'sec-religiao', label: 'Arte Sacra (7)' },
+    { id: 'sec-mascotes', label: 'Mascotes Futebol (28)' },
+    { id: 'sec-minifiguras', label: 'Minifiguras (99)' },
+    { id: 'sec-bobesponja', label: 'Bob Esponja (500%)' },
+    { id: 'sec-dc-comics', label: 'DC Comics (Lego 500%)' },
+    { id: 'sec-dragonball', label: 'Dragon Ball 3D' },
+    { id: 'sec-minecraft', label: 'Minecraft 3D' },
+    { id: 'sec-fallout', label: 'Fallout 3D' },
+    { id: 'sec-mistas', label: 'Coleções Mistas' },
+    { id: 'sec-pokemon', label: 'Pokémon 3D' },
+    { id: 'sec-monster', label: 'Monster Energy' },
+    { id: 'sec-aeromodelos', label: 'Aeromodelos RC' },
+    { id: 'sec-animais', label: 'Articulados & Miniaturas' },
+    { id: 'sec-animes-vip', label: 'Animes 3D VIP' },
+    { id: 'sec-brinquedos', label: 'Brinquedos & Puzzles' },
+    { id: 'sec-bustos', label: 'Bustos HQ' },
+    { id: 'sec-funkos', label: 'Funkos Exclusivos' },
+  ];
 
-    addToast({
-      title: 'Pacote ZIP Baixado',
-      description: `Arquivos STL prontos para fatiamento`,
-      type: 'download',
-    });
-  };
+  // Filtered & Sorted models
+  const filteredModels = useMemo(() => {
+    let list = ALL_MODELS;
 
-  const handleCopyLink = (link: string, title: string) => {
-    navigator.clipboard?.writeText(link).catch(() => {});
-    addToast({
-      title: 'Link Copiado!',
-      description: `Link do Google Drive copiado para transferência`,
-      type: 'copy',
-    });
-  };
+    if (deferredSearchQuery.trim()) {
+      const q = deferredSearchQuery.toLowerCase().trim();
+      list = list.filter(m => 
+        m.title.toLowerCase().includes(q) || 
+        m.category.toLowerCase().includes(q) ||
+        (m.description && m.description.toLowerCase().includes(q))
+      );
+    }
 
-  const handleOpenFavoritesOnly = () => {
-    setSelectedCategory('Todos');
-    setSearchQuery('');
-    // filter to favorites
-    addToast({
-      title: 'Exibindo Seus Favoritos',
-      description: `${favoritesCount} modelos salvos na sua biblioteca`,
-      type: 'favorite',
-    });
-  };
+    if (selectedSessionFilter !== 'all') {
+      list = list.filter(m => m.sectionId === selectedSessionFilter);
+    }
 
-  const handleResetFilters = () => {
-    setSelectedCategory('Todos');
-    setSearchQuery('');
-    setFormatFilter('todos');
-    setBadgeFilter('todos');
-    setSortBy('recentes');
-  };
+    if (onlyPhotosFilter) {
+      list = list.filter(m => Boolean(m.imageUrl || (m.images && m.images.length > 0)));
+    }
+
+    return [...list].sort((a, b) => {
+      if (sortBy === 'name') {
+        return a.title.localeCompare(b.title);
+      }
+      if (sortBy === 'margin') {
+        return (b.suggestedPrice || 0) - (a.suggestedPrice || 0);
+      }
+      if (sortBy === 'printTime') {
+        return (a.printTimeHours || 99) - (b.printTimeHours || 99);
+      }
+      // 'recent' by default prioritizes models with real photos
+      const aHasPhoto = a.imageUrl ? 1 : 0;
+      const bHasPhoto = b.imageUrl ? 1 : 0;
+      return bHasPhoto - aHasPhoto;
+    });
+  }, [deferredSearchQuery, selectedSessionFilter, onlyPhotosFilter, sortBy]);
+
+  const displayedModels = useMemo(() => {
+    return filteredModels.slice(0, visibleCount);
+  }, [filteredModels, visibleCount]);
+
+  const favoriteModels = useMemo(() => {
+    return ALL_MODELS.filter(m => favorites.includes(m.id));
+  }, [favorites]);
+
+  // Preload first batch of images in background for instant display
+  useEffect(() => {
+    if (displayedModels.length > 0) {
+      const urls = displayedModels.slice(0, 16).map(m => {
+        const raw = (m.images && m.images[0]) || m.imageUrl || m.thumbnailUrl;
+        return getOptimizedCardImageUrl(raw, 0, 420);
+      }).filter(Boolean);
+      preloadImageBatch(urls, 16);
+    }
+  }, [displayedModels]);
+
+  // Auto-scroll infinite load trigger
+  useEffect(() => {
+    if (!loadMoreRef.current) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setVisibleCount(prev => (prev < filteredModels.length ? prev + 36 : prev));
+      }
+    }, { rootMargin: '350px' });
+
+    observer.observe(loadMoreRef.current);
+    return () => observer.disconnect();
+  }, [filteredModels.length]);
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-[#f4f4f5] flex flex-col font-sans selection:bg-white selection:text-black">
-      
-      {/* Top Header */}
-      <Header
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        onOpenSearchModal={() => setIsSearchModalOpen(true)}
-        favoritesCount={favoritesCount}
-        onOpenFavorites={handleOpenFavoritesOnly}
-        onOpenDownloads={() => setIsDownloadsModalOpen(true)}
-        onOpenBonus={() => setIsBonusModalOpen(true)}
-        mobileMenuOpen={mobileMenuOpen}
-        onToggleMobileMenu={() => setMobileMenuOpen(!mobileMenuOpen)}
-      />
-
-      {/* Main Layout Container (Sidebar + Content) */}
-      <div className="flex-1 flex max-w-[1920px] w-full mx-auto">
-        
-        {/* Navigation Sidebar */}
+    <div className="min-h-screen bg-[#0A0A0A] text-white antialiased flex font-sans selection:bg-white selection:text-black">
+      {/* Desktop Fixed Left Sidebar (Preto e Branco) */}
+      <div className="hidden lg:block h-screen sticky top-0 z-30">
         <Sidebar
-          selectedCategory={selectedCategory}
-          onSelectCategory={(cat) => {
-            setSelectedCategory(cat);
-            setMobileMenuOpen(false);
-          }}
-          favoritesCount={favoritesCount}
-          onOpenFavorites={handleOpenFavoritesOnly}
-          onOpenDownloads={() => {
-            setIsDownloadsModalOpen(true);
-            setMobileMenuOpen(false);
-          }}
-          onOpenBonus={() => {
-            setIsBonusModalOpen(true);
-            setMobileMenuOpen(false);
-          }}
-          isMobileOpen={mobileMenuOpen}
-          onCloseMobile={() => setMobileMenuOpen(false)}
+          activeTab={activeTab}
+          onSelectTab={setActiveTab}
+          selectedCategoryFilter={selectedSessionFilter}
+          onSelectCategoryFilter={setSelectedSessionFilter}
+          favoritesCount={favorites.length}
+          downloadsCount={downloads.length}
         />
+      </div>
 
-        {/* Main Content Area */}
-        <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-6">
-          
-          {/* Banner / Hero Section */}
-          <HeroBanner
-            totalFilesCount="Mais de 150 mil arquivos"
-            onExploreBonus={() => setIsBonusModalOpen(true)}
+      {/* Mobile Drawer Sidebar */}
+      {isMobileSidebarOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex">
+          <div 
+            className="fixed inset-0 bg-black/85 backdrop-blur-sm"
+            onClick={() => setIsMobileSidebarOpen(false)}
           />
+          <div className="relative w-72 max-w-[85%] h-full bg-[#0C0C0C] z-10 shadow-2xl">
+            <div className="absolute top-3 right-3 z-20">
+              <button 
+                onClick={() => setIsMobileSidebarOpen(false)}
+                className="p-1.5 rounded-lg bg-[#1a1a1a] text-neutral-400 hover:text-white"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <Sidebar
+              activeTab={activeTab}
+              onSelectTab={(tab) => {
+                setActiveTab(tab);
+                setIsMobileSidebarOpen(false);
+              }}
+              selectedCategoryFilter={selectedSessionFilter}
+              onSelectCategoryFilter={(cat) => {
+                setSelectedSessionFilter(cat);
+                setIsMobileSidebarOpen(false);
+              }}
+              favoritesCount={favorites.length}
+              downloadsCount={downloads.length}
+            />
+          </div>
+        </div>
+      )}
 
-          {/* Filter Bar with Universe Switcher, Pills and Sort */}
-          <FilterBar
-            selectedUniverse={selectedUniverse}
-            onSelectUniverse={setSelectedUniverse}
-            selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
-            onOpenMoreFilters={() => setIsFilterModalOpen(true)}
-            sortBy={sortBy}
-            onSortChange={setSortBy}
-            totalFiltered={filteredModels.length}
-            totalCount={models.length}
-            marvelCount={marvelCount}
-            dcCount={dcCount}
-            dragonBallCount={dragonBallCount}
-            spongebobCount={spongebobCount}
-            geekCount={geekCount}
-            natalCount={natalCount}
-          />
+      {/* Main Right Content Layout (Fundo Plano) */}
+      <div className="flex-1 flex flex-col min-w-0 bg-[#0A0A0A]">
+        {/* Top Header Bar (Preto e Branco / Xadrez) */}
+        <header className="sticky top-0 z-20 bg-[#0C0C0C]/95 backdrop-blur-md border-b border-[#242424] px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+          {/* Mobile Menu Trigger & Logo */}
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setIsMobileSidebarOpen(true)}
+              className="lg:hidden p-2 rounded-lg bg-[#181818] text-neutral-300 hover:text-white border border-[#2b2b2b]"
+              aria-label="Menu"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
 
-          {/* 6-Column Product Card Grid */}
-          <CardGrid
-            models={filteredModels}
-            onToggleFavorite={handleToggleFavorite}
-            onOpenFolder={handleOpenFolder}
-            onQuickDownload={handleQuickDownload}
-            onCopyLink={handleCopyLink}
-            onClearFilters={handleResetFilters}
-          />
+            <div className="lg:hidden flex items-center gap-2">
+              <div className="w-7 h-7 rounded-md bg-white text-black flex items-center justify-center font-black">
+                <Box className="w-4 h-4 stroke-[2.5]" />
+              </div>
+              <span className="text-xs font-black tracking-tight text-white uppercase">
+                Biblioteca Central 3D
+              </span>
+            </div>
+          </div>
 
+          {/* Central Search Bar (Preto e Branco com Ctrl + K) */}
+          <div className="flex-1 max-w-xl">
+            <div className="relative flex items-center">
+              <Search className="w-4 h-4 text-neutral-400 absolute left-3.5 pointer-events-none" />
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Buscar modelos, coleções, categorias..."
+                className="w-full bg-[#141414] hover:bg-[#1a1a1a] focus:bg-[#1c1c1c] text-white text-xs sm:text-sm pl-10 pr-20 py-2 rounded-lg border border-[#2c2c2c] focus:border-white outline-none transition placeholder:text-neutral-400 font-bold"
+              />
+              <div className="absolute right-2.5 hidden sm:flex items-center pointer-events-none">
+                <kbd className="px-1.5 py-0.5 text-[10px] font-mono font-bold text-neutral-400 bg-[#222222] border border-[#333333] rounded">
+                  Ctrl + K
+                </kbd>
+              </div>
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-12 text-neutral-400 hover:text-white"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Right User Profile & Notification Bar (Preto e Branco) */}
+          <div className="flex items-center gap-3 shrink-0">
+            {/* Google Drive Link */}
+            <a
+              href={VIP_DRIVE_MAIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#141414] hover:bg-[#202020] text-white border border-[#2c2c2c] hover:border-white text-xs font-mono font-bold transition shadow-sm"
+              title="Acessar pasta completa no Google Drive"
+            >
+              <HardDrive className="w-3.5 h-3.5 text-white" />
+              <span>Drive Raiz VIP</span>
+            </a>
+
+            {/* Notification Bell */}
+            <button
+              type="button"
+              onClick={() => setIsNotificationsModalOpen(true)}
+              className="relative p-2 rounded-lg bg-[#141414] hover:bg-[#202020] text-neutral-300 hover:text-white border border-[#2c2c2c] hover:border-white transition cursor-pointer"
+              title="Notificações e Avisos"
+              aria-label="Notificações"
+            >
+              <Bell className="w-4 h-4" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-white shadow-[0_0_8px_#ffffff]" />
+            </button>
+
+            {/* User Profile Component (Preto e Branco: joão freitas • Membro VIP) */}
+            <div className="flex items-center gap-2.5 pl-1 border-l border-[#242424]">
+              <div className="w-8 h-8 rounded-full bg-white text-black p-[1.5px] shadow-sm flex items-center justify-center font-black text-xs uppercase">
+                JF
+              </div>
+
+              <div className="hidden sm:block text-left leading-tight">
+                <span className="text-xs font-extrabold text-white block">
+                  joão freitas
+                </span>
+                <span className="text-[10px] font-mono font-black text-white uppercase tracking-wider bg-white/10 px-1.5 py-0.2 rounded">
+                  Membro VIP
+                </span>
+              </div>
+
+              <ChevronDown className="w-3.5 h-3.5 text-neutral-400 hidden sm:block" />
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content Viewport (Fundo Plano) */}
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6">
+          {/* VIEW 1: CATALOG */}
+          {activeTab === 'catalog' && (
+            <div className="space-y-6 text-left">
+              {/* Page Title & Subtitle */}
+              <div className="space-y-1">
+                <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase font-sans">
+                  Biblioteca por categorias
+                </h1>
+                <p className="text-neutral-400 text-xs sm:text-sm font-bold">
+                  Centenas de modelos 3D oficiais para imprimir, fatiar e lucrar no mercado 3D.
+                </p>
+              </div>
+
+              {/* Horizontal Category Filter Pills (Preto e Branco / Xadrez) */}
+              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none pt-1">
+                {categoryPills.map((pill) => {
+                  const isSelected = selectedSessionFilter === pill.id;
+                  return (
+                    <button
+                      key={pill.id}
+                      type="button"
+                      onClick={() => setSelectedSessionFilter(pill.id)}
+                      className={`px-3.5 py-1.5 rounded-lg text-xs font-black shrink-0 transition-all cursor-pointer ${
+                        isSelected
+                          ? 'bg-white text-black shadow-md'
+                          : 'bg-[#151515] hover:bg-[#202020] text-neutral-300 hover:text-white border border-[#282828]'
+                      }`}
+                    >
+                      {pill.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Sort Bar & Total Count */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 border-t border-[#242424]">
+                <div className="flex items-center gap-2 text-xs font-mono text-neutral-400 font-bold">
+                  <span className="text-white font-black">{filteredModels.length}</span>
+                  <span>modelos encontrados</span>
+                  {selectedSessionFilter !== 'all' && (
+                    <button
+                      onClick={() => setSelectedSessionFilter('all')}
+                      className="ml-2 text-white hover:underline text-[11px] font-bold"
+                    >
+                      (Ver todos)
+                    </button>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 bg-[#151515] border border-[#282828] rounded-lg px-3 py-1.5 text-xs">
+                    <ArrowUpDown className="w-3.5 h-3.5 text-white" />
+                    <span className="text-neutral-400 font-bold hidden sm:inline">Ordenar:</span>
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value as any)}
+                      className="bg-transparent text-white outline-none cursor-pointer font-bold text-xs"
+                    >
+                      <option value="recent" className="bg-[#151515] text-white">Com Foto Primeiro</option>
+                      <option value="name" className="bg-[#151515] text-white">Nome (A-Z)</option>
+                      <option value="margin" className="bg-[#151515] text-white">Maior Preço (R$)</option>
+                      <option value="printTime" className="bg-[#151515] text-white">Menor Tempo</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card Grid (Estilo Xadrez Preto e Branco - 6 Colunas) */}
+              {filteredModels.length === 0 ? (
+                <div className="p-16 text-center border border-[#282828] rounded-xl bg-[#141414] space-y-4">
+                  <p className="text-neutral-300 text-sm font-bold">Nenhum modelo encontrado para os filtros atuais.</p>
+                  <button
+                    onClick={() => {
+                      setSearchQuery('');
+                      setSelectedSessionFilter('all');
+                      setOnlyPhotosFilter(false);
+                    }}
+                    className="px-4 py-2 bg-white hover:bg-neutral-200 text-black text-xs font-mono font-black uppercase rounded-lg transition"
+                  >
+                    Limpar Todos os Filtros
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-8">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4">
+                    {displayedModels.map((model, index) => (
+                      <ModelCard
+                        key={model.id}
+                        model={model}
+                        priority={index < 12}
+                        isFavorite={favorites.includes(model.id)}
+                        onToggleFavorite={handleToggleFavorite}
+                        onOpenDetails={handleOpenModel}
+                        onDirectDownload={handleDirectDownload}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Intersection Sentinel for smooth auto-pagination */}
+                  {visibleCount < filteredModels.length && (
+                    <div ref={loadMoreRef} className="h-6 w-full pointer-events-none" />
+                  )}
+
+                  {/* Load More Button */}
+                  {visibleCount < filteredModels.length && (
+                    <div className="text-center pt-2">
+                      <button
+                        onClick={() => setVisibleCount(prev => prev + 36)}
+                        className="px-8 py-3 bg-[#151515] hover:bg-[#202020] text-white border border-[#2c2c2c] hover:border-white text-xs font-mono font-black uppercase tracking-wider rounded-lg transition-all shadow-md cursor-pointer"
+                      >
+                        Carregar Mais Modelos ({filteredModels.length - visibleCount} restantes)
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* VIEW 2: FAVORITES */}
+          {activeTab === 'favorites' && (
+            <div className="space-y-6 text-left">
+              <div className="border-b border-[#242424] pb-6 flex items-center justify-between">
+                <div className="space-y-1">
+                  <span className="text-xs font-mono uppercase tracking-widest text-neutral-400 block font-black">
+                    MODELOS SALVOS
+                  </span>
+                  <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase">
+                    MEUS FAVORITOS ({favoriteModels.length})
+                  </h1>
+                  <p className="text-neutral-400 text-xs sm:text-sm font-bold">
+                    Modelos que você marcou para impressão posterior ou consulta rápida.
+                  </p>
+                </div>
+
+                {favoriteModels.length > 0 && (
+                  <button
+                    onClick={() => setFavorites([])}
+                    className="px-3.5 py-1.5 bg-[#151515] hover:bg-[#222222] text-neutral-300 hover:text-white border border-[#2c2c2c] text-xs font-mono font-bold uppercase rounded-lg transition-all cursor-pointer"
+                  >
+                    Limpar Favoritos
+                  </button>
+                )}
+              </div>
+
+              {favoriteModels.length === 0 ? (
+                <div className="p-16 text-center border border-[#242424] rounded-xl bg-[#141414] space-y-4">
+                  <Heart className="w-10 h-10 text-neutral-600 mx-auto" />
+                  <p className="text-neutral-300 text-sm font-bold">Nenhum modelo foi salvo como favorito ainda.</p>
+                  <button
+                    onClick={() => setActiveTab('catalog')}
+                    className="px-5 py-2.5 bg-white hover:bg-neutral-200 text-black text-xs font-mono font-black uppercase rounded-lg transition cursor-pointer"
+                  >
+                    Explorar Catálogo
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4">
+                  {favoriteModels.map((model) => (
+                    <ModelCard
+                      key={model.id}
+                      model={model}
+                      isFavorite={true}
+                      onToggleFavorite={handleToggleFavorite}
+                      onOpenDetails={handleOpenModel}
+                      onDirectDownload={handleDirectDownload}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* VIEW 3: DOWNLOADS */}
+          {activeTab === 'downloads' && (
+            <DownloadsTab
+              downloadedModels={downloads}
+              onClearDownloads={() => setDownloads([])}
+              onOpenModel={handleOpenModel}
+              onReDownload={handleDirectDownload}
+              onBrowseCatalog={() => setActiveTab('catalog')}
+            />
+          )}
+
+          {/* VIEW 4: CALCULATOR */}
+          {activeTab === 'calculator' && (
+            <ProfitCalculator
+              onSelectProduct={(title) => {
+                setSearchQuery(title);
+                setActiveTab('catalog');
+              }}
+            />
+          )}
         </main>
       </div>
 
-      {/* Interactive Modals */}
-      <FolderModal
+      {/* Model Detail Modal */}
+      <ModelDetailModal
         model={selectedModel}
-        onClose={() => {
-          setIsFolderModalOpen(false);
-          setSelectedModel(null);
-        }}
-        onDownloadAll={handleDownloadAllFromModal}
-        onCopyLink={handleCopyLink}
+        isOpen={isDetailModalOpen}
+        onClose={() => setIsDetailModalOpen(false)}
+        isFavorite={selectedModel ? favorites.includes(selectedModel.id) : false}
+        onToggleFavorite={handleToggleFavorite}
+        onRecordDownload={handleRecordDownload}
       />
 
-      <SearchModal
-        isOpen={isSearchModalOpen}
-        onClose={() => setIsSearchModalOpen(false)}
-        models={models}
-        onSelectModel={handleOpenFolder}
+      {/* Notifications Modal */}
+      <NotificationsModal
+        isOpen={isNotificationsModalOpen}
+        onClose={() => setIsNotificationsModalOpen(false)}
       />
-
-      <FilterModal
-        isOpen={isFilterModalOpen}
-        onClose={() => setIsFilterModalOpen(false)}
-        formatFilter={formatFilter}
-        setFormatFilter={setFormatFilter}
-        badgeFilter={badgeFilter}
-        setBadgeFilter={setBadgeFilter}
-        onReset={handleResetFilters}
-      />
-
-      <DownloadsModal
-        isOpen={isDownloadsModalOpen}
-        onClose={() => setIsDownloadsModalOpen(false)}
-        downloadsList={downloadsHistory}
-        onOpenFolder={handleOpenFolder}
-      />
-
-      <BonusModal
-        isOpen={isBonusModalOpen}
-        onClose={() => setIsBonusModalOpen(false)}
-      />
-
-      {/* Minimalist Monochrome Toast Container */}
-      <ToastContainer toasts={toasts} onDismiss={removeToast} />
-
     </div>
   );
 }

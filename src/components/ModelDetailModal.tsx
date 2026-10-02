@@ -1,0 +1,363 @@
+import React, { useState, useEffect } from 'react';
+import { X, ExternalLink, Download, Heart, Check, Copy, Box, ChevronLeft, ChevronRight, Images } from 'lucide-react';
+import { ModelItem, VIP_DRIVE_MAIN_URL } from '../data/modelsData';
+import { getOptimizedModalImageUrl, getOptimizedCardImageUrl, isImageCached, markImageCached } from '../utils/imageOptimizer';
+
+interface ModelDetailModalProps {
+  model: ModelItem | null;
+  isOpen: boolean;
+  onClose: () => void;
+  isFavorite: boolean;
+  onToggleFavorite: (id: string) => void;
+  onRecordDownload?: (model: ModelItem) => void;
+}
+
+export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
+  model,
+  isOpen,
+  onClose,
+  isFavorite,
+  onToggleFavorite,
+  onRecordDownload
+}) => {
+  const [copied, setCopied] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [imageError, setImageError] = useState(false);
+  const [fallbackAttempt, setFallbackAttempt] = useState(0);
+  const [isMainLoaded, setIsMainLoaded] = useState(false);
+
+  // Strictly deduplicate all images for this model without repetition
+  const allImages = React.useMemo(() => {
+    if (!model) return [];
+    const set = new Set<string>();
+    if (model.images && model.images.length > 0) {
+      model.images.forEach(img => set.add(img));
+    }
+    if (model.imageUrl) set.add(model.imageUrl);
+    if (model.thumbnailUrl) set.add(model.thumbnailUrl);
+    return Array.from(set);
+  }, [model]);
+
+  useEffect(() => {
+    setImageError(false);
+    setFallbackAttempt(0);
+    setSelectedImageIndex(0);
+    setIsMainLoaded(false);
+  }, [model]);
+
+  if (!isOpen || !model) return null;
+
+  const rawSrc = allImages.length > 0 ? allImages[selectedImageIndex] : (model.imageUrl || model.thumbnailUrl);
+
+  const getImageSource = () => {
+    return getOptimizedModalImageUrl(rawSrc, fallbackAttempt);
+  };
+
+  const currentSrc = getImageSource();
+  const hasPhoto = Boolean(currentSrc && !imageError);
+
+  const handlePrevImage = () => {
+    setImageError(false);
+    setFallbackAttempt(0);
+    setSelectedImageIndex(prev => (prev - 1 + allImages.length) % allImages.length);
+  };
+
+  const handleNextImage = () => {
+    setImageError(false);
+    setFallbackAttempt(0);
+    setSelectedImageIndex(prev => (prev + 1) % allImages.length);
+  };
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(model.driveUrl || VIP_DRIVE_MAIN_URL);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleOpenDrive = () => {
+    if (onRecordDownload) onRecordDownload(model);
+    window.open(model.driveUrl || VIP_DRIVE_MAIN_URL, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleDirectDownload = () => {
+    if (onRecordDownload) onRecordDownload(model);
+    if (model.downloadUrl) {
+      window.open(model.downloadUrl, '_blank', 'noopener,noreferrer');
+    } else {
+      window.open(model.driveUrl || VIP_DRIVE_MAIN_URL, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  return (
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/90 backdrop-blur-md overflow-y-auto"
+      onClick={onClose}
+    >
+      <div 
+        className="relative w-full max-w-2xl bg-[#141414] border border-[#333333] rounded-2xl shadow-2xl my-8 text-left overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header (Black & White Style) */}
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#282828] bg-[#0c0c0c]">
+          <div className="flex items-center gap-2 text-xs font-mono tracking-wider uppercase font-black">
+            <span className="text-white">BIBLIOTECA 3D</span>
+            <span className="text-neutral-500">/</span>
+            <span className="text-neutral-300">{model.category}</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => onToggleFavorite(model.id)}
+              className={`p-2 rounded-full border transition-all ${
+                isFavorite
+                  ? 'bg-white text-black border-white shadow-md'
+                  : 'bg-[#1c1c1c] border-[#383838] text-white hover:bg-white hover:text-black'
+              }`}
+              title={isFavorite ? "Remover dos favoritos" : "Salvar nos favoritos"}
+            >
+              <Heart className={`w-4 h-4 ${isFavorite ? 'fill-black stroke-black' : ''}`} />
+            </button>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-2 rounded-full border border-[#383838] bg-[#1c1c1c] text-neutral-300 hover:bg-white hover:text-black transition-all cursor-pointer"
+              aria-label="Fechar"
+            >
+              <X className="w-4 h-4 stroke-[2.5]" />
+            </button>
+          </div>
+        </div>
+
+        {/* Content Body */}
+        <div className="p-5 sm:p-6 space-y-6 max-h-[82vh] overflow-y-auto bg-[#141414]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
+            {/* Visual with Full Gallery */}
+            <div className="space-y-3">
+              <div className="w-full aspect-square rounded-xl overflow-hidden border border-[#2b2b2b] bg-[#0c0c0c] flex items-center justify-center relative group/modalImage">
+                {hasPhoto && !isMainLoaded && (
+                  <div className="absolute inset-0 bg-[#161616] animate-pulse flex items-center justify-center z-0">
+                    <Box className="w-12 h-12 text-neutral-700 animate-pulse" />
+                  </div>
+                )}
+
+                {hasPhoto ? (
+                  <img
+                    key={`${currentSrc}-${fallbackAttempt}`}
+                    src={currentSrc}
+                    alt={model.title}
+                    referrerPolicy="no-referrer"
+                    decoding="async"
+                    onLoad={() => {
+                      markImageCached(currentSrc);
+                      setIsMainLoaded(true);
+                    }}
+                    className={`w-full h-full object-cover object-center transition-opacity duration-200 ${
+                      isMainLoaded ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    onError={() => {
+                      if (fallbackAttempt < 3) {
+                        setFallbackAttempt(prev => prev + 1);
+                      } else {
+                        setImageError(true);
+                      }
+                    }}
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center gap-2 text-neutral-400 p-6 text-center">
+                    <Box className="w-16 h-16 text-white" />
+                    <span className="text-xs font-mono font-black tracking-widest uppercase text-white">MODELO 3D STL</span>
+                  </div>
+                )}
+
+                {/* Popular Badge (White & Black) */}
+                <div className="absolute top-2.5 left-2.5 z-20">
+                  <span className="bg-white text-black text-[10px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider shadow-md">
+                    POPULAR
+                  </span>
+                </div>
+
+                {/* Counter Tag */}
+                {allImages.length > 1 && (
+                  <div className="absolute top-2.5 right-2.5 z-20 flex items-center gap-1.5 bg-black/85 backdrop-blur-sm text-white text-[11px] font-mono font-black px-2 py-0.5 rounded-md border border-white/20">
+                    <Images className="w-3.5 h-3.5 text-white" />
+                    <span>{selectedImageIndex + 1}/{allImages.length}</span>
+                  </div>
+                )}
+
+                {/* Left/Right Carousel Controls */}
+                {allImages.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={handlePrevImage}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/80 hover:bg-white text-white hover:text-black border border-white/20 transition-all z-20 shadow-md cursor-pointer"
+                      title="Foto anterior"
+                    >
+                      <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNextImage}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/80 hover:bg-white text-white hover:text-black border border-white/20 transition-all z-20 shadow-md cursor-pointer"
+                      title="Próxima foto"
+                    >
+                      <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+                    </button>
+                  </>
+                )}
+
+                {model.fileSize && (
+                  <div className="absolute bottom-2.5 left-2.5 bg-black/90 text-white text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-white/20 z-20">
+                    {model.fileSize}
+                  </div>
+                )}
+              </div>
+
+              {/* Thumbnail Strip */}
+              {allImages.length > 1 && (
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-white font-black uppercase">Galeria ({allImages.length} fotos)</span>
+                  </div>
+                  <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                    {allImages.map((imgUrl, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          setImageError(false);
+                          setFallbackAttempt(0);
+                          setSelectedImageIndex(idx);
+                        }}
+                        className={`w-14 h-14 rounded-lg overflow-hidden border shrink-0 transition-all cursor-pointer ${
+                          idx === selectedImageIndex
+                            ? 'border-2 border-white ring-2 ring-white/50 shadow-md'
+                            : 'border-[#333333] opacity-70 hover:opacity-100 hover:border-white'
+                        }`}
+                      >
+                        <img
+                          src={getOptimizedCardImageUrl(imgUrl, 0, 160)}
+                          alt=""
+                          referrerPolicy="no-referrer"
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Information Column */}
+            <div className="space-y-4">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-mono text-neutral-400 mb-1 font-black">
+                  <span className="text-white">{model.category}</span>
+                  {model.scale && (
+                    <>
+                      <span>•</span>
+                      <span>{model.scale}</span>
+                    </>
+                  )}
+                </div>
+                <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight uppercase leading-tight">
+                  {model.title}
+                </h2>
+              </div>
+
+              {model.description && (
+                <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-bold">
+                  {model.description}
+                </p>
+              )}
+
+              {/* Technical Specifications */}
+              <div className="p-3.5 rounded-xl bg-[#0c0c0c] border border-[#262626] space-y-2.5 font-mono text-xs">
+                <span className="text-white font-black uppercase tracking-wider block text-[10px]">
+                  Ficha Técnica da Impressão 3D
+                </span>
+                <div className="grid grid-cols-2 gap-2 text-neutral-300 font-bold">
+                  {model.printTimeHours && (
+                    <div>
+                      <span className="text-neutral-400 block text-[10px] font-bold">TEMPO ESTIMADO</span>
+                      <span className="text-white font-extrabold">{model.printTimeHours}h</span>
+                    </div>
+                  )}
+                  {model.weightGrams && (
+                    <div>
+                      <span className="text-neutral-400 block text-[10px] font-bold">PESO FILAMENTO</span>
+                      <span className="text-white font-extrabold">~{model.weightGrams}g</span>
+                    </div>
+                  )}
+                  {model.suggestedPrice && (
+                    <div>
+                      <span className="text-neutral-400 block text-[10px] font-bold">VALOR SUGERIDO</span>
+                      <span className="text-white font-black">R$ {model.suggestedPrice.toFixed(2)}</span>
+                    </div>
+                  )}
+                  {model.infill && (
+                    <div>
+                      <span className="text-neutral-400 block text-[10px] font-bold">PREENCHIMENTO</span>
+                      <span className="text-white font-extrabold">{model.infill}</span>
+                    </div>
+                  )}
+                  {model.walls && (
+                    <div>
+                      <span className="text-neutral-400 block text-[10px] font-bold">PAREDES</span>
+                      <span className="text-white font-extrabold">{model.walls} loops</span>
+                    </div>
+                  )}
+                  {model.amsSupport !== undefined && (
+                    <div>
+                      <span className="text-neutral-400 block text-[10px] font-bold">MULTICOLOR</span>
+                      <span className="font-black text-white">
+                        {model.amsSupport ? 'Compatível com AMS' : 'Pintura/Mono'}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Direct Actions (High Contrast White & Black Buttons) */}
+              <div className="space-y-2.5 pt-2">
+                <button
+                  type="button"
+                  onClick={handleOpenDrive}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-white hover:bg-neutral-200 text-black font-black text-xs uppercase tracking-wider rounded-lg transition-all shadow-md cursor-pointer"
+                >
+                  <ExternalLink className="w-4 h-4 stroke-[2.5]" />
+                  <span>ACESSAR PASTA NO GOOGLE DRIVE</span>
+                </button>
+
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={handleDirectDownload}
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 bg-[#1e1e1e] hover:bg-[#282828] text-white font-mono font-bold text-xs uppercase tracking-wider rounded-lg border border-[#383838] hover:border-white transition-all cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5 stroke-[2.5]" />
+                    <span>Baixar STL</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleCopyLink}
+                    className="px-3 py-2.5 bg-[#1e1e1e] hover:bg-[#282828] text-neutral-300 hover:text-white border border-[#383838] hover:border-white rounded-lg transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono font-bold"
+                    title="Copiar link"
+                  >
+                    {copied ? <Check className="w-4 h-4 text-white stroke-[3]" /> : <Copy className="w-4 h-4 stroke-[2]" />}
+                    <span>{copied ? 'Copiado' : 'Link'}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

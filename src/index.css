@@ -1,61 +1,56 @@
 @import "tailwindcss";
 
 @layer base {
-  body {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  html, body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    background-color: #0A0A0A; /* Fundo 100% plano, sem quadradinhos */
+    color: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
+  }
+
+  /* Todas as letras da página numa fonte grossa e marcante */
+  body, p, span, div, a, button, input, select, textarea, label, li, td, th {
+    font-weight: 700;
+  }
+
+  /* Títulos e cabeçalhos em peso ultra-pesado (800 / 900) */
+  h1, h2, h3, h4, h5, h6, strong, b {
+    font-weight: 900 !important;
+    letter-spacing: -0.02em;
+  }
+
+  button, input, select, textarea {
+    font-family: inherit;
+    font-weight: 800 !important;
   }
 }
 
-.font-display {
-  font-family: 'Cinzel', Georgia, serif;
+@layer utilities {
+  .font-cinzel {
+    font-family: 'Cinzel', serif, ui-serif, Georgia;
+    font-weight: 800;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-weight: 700;
+  }
 }
 
-/* Custom Black & White Chess Checkerboard Patterns for Card Media Placeholders */
-.chess-pattern-sm {
-  background-color: #121215;
-  background-image: 
-    linear-gradient(45deg, #1c1c21 25%, transparent 25%), 
-    linear-gradient(-45deg, #1c1c21 25%, transparent 25%), 
-    linear-gradient(45deg, transparent 75%, #1c1c21 75%), 
-    linear-gradient(-45deg, transparent 75%, #1c1c21 75%);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-}
-
-.chess-pattern-contrast {
-  background-color: #0d0d11;
-  background-image: 
-    linear-gradient(45deg, #272730 25%, transparent 25%), 
-    linear-gradient(-45deg, #272730 25%, transparent 25%), 
-    linear-gradient(45deg, transparent 75%, #272730 75%), 
-    linear-gradient(-45deg, transparent 75%, #272730 75%);
-  background-size: 32px 32px;
-  background-position: 0 0, 0 16px, 16px -16px, -16px 0px;
-}
-
-.chess-pattern-subtle {
-  background-color: #09090b;
-  background-image: 
-    linear-gradient(45deg, #141418 25%, transparent 25%), 
-    linear-gradient(-45deg, #141418 25%, transparent 25%), 
-    linear-gradient(45deg, transparent 75%, #141418 75%), 
-    linear-gradient(-45deg, transparent 75%, #141418 75%);
-  background-size: 40px 40px;
-  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
-}
-
-/* Custom Scrollbar */
+/* Scrollbar em preto e branco (estilo xadrez monocromático) */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #0A0A0A;
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 3px;
+  background: #2C2C2C;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #FFFFFF;
 }
