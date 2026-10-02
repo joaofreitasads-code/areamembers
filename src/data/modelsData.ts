@@ -27688,7 +27688,30 @@ const MODELS_PART_3: ModelItem[] = [
   }
 ];
 
+export const VIP_CHECKOUT_MODEL: ModelItem = {
+  id: "produto-vip-vitalicio-cadeado",
+  title: "QUER ACELERAR SEUS RESULTADOS?",
+  category: "Chaveiros & Keychains 3D",
+  sectionId: "sec-chaveiros",
+  isHot: true,
+  driveUrl: "https://checkout.wiven.com.br/checkout/cmupyvej300i601pll6oi9cj1?offer=BX0N8TV",
+  downloadUrl: "https://checkout.wiven.com.br/checkout/cmupyvej300i601pll6oi9cj1?offer=BX0N8TV",
+  imageUrl: "https://i.imgur.com/6Yw58DOm.png",
+  thumbnailUrl: "https://i.imgur.com/6Yw58DOm.png",
+  images: ["https://i.imgur.com/6Yw58DOm.png"],
+  filamentGrams: 0,
+  printTimeHours: 0,
+  suggestedPrice: 97.0,
+  dimensions: "Acesso Vitalício Completo",
+  infill: "Acesso Ilimitado",
+  supports: "Liberação Imediata",
+  colorTheme: "#F59E0B",
+  description: "Acesso total e vitalício à Área de Membros VIP do Universo 3D com mais de 150.000 modelos 3D STL, atualizações perpétuas, pastas no Google Drive liberadas e suporte prioritário.",
+  commercialPermitted: true
+};
+
 export const CHAVEIROS_MODELS: ModelItem[] = [
+  VIP_CHECKOUT_MODEL,
   {
     id: "chaveiro-biblia-sagrada-1",
     title: "Chaveiro B\u00edblia Sagrada 3D",

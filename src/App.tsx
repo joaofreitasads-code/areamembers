@@ -13,7 +13,7 @@ import { NotificationsModal } from './components/NotificationsModal';
 import { ProfitCalculator } from './components/ProfitCalculator';
 import { DownloadsTab } from './components/DownloadsTab';
 import { Sidebar, TabKey } from './components/Sidebar';
-import { preloadImageBatch, getOptimizedCardImageUrl } from './utils/imageOptimizer';
+import { preloadImageBatch, preloadPriorityImages, getOptimizedCardImageUrl } from './utils/imageOptimizer';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabKey>('catalog');
@@ -193,22 +193,28 @@ export default function App() {
   // Preload first batch of images in background for instant display
   useEffect(() => {
     if (displayedModels.length > 0) {
-      const urls = displayedModels.slice(0, 24).map(m => {
+      const allUrls = displayedModels.map(m => {
         const raw = (m.images && m.images[0]) || m.imageUrl || m.thumbnailUrl;
-        return getOptimizedCardImageUrl(raw, 0, 320);
+        return getOptimizedCardImageUrl(raw, 0, 220);
       }).filter(Boolean);
-      preloadImageBatch(urls, 24);
+
+      // Preload priority first 24 images immediately with high priority
+      preloadPriorityImages(allUrls.slice(0, 24));
+      // Preload next batch in background micro-chunks
+      if (allUrls.length > 24) {
+        preloadImageBatch(allUrls.slice(24, 72), 48);
+      }
     }
   }, [displayedModels]);
 
-  // Auto-scroll infinite load trigger
+  // Auto-scroll infinite load trigger with generous anticipation
   useEffect(() => {
     if (!loadMoreRef.current) return;
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         setVisibleCount(prev => (prev < filteredModels.length ? prev + 36 : prev));
       }
-    }, { rootMargin: '350px' });
+    }, { rootMargin: '600px' });
 
     observer.observe(loadMoreRef.current);
     return () => observer.disconnect();
@@ -385,22 +391,20 @@ export default function App() {
                 })}
               </div>
 
-              {/* Sort Bar & Total Count */}
+              {/* Sort Bar */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 border-t border-[#242424]">
-                <div className="flex items-center gap-2 text-xs font-mono text-neutral-400 font-bold">
-                  <span className="text-white font-black">{filteredModels.length}</span>
-                  <span>modelos encontrados</span>
+                <div>
                   {selectedSessionFilter !== 'all' && (
                     <button
                       onClick={() => setSelectedSessionFilter('all')}
-                      className="ml-2 text-white hover:underline text-[11px] font-bold"
+                      className="text-white hover:underline text-xs font-bold cursor-pointer"
                     >
                       (Ver todos)
                     </button>
                   )}
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 sm:ml-auto">
                   <div className="flex items-center gap-2 bg-[#151515] border border-[#282828] rounded-lg px-3 py-1.5 text-xs">
                     <ArrowUpDown className="w-3.5 h-3.5 text-white" />
                     <span className="text-neutral-400 font-bold hidden sm:inline">Ordenar:</span>
@@ -440,7 +444,7 @@ export default function App() {
                       <ModelCard
                         key={model.id}
                         model={model}
-                        priority={index < 12}
+                        priority={index < 24}
                         isFavorite={favorites.includes(model.id)}
                         onToggleFavorite={handleToggleFavorite}
                         onOpenDetails={handleOpenModel}

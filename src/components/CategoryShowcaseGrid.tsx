@@ -15,7 +15,7 @@ const SECTION_PREVIEWS: Record<string, string> = (() => {
     const modelWithPhoto = ALL_MODELS.find(m => m.sectionId === sec.id && m.imageUrl);
     const raw = modelWithPhoto?.imageUrl || '';
     if (raw) {
-      map[sec.id] = getOptimizedCardImageUrl(raw, 0, 280);
+      map[sec.id] = getOptimizedCardImageUrl(raw, 0, 220);
     }
   }
   return map;

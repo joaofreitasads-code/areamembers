@@ -7,7 +7,6 @@ import {
 import { VIP_DRIVE_MAIN_URL, SECTIONS } from '../data/modelsData';
 
 const CHECKOUT_VIP_URL = 'https://checkout.wiven.com.br/checkout/cmupyvej300i601pll6oi9cj1?offer=BX0N8TV';
-const PRODUCT_IMG_URL = 'https://i.imgur.com/6Yw58DO.png';
 
 export type TabKey = 'catalog' | 'favorites' | 'downloads' | 'calculator';
 
@@ -207,61 +206,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
 
-      {/* Product Banner with Lock & Image - Bem Em Cima da Área de Membros */}
-      <div className="p-3 border-t border-[#242424] bg-[#0E0E0E]">
-        <a
+      {/* Footer Info in Sidebar (Área de Membros) */}
+      <div className="p-3 border-t border-[#242424] bg-[#080808] text-[11px] font-mono text-center">
+        <a 
           href={CHECKOUT_VIP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="group block relative rounded-xl overflow-hidden border border-[#2e2e2e] hover:border-white transition-all duration-300 bg-[#161616] shadow-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-          title="Clique para Comprar no Checkout Oficial"
+          className="flex items-center justify-center gap-1.5 mb-0.5 text-white hover:text-amber-400 transition"
         >
-          {/* Image */}
-          <div className="relative aspect-square w-full overflow-hidden bg-black flex items-center justify-center">
-            <img
-              src={PRODUCT_IMG_URL}
-              alt="Produto Acesso VIP Área de Membros"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = '/product_checkout.png';
-              }}
-            />
-            {/* Lock / Cadeado badge */}
-            <div className="absolute top-2.5 right-2.5 px-2 py-1 rounded-md bg-black/85 backdrop-blur-md border border-white/20 flex items-center gap-1.5 shadow-lg">
-              <Lock className="w-3.5 h-3.5 text-white stroke-[2.5]" />
-              <span className="text-[10px] font-mono font-black text-white uppercase tracking-wider">
-                CADEADO
-              </span>
-            </div>
-          </div>
-
-          {/* Call to Action */}
-          <div className="p-2.5 bg-[#141414] border-t border-[#242424]">
-            <div className="flex items-center justify-between gap-1 mb-2">
-              <span className="text-[11px] font-black text-white uppercase tracking-tight truncate">
-                Acesso Vitalício VIP
-              </span>
-              <span className="text-[9px] font-mono font-black px-1.5 py-0.5 rounded bg-white text-black shrink-0">
-                OFERTA
-              </span>
-            </div>
-            <div className="w-full py-2 px-3 rounded-lg bg-white hover:bg-neutral-200 text-black font-black text-xs flex items-center justify-center gap-2 transition shadow-md group-hover:bg-neutral-100">
-              <Lock className="w-3.5 h-3.5 text-black stroke-[2.5]" />
-              <span>COMPRAR AGORA</span>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      {/* Footer Info in Sidebar (Área de Membros) */}
-      <div className="p-3 border-t border-[#242424] bg-[#080808] text-[11px] font-mono text-center">
-        <div className="flex items-center justify-center gap-1.5 mb-0.5">
           <Lock className="w-3 h-3 text-neutral-400" />
-          <p className="font-black text-white">Área de Membros VIP</p>
-        </div>
+          <p className="font-black text-white hover:text-amber-400">Área de Membros VIP</p>
+        </a>
         <p className="text-[10px] text-neutral-400 font-bold">Acesso aos Arquivos STL</p>
       </div>
     </aside>

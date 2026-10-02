@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, ExternalLink, Box, ChevronLeft, ChevronRight, Images } from 'lucide-react';
+import { Heart, ExternalLink, Box, ChevronLeft, ChevronRight, Images, Lock } from 'lucide-react';
 import { ModelItem, VIP_DRIVE_MAIN_URL } from '../data/modelsData';
 import { getOptimizedCardImageUrl, isImageCached, markImageCached } from '../utils/imageOptimizer';
 
@@ -37,10 +37,18 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
 
   const rawSrc = allImages.length > 0 ? allImages[currentImageIndex] : (model.imageUrl || model.thumbnailUrl);
   const currentSrc = React.useMemo(() => {
-    return getOptimizedCardImageUrl(rawSrc, fallbackAttempt, 320);
+    return getOptimizedCardImageUrl(rawSrc, fallbackAttempt, 220);
   }, [rawSrc, fallbackAttempt]);
 
   const [isLoaded, setIsLoaded] = useState(() => (currentSrc ? isImageCached(currentSrc) : false));
+
+  // Instant detection callback when browser already has image in cache
+  const imgRef = React.useCallback((node: HTMLImageElement | null) => {
+    if (node && node.complete && node.naturalWidth > 0) {
+      markImageCached(currentSrc);
+      setIsLoaded(true);
+    }
+  }, [currentSrc]);
 
   // Reset loaded state when src changes unless already in session cache
   useEffect(() => {
@@ -72,32 +80,42 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
     window.open(model.driveUrl || VIP_DRIVE_MAIN_URL, '_blank', 'noopener,noreferrer');
   };
 
+  const isVipCheckout = model.id === 'produto-vip-vitalicio-cadeado';
   const hasPhoto = Boolean(currentSrc && !imageError);
 
   return (
     <article
-      onClick={() => onOpenDetails(model)}
+      onClick={() => {
+        if (isVipCheckout) {
+          window.open(model.driveUrl || 'https://checkout.wiven.com.br/checkout/cmupyvej300i601pll6oi9cj1?offer=BX0N8TV', '_blank', 'noopener,noreferrer');
+        } else {
+          onOpenDetails(model);
+        }
+      }}
       style={{ contentVisibility: 'auto', containIntrinsicSize: '320px' }}
-      className="group bg-[#151515] hover:bg-[#1c1c1c] border border-[#282828] hover:border-white rounded-xl overflow-hidden cursor-pointer transition-all duration-200 flex flex-col justify-between text-left p-3 shadow-md hover:shadow-[0_12px_32px_rgba(0,0,0,0.8)] relative will-change-transform"
+      className={`group bg-[#151515] hover:bg-[#1c1c1c] border rounded-xl overflow-hidden cursor-pointer transition-all duration-200 flex flex-col justify-between text-left p-3 shadow-md hover:shadow-[0_12px_32px_rgba(0,0,0,0.8)] relative will-change-transform ${
+        isVipCheckout ? 'border-amber-400/80 hover:border-amber-300' : 'border-[#282828] hover:border-white'
+      }`}
     >
       {/* Visual Image Container with Square Aspect Ratio */}
       <div className="w-full aspect-square relative overflow-hidden rounded-lg bg-[#0e0e0e] flex items-center justify-center group/image select-none border border-[#222222]">
         {/* Placeholder skeleton loader while image is loading */}
-        {hasPhoto && !isLoaded && (
-          <div className="absolute inset-0 bg-[#161616] flex items-center justify-center z-0">
+        {hasPhoto && !isLoaded && !priority && (
+          <div className="absolute inset-0 bg-[#141414] flex items-center justify-center z-0">
             <Box className="w-8 h-8 text-neutral-700 animate-pulse" />
           </div>
         )}
 
         {hasPhoto ? (
           <img
+            ref={imgRef}
             key={`${currentSrc}-${fallbackAttempt}`}
             src={currentSrc}
             alt={model.title}
             referrerPolicy="no-referrer"
             loading={priority ? 'eager' : 'lazy'}
             decoding="async"
-            fetchPriority={priority ? 'high' : 'low'}
+            fetchPriority={priority ? 'high' : 'auto'}
             onLoad={() => {
               markImageCached(currentSrc);
               setIsLoaded(true);
@@ -109,8 +127,8 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
                 setImageError(true);
               }
             }}
-            className={`w-full h-full object-cover object-center transition-opacity duration-200 group-hover:scale-105 ${
-              isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-98'
+            className={`w-full h-full object-cover object-center transition-opacity duration-100 group-hover:scale-105 ${
+              (isLoaded || priority) ? 'opacity-100 scale-100' : 'opacity-0 scale-98'
             }`}
           />
         ) : (
@@ -118,6 +136,23 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
             <Box className="w-10 h-10 text-neutral-400 group-hover:text-white transition-colors" />
             <span className="text-[11px] font-mono tracking-widest uppercase text-white font-black">MODELO 3D</span>
           </div>
+        )}
+
+        {/* Transparent Lock Centered in the middle (No meio) for VIP checkout */}
+        {isVipCheckout ? (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+            <span className="p-3.5 sm:p-4 rounded-2xl bg-black/40 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-transform">
+              <Lock className="w-8 h-8 sm:w-10 sm:h-10 text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] stroke-[1.8]" />
+            </span>
+          </div>
+        ) : (
+          model.badge && (
+            <div className="absolute top-2.5 left-2.5 z-20">
+              <span className="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded shadow-md tracking-wider flex items-center gap-1 bg-black/85 text-white border border-white/20">
+                {model.badge}
+              </span>
+            </div>
+          )
         )}
 
         {/* Top-Right: Circular Favorite Heart Button (Black & White) */}
@@ -177,13 +212,18 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
           </h3>
         </div>
 
-        {/* Primary Action Button: High-Contrast Pure White with Black Text */}
+        {/* Primary Action Button */}
         <button
           type="button"
           onClick={handleAccessFolder}
-          className="w-full bg-white hover:bg-neutral-200 text-black font-black text-xs uppercase tracking-wider py-2.5 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg transition-all cursor-pointer select-none active:scale-[0.98] mt-auto"
+          className={`w-full font-black text-xs uppercase tracking-wider py-2.5 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg transition-all cursor-pointer select-none active:scale-[0.98] mt-auto ${
+            isVipCheckout
+              ? 'bg-amber-400 hover:bg-amber-300 text-black'
+              : 'bg-white hover:bg-neutral-200 text-black'
+          }`}
         >
-          <span>ACESSAR PASTA</span>
+          {isVipCheckout && <Lock className="w-3.5 h-3.5 stroke-[2.5]" />}
+          <span>{isVipCheckout ? 'ACESSAR PRODUTO' : 'ACESSAR PASTA'}</span>
           <ExternalLink className="w-3.5 h-3.5 stroke-[2.5]" />
         </button>
       </div>

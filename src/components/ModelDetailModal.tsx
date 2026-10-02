@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ExternalLink, Download, Heart, Check, Copy, Box, ChevronLeft, ChevronRight, Images } from 'lucide-react';
+import { X, ExternalLink, Download, Heart, Check, Copy, Box, ChevronLeft, ChevronRight, Images, Lock } from 'lucide-react';
 import { ModelItem, VIP_DRIVE_MAIN_URL } from '../data/modelsData';
 import { getOptimizedModalImageUrl, getOptimizedCardImageUrl, isImageCached, markImageCached } from '../utils/imageOptimizer';
 
@@ -47,6 +47,7 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
 
   if (!isOpen || !model) return null;
 
+  const isVipCheckout = model.id === 'produto-vip-vitalicio-cadeado';
   const rawSrc = allImages.length > 0 ? allImages[selectedImageIndex] : (model.imageUrl || model.thumbnailUrl);
 
   const getImageSource = () => {
@@ -144,11 +145,18 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
 
                 {hasPhoto ? (
                   <img
+                    ref={(el) => {
+                      if (el && el.complete && el.naturalWidth > 0 && !isMainLoaded) {
+                        markImageCached(currentSrc);
+                        setIsMainLoaded(true);
+                      }
+                    }}
                     key={`${currentSrc}-${fallbackAttempt}`}
                     src={currentSrc}
                     alt={model.title}
                     referrerPolicy="no-referrer"
                     decoding="async"
+                    fetchPriority="high"
                     onLoad={() => {
                       markImageCached(currentSrc);
                       setIsMainLoaded(true);
@@ -171,12 +179,20 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
                   </div>
                 )}
 
-                {/* Popular Badge (White & Black) */}
-                <div className="absolute top-2.5 left-2.5 z-20">
-                  <span className="bg-white text-black text-[10px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider shadow-md">
-                    POPULAR
-                  </span>
-                </div>
+                {/* Transparent Centered Lock for VIP checkout or Popular Badge */}
+                {isVipCheckout ? (
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                    <span className="p-4 sm:p-5 rounded-2xl bg-black/40 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
+                      <Lock className="w-10 h-10 sm:w-12 sm:h-12 text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] stroke-[1.8]" />
+                    </span>
+                  </div>
+                ) : (
+                  <div className="absolute top-2.5 left-2.5 z-20">
+                    <span className="bg-white text-black text-[10px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider shadow-md">
+                      POPULAR
+                    </span>
+                  </div>
+                )}
 
                 {/* Counter Tag */}
                 {allImages.length > 1 && (
@@ -327,10 +343,15 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
                 <button
                   type="button"
                   onClick={handleOpenDrive}
-                  className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-white hover:bg-neutral-200 text-black font-black text-xs uppercase tracking-wider rounded-lg transition-all shadow-md cursor-pointer"
+                  className={`w-full flex items-center justify-center gap-2 py-3 px-4 font-black text-xs uppercase tracking-wider rounded-lg transition-all shadow-md cursor-pointer ${
+                    isVipCheckout
+                      ? 'bg-amber-400 hover:bg-amber-300 text-black'
+                      : 'bg-white hover:bg-neutral-200 text-black'
+                  }`}
                 >
+                  {isVipCheckout && <Lock className="w-4 h-4 stroke-[2.5]" />}
                   <ExternalLink className="w-4 h-4 stroke-[2.5]" />
-                  <span>ACESSAR PASTA NO GOOGLE DRIVE</span>
+                  <span>{isVipCheckout ? 'ACESSAR PRODUTO' : 'ACESSAR PASTA NO GOOGLE DRIVE'}</span>
                 </button>
 
                 <div className="flex gap-2">
