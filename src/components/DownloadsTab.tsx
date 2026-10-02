@@ -1,6 +1,7 @@
 import React from 'react';
 import { Download, ExternalLink, HardDrive, Trash2, Box } from 'lucide-react';
 import { ModelItem, VIP_DRIVE_MAIN_URL } from '../data/modelsData';
+import { getOptimizedCardImageUrl } from '../utils/imageOptimizer';
 
 interface DownloadsTabProps {
   downloadedModels: ModelItem[];
@@ -89,9 +90,11 @@ export const DownloadsTab: React.FC<DownloadsTabProps> = ({
                 <div className="w-14 h-14 rounded-lg bg-[#0e0e0e] border border-[#2a2a2a] shrink-0 overflow-hidden flex items-center justify-center">
                   {model.imageUrl ? (
                     <img 
-                      src={model.imageUrl} 
+                      src={getOptimizedCardImageUrl(model.imageUrl, 0, 160)} 
                       alt="" 
                       referrerPolicy="no-referrer"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover" 
                     />
                   ) : (

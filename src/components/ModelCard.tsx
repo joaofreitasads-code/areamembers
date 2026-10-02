@@ -12,7 +12,7 @@ interface ModelCardProps {
   priority?: boolean;
 }
 
-export const ModelCard: React.FC<ModelCardProps> = ({
+const ModelCardComponent: React.FC<ModelCardProps> = ({
   model,
   isFavorite,
   onToggleFavorite,
@@ -37,7 +37,7 @@ export const ModelCard: React.FC<ModelCardProps> = ({
 
   const rawSrc = allImages.length > 0 ? allImages[currentImageIndex] : (model.imageUrl || model.thumbnailUrl);
   const currentSrc = React.useMemo(() => {
-    return getOptimizedCardImageUrl(rawSrc, fallbackAttempt, 420);
+    return getOptimizedCardImageUrl(rawSrc, fallbackAttempt, 320);
   }, [rawSrc, fallbackAttempt]);
 
   const [isLoaded, setIsLoaded] = useState(() => (currentSrc ? isImageCached(currentSrc) : false));
@@ -77,13 +77,14 @@ export const ModelCard: React.FC<ModelCardProps> = ({
   return (
     <article
       onClick={() => onOpenDetails(model)}
-      className="group bg-[#151515] hover:bg-[#1c1c1c] border border-[#282828] hover:border-white rounded-xl overflow-hidden cursor-pointer transition-all duration-300 flex flex-col justify-between text-left p-3 shadow-md hover:shadow-[0_12px_32px_rgba(0,0,0,0.8)] relative"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '320px' }}
+      className="group bg-[#151515] hover:bg-[#1c1c1c] border border-[#282828] hover:border-white rounded-xl overflow-hidden cursor-pointer transition-all duration-200 flex flex-col justify-between text-left p-3 shadow-md hover:shadow-[0_12px_32px_rgba(0,0,0,0.8)] relative will-change-transform"
     >
       {/* Visual Image Container with Square Aspect Ratio */}
       <div className="w-full aspect-square relative overflow-hidden rounded-lg bg-[#0e0e0e] flex items-center justify-center group/image select-none border border-[#222222]">
         {/* Placeholder skeleton loader while image is loading */}
         {hasPhoto && !isLoaded && (
-          <div className="absolute inset-0 bg-[#161616] animate-pulse flex items-center justify-center z-0">
+          <div className="absolute inset-0 bg-[#161616] flex items-center justify-center z-0">
             <Box className="w-8 h-8 text-neutral-700 animate-pulse" />
           </div>
         )}
@@ -96,7 +97,7 @@ export const ModelCard: React.FC<ModelCardProps> = ({
             referrerPolicy="no-referrer"
             loading={priority ? 'eager' : 'lazy'}
             decoding="async"
-            fetchPriority={priority ? 'high' : 'auto'}
+            fetchPriority={priority ? 'high' : 'low'}
             onLoad={() => {
               markImageCached(currentSrc);
               setIsLoaded(true);
@@ -108,7 +109,7 @@ export const ModelCard: React.FC<ModelCardProps> = ({
                 setImageError(true);
               }
             }}
-            className={`w-full h-full object-cover object-center transition-all duration-300 group-hover:scale-105 ${
+            className={`w-full h-full object-cover object-center transition-opacity duration-200 group-hover:scale-105 ${
               isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-98'
             }`}
           />
@@ -189,3 +190,11 @@ export const ModelCard: React.FC<ModelCardProps> = ({
     </article>
   );
 };
+
+export const ModelCard = React.memo(ModelCardComponent, (prev, next) => {
+  return (
+    prev.model.id === next.model.id &&
+    prev.isFavorite === next.isFavorite &&
+    prev.priority === next.priority
+  );
+});

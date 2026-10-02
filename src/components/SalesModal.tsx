@@ -1,6 +1,9 @@
 import React from 'react';
-import { X, Check, ShieldCheck, Zap, HardDrive, Sparkles, HelpCircle, ArrowRight, Crown } from 'lucide-react';
+import { X, Check, ShieldCheck, Zap, HardDrive, Sparkles, HelpCircle, ArrowRight, Crown, Lock } from 'lucide-react';
 import { VIP_DRIVE_MAIN_URL } from '../data/modelsData';
+
+const CHECKOUT_VIP_URL = 'https://checkout.wiven.com.br/checkout/cmupyvej300i601pll6oi9cj1?offer=BX0N8TV';
+const PRODUCT_IMG_URL = 'https://i.imgur.com/6Yw58DO.png';
 
 interface SalesModalProps {
   isOpen: boolean;
@@ -86,17 +89,26 @@ export const SalesModal: React.FC<SalesModalProps> = ({ isOpen, onClose }) => {
           {/* Action Callouts */}
           <div className="pt-4 border-t border-[#1E2132] flex flex-col sm:flex-row gap-3">
             <a
+              href={CHECKOUT_VIP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 py-3 px-4 bg-white hover:bg-neutral-200 text-black font-black text-xs font-mono uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition cursor-pointer shadow-lg"
+            >
+              <Lock className="w-4 h-4 stroke-[2.5]" />
+              <span>Comprar Acesso VIP (Checkout)</span>
+            </a>
+            <a
               href={VIP_DRIVE_MAIN_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 py-3 px-4 bg-amber-400 hover:bg-amber-300 text-black font-black text-xs font-mono uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition cursor-pointer shadow-lg"
+              className="py-3 px-4 bg-[#1C1E2D] hover:bg-[#25283A] text-white font-bold text-xs font-mono uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition cursor-pointer border border-[#232638]"
             >
               <HardDrive className="w-4 h-4 stroke-[2.5]" />
-              <span>Acessar Google Drive Oficial</span>
+              <span>Drive Raiz</span>
             </a>
             <button
               onClick={onClose}
-              className="py-3 px-5 rounded-xl bg-[#1C1E2D] hover:bg-[#25283A] text-zinc-300 text-xs font-mono font-bold uppercase transition cursor-pointer border border-[#232638]"
+              className="py-3 px-5 rounded-xl bg-[#141414] hover:bg-[#25283A] text-zinc-300 text-xs font-mono font-bold uppercase transition cursor-pointer border border-[#232638]"
             >
               Fechar
             </button>

@@ -279,15 +279,16 @@ export const ThematicSVGPreview: React.FC<ThematicSVGPreviewProps> = ({
           </svg>
         );
 
-      case 'sec-mascotes':
+      case 'sec-veiculos':
         return (
           <svg viewBox="0 0 100 100" className="w-24 h-24 drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)]" fill="none">
-            {/* Football Club Mascot Shield */}
-            <path d="M50 10 L84 22 C84 60 50 88 50 88 C50 88 16 60 16 22 Z" fill="#131418" stroke={colorTheme} strokeWidth="3.5" />
-            <circle cx="50" cy="45" r="20" fill="#181A20" stroke={colorTheme} strokeWidth="2" strokeDasharray="3 3" />
-            {/* Mascot Star */}
-            <path d="M50 30 L54 41 L65 41 L56 48 L60 59 L50 52 L40 59 L44 48 L35 41 L46 41 Z" fill={colorTheme} />
-            <path d="M30 68 Q50 78 70 68" stroke={colorTheme} strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            {/* Aerodynamic Sports Car Outline */}
+            <path d="M12 60 L24 44 Q36 34 52 34 L68 36 L86 52 L92 60 L88 68 L14 68 Z" fill="#141416" stroke={colorTheme} strokeWidth="3" strokeLinejoin="round" />
+            <path d="M30 46 L48 38 L65 40 L76 52 Z" fill="#1C1E24" stroke={colorTheme} strokeWidth="1.5" />
+            <circle cx="28" cy="68" r="9" fill="#0C0D10" stroke={colorTheme} strokeWidth="3" />
+            <circle cx="28" cy="68" r="4" fill={colorTheme} />
+            <circle cx="76" cy="68" r="9" fill="#0C0D10" stroke={colorTheme} strokeWidth="3" />
+            <circle cx="76" cy="68" r="4" fill={colorTheme} />
           </svg>
         );
 
@@ -384,6 +385,35 @@ export const ThematicSVGPreview: React.FC<ThematicSVGPreviewProps> = ({
             />
             <path d="M46 36 L54 36 L54 60 L46 60 Z" fill="#0B0B0D" opacity="0.8" />
             <circle cx="50" cy="46" r="4" fill="#F8FAFC" />
+          </svg>
+        );
+
+      case 'sec-chaveiros':
+        return (
+          <svg viewBox="0 0 100 100" className="w-24 h-24 drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)]" fill="none">
+            {/* Keychain Metallic Ring */}
+            <circle cx="50" cy="28" r="16" stroke={colorTheme} strokeWidth="4" />
+            <circle cx="50" cy="28" r="10" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.6" />
+            {/* Keychain Link Connector */}
+            <rect x="47" y="44" width="6" height="8" rx="2" fill={colorTheme} />
+            {/* Keychain Charm Body (Geometric Tag) */}
+            <path d="M34 52 L66 52 L74 82 L50 90 L26 82 Z" fill="#1C1F26" stroke={colorTheme} strokeWidth="2.5" />
+            {/* Inner Star / Charm Design */}
+            <polygon points="50,60 53,67 61,67 55,71 57,78 50,74 43,78 45,71 39,67 47,67" fill="#F8FAFC" />
+          </svg>
+        );
+
+      case 'sec-mascotes':
+        return (
+          <svg viewBox="0 0 100 100" className="w-24 h-24 drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)]" fill="none">
+            {/* Mascot Trophy & Soccer Ball Shield */}
+            <path d="M30 20 L70 20 L66 48 C64 62 50 72 50 72 C50 72 36 62 34 48 Z" fill="#1C1F26" stroke={colorTheme} strokeWidth="2.5" />
+            <path d="M30 24 C22 24 16 32 20 44 C23 52 32 54 34 54" stroke={colorTheme} strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            <path d="M70 24 C78 24 84 32 80 44 C77 52 68 54 66 54" stroke={colorTheme} strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            <path d="M44 72 L42 84 L58 84 L56 72" fill="#2A2E39" stroke={colorTheme} strokeWidth="2" />
+            <rect x="36" y="84" width="28" height="6" rx="2" fill="#F8FAFC" />
+            {/* Star on Cup */}
+            <polygon points="50,30 53,38 61,38 55,43 57,51 50,46 43,51 45,43 39,38 47,38" fill={colorTheme} />
           </svg>
         );
 

@@ -111,20 +111,22 @@ export default function App() {
 
   const handleDirectDownload = (model: ModelItem) => {
     handleRecordDownload(model);
-    if (model.downloadUrl) {
-      window.open(model.downloadUrl, '_blank', 'noopener,noreferrer');
-    } else {
-      window.open(model.driveUrl, '_blank', 'noopener,noreferrer');
-    }
+  };
+
+  const handleReDownload = (model: ModelItem) => {
+    handleRecordDownload(model);
+    window.open(model.driveUrl || VIP_DRIVE_MAIN_URL, '_blank', 'noopener,noreferrer');
   };
 
   // Horizontal filter pills (Black & White, based on actual collections)
   const categoryPills = [
     { id: 'all', label: 'Todos os Modelos' },
+    { id: 'sec-chaveiros', label: 'Chaveiros & Keychains (98)' },
+    { id: 'sec-mascotes', label: 'Mascotes Futebol (31)' },
+    { id: 'sec-veiculos', label: 'Veículos & Carros (178)' },
     { id: 'sec-natal', label: 'Especial Natal (41)' },
     { id: 'sec-series', label: 'Séries & TV (148)' },
     { id: 'sec-religiao', label: 'Arte Sacra (7)' },
-    { id: 'sec-mascotes', label: 'Mascotes Futebol (28)' },
     { id: 'sec-minifiguras', label: 'Minifiguras (99)' },
     { id: 'sec-bobesponja', label: 'Bob Esponja (500%)' },
     { id: 'sec-dc-comics', label: 'DC Comics (Lego 500%)' },
@@ -191,11 +193,11 @@ export default function App() {
   // Preload first batch of images in background for instant display
   useEffect(() => {
     if (displayedModels.length > 0) {
-      const urls = displayedModels.slice(0, 16).map(m => {
+      const urls = displayedModels.slice(0, 24).map(m => {
         const raw = (m.images && m.images[0]) || m.imageUrl || m.thumbnailUrl;
-        return getOptimizedCardImageUrl(raw, 0, 420);
+        return getOptimizedCardImageUrl(raw, 0, 320);
       }).filter(Boolean);
-      preloadImageBatch(urls, 16);
+      preloadImageBatch(urls, 24);
     }
   }, [displayedModels]);
 
@@ -315,18 +317,6 @@ export default function App() {
 
           {/* Right User Profile & Notification Bar (Preto e Branco) */}
           <div className="flex items-center gap-3 shrink-0">
-            {/* Google Drive Link */}
-            <a
-              href={VIP_DRIVE_MAIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#141414] hover:bg-[#202020] text-white border border-[#2c2c2c] hover:border-white text-xs font-mono font-bold transition shadow-sm"
-              title="Acessar pasta completa no Google Drive"
-            >
-              <HardDrive className="w-3.5 h-3.5 text-white" />
-              <span>Drive Raiz VIP</span>
-            </a>
-
             {/* Notification Bell */}
             <button
               type="button"
@@ -540,7 +530,7 @@ export default function App() {
               downloadedModels={downloads}
               onClearDownloads={() => setDownloads([])}
               onOpenModel={handleOpenModel}
-              onReDownload={handleDirectDownload}
+              onReDownload={handleReDownload}
               onBrowseCatalog={() => setActiveTab('catalog')}
             />
           )}

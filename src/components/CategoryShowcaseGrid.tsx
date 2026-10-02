@@ -8,18 +8,24 @@ interface CategoryShowcaseGridProps {
   onSelectCategory: (categoryId: string) => void;
 }
 
+// Precompute section preview map once for O(1) instant lookup without searching 1200+ models
+const SECTION_PREVIEWS: Record<string, string> = (() => {
+  const map: Record<string, string> = {};
+  for (const sec of SECTIONS) {
+    const modelWithPhoto = ALL_MODELS.find(m => m.sectionId === sec.id && m.imageUrl);
+    const raw = modelWithPhoto?.imageUrl || '';
+    if (raw) {
+      map[sec.id] = getOptimizedCardImageUrl(raw, 0, 280);
+    }
+  }
+  return map;
+})();
+
 export const CategoryShowcaseGrid: React.FC<CategoryShowcaseGridProps> = ({
   selectedCategory,
   onSelectCategory
 }) => {
   const [showAll, setShowAll] = useState(false);
-
-  // Grab a representative image for each section from ALL_MODELS
-  const getSectionPreview = (sectionId: string) => {
-    const modelWithPhoto = ALL_MODELS.find(m => m.sectionId === sectionId && m.imageUrl);
-    const raw = modelWithPhoto?.imageUrl || ALL_MODELS.find(m => m.sectionId === sectionId)?.imageUrl;
-    return raw ? getOptimizedCardImageUrl(raw, 0, 360) : '';
-  };
 
   const displayedSections = showAll ? SECTIONS : SECTIONS.slice(0, 12);
 
@@ -63,7 +69,7 @@ export const CategoryShowcaseGrid: React.FC<CategoryShowcaseGridProps> = ({
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
         {displayedSections.map((section) => {
           const isSelected = selectedCategory === section.id;
-          const previewImg = getSectionPreview(section.id);
+          const previewImg = SECTION_PREVIEWS[section.id] || '';
 
           return (
             <div
