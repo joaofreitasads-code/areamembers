@@ -94,6 +94,46 @@ export const MONSTER_DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/
 
 export const SECTIONS: SectionCategory[] = [
   {
+    id: "sec-canecas",
+    title: "SESSÃO CANECAS DE TIME 3D (BRASILEIRÃO, CLUBES & SELEÇÕES)",
+    shortTitle: "CANECAS DE TIME",
+    iconType: "trophy",
+    accentColor: "text-emerald-400",
+    description: "Coleção completa de canecas 3D personalizadas com brasões e escudos de times em alto relevo, alças reforçadas e arquivos STL prontos para impressão 3D.",
+    count: 17,
+    driveFolderUrl: "https://drive.google.com/drive/folders/1Qu5KADTlKaJNFZytdJqkpPIwkIKn7Ie0?usp=sharing",
+  },
+  {
+    id: "sec-rpg",
+    title: "SESSÃO RPG & MINIATURAS FANTASIA (FINAL FANTASY, WARHAMMER, MONSTROS & HERÓIS)",
+    shortTitle: "RPG & MINIATURAS",
+    iconType: "sword",
+    accentColor: "text-purple-400",
+    description: "Mais de 460 miniaturas e estátuas de RPG de mesa, wargames e universos de fantasia épica com STLs dedicados e fotos exclusivas.",
+    count: 467,
+    driveFolderUrl: "https://drive.google.com/drive/folders/1JfdAhzEim1pPst3DHRCo9XQATqj8zSue?usp=drive_link",
+  },
+  {
+    id: "sec-cenarios",
+    title: "SESSÃO CENÁRIOS & DIORAMAS 3D (CASTELOS, RUÍNAS, CASAS & MASMORRAS)",
+    shortTitle: "CENÁRIOS & DIORAMAS",
+    iconType: "box",
+    accentColor: "text-emerald-400",
+    description: "Mais de 140 maquetes, edifícios modulares, castelos medievais, masmorras e trincheiras góticas prontas para impressão 3D.",
+    count: 141,
+    driveFolderUrl: "https://drive.google.com/drive/folders/1x_CmWOShR1rXF3f3R1jN8Be0Y4EiLwqt?usp=drive_link",
+  },
+  {
+    id: "sec-disney",
+    title: "SESSÃO DISNEY & ANIMAÇÃO 3D (TOY STORY, MICKEY, CINDERELA, ALICE & CLÁSSICOS)",
+    shortTitle: "DISNEY & ANIMAÇÃO",
+    iconType: "sparkles",
+    accentColor: "text-pink-400",
+    description: "Mais de 140 personagens lendários dos clássicos Disney, Pixar e DreamWorks com fotos exclusivas sem repetição e arquivos STL.",
+    count: 142,
+    driveFolderUrl: "https://drive.google.com/drive/folders/187M6Mgh24dGzWykaeEejhUs0PWBkZLhf?usp=drive_link",
+  },
+  {
     id: "sec-chaveiros",
     title: "SESSÃO CHAVEIROS & KEYCHAINS 3D (RELIGIOSOS, POKÉMON, TIMES & GEEK)",
     shortTitle: "CHAVEIROS & KEYCHAINS",
@@ -30777,9 +30817,18 @@ export const MASCOTES_MODELS: ModelItem[] = [
   }
 ];
 
+import { RPG_MODELS } from './rpgModels';
+import { CENARIOS_MODELS } from './cenariosModels';
+import { DISNEY_MODELS } from './disneyModels';
+import { CANECAS_MODELS } from './canecasModels';
+
 export const ALL_MODELS: ModelItem[] = [
+  ...CANECAS_MODELS,
   ...CHAVEIROS_MODELS,
   ...MASCOTES_MODELS,
+  ...RPG_MODELS,
+  ...CENARIOS_MODELS,
+  ...DISNEY_MODELS,
   ...MODELS_PART_1,
   ...MODELS_PART_2,
   ...MODELS_PART_3

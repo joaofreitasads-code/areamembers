@@ -346,7 +346,7 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
                   className={`w-full flex items-center justify-center gap-2 py-3 px-4 font-black text-xs uppercase tracking-wider rounded-lg transition-all shadow-md cursor-pointer ${
                     isVipCheckout
                       ? 'bg-amber-400 hover:bg-amber-300 text-black'
-                      : 'bg-white hover:bg-neutral-200 text-black'
+                      : 'bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white shadow-emerald-950/40'
                   }`}
                 >
                   {isVipCheckout && <Lock className="w-4 h-4 stroke-[2.5]" />}

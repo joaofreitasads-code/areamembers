@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef, useDeferredValue } from 'react';
 import { 
   Search, Bell, HardDrive, Heart, Download, Calculator, 
-  ExternalLink, ChevronDown, Menu, X, ArrowUpDown, Box
+  ExternalLink, ChevronDown, Menu, X, ArrowUpDown, Box, Check
 } from 'lucide-react';
 import { 
   SECTIONS, ALL_MODELS, VIP_DRIVE_MAIN_URL,
@@ -13,6 +13,7 @@ import { NotificationsModal } from './components/NotificationsModal';
 import { ProfitCalculator } from './components/ProfitCalculator';
 import { DownloadsTab } from './components/DownloadsTab';
 import { Sidebar, TabKey } from './components/Sidebar';
+import { VideoAulaSection } from './components/VideoAulaSection';
 import { preloadImageBatch, preloadPriorityImages, getOptimizedCardImageUrl } from './utils/imageOptimizer';
 
 export default function App() {
@@ -121,8 +122,9 @@ export default function App() {
   // Horizontal filter pills (Black & White, based on actual collections)
   const categoryPills = [
     { id: 'all', label: 'Todos os Modelos' },
-    { id: 'sec-chaveiros', label: 'Chaveiros & Keychains (98)' },
+    { id: 'sec-canecas', label: 'Canecas de Time (17)' },
     { id: 'sec-mascotes', label: 'Mascotes Futebol (31)' },
+    { id: 'sec-rpg', label: 'RPG & Miniaturas (467)' },
     { id: 'sec-veiculos', label: 'Veículos & Carros (178)' },
     { id: 'sec-natal', label: 'Especial Natal (41)' },
     { id: 'sec-series', label: 'Séries & TV (148)' },
@@ -198,11 +200,11 @@ export default function App() {
         return getOptimizedCardImageUrl(raw, 0, 220);
       }).filter(Boolean);
 
-      // Preload priority first 24 images immediately with high priority
-      preloadPriorityImages(allUrls.slice(0, 24));
+      // Preload priority first 36 images immediately with high priority
+      preloadPriorityImages(allUrls.slice(0, 36));
       // Preload next batch in background micro-chunks
-      if (allUrls.length > 24) {
-        preloadImageBatch(allUrls.slice(24, 72), 48);
+      if (allUrls.length > 36) {
+        preloadImageBatch(allUrls.slice(36, 108), 72);
       }
     }
   }, [displayedModels]);
@@ -360,6 +362,9 @@ export default function App() {
           {/* VIEW 1: CATALOG */}
           {activeTab === 'catalog' && (
             <div className="space-y-6 text-left">
+              {/* VÍDEO AULA PASSO A PASSO (NO COMEÇO) */}
+              <VideoAulaSection />
+
               {/* Page Title & Subtitle */}
               <div className="space-y-1">
                 <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase font-sans">
@@ -422,6 +427,43 @@ export default function App() {
                 </div>
               </div>
 
+              {/* Observação no Topo: Aviso para Clicar em Ver Mais Modelos */}
+              <div className="bg-[#121212] border border-[#262626] hover:border-neutral-500 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3.5 transition-all shadow-md">
+                <div className="flex items-center gap-3 text-left w-full sm:w-auto">
+                  <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                    <span className="w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono font-black text-black bg-white px-2 py-0.5 rounded uppercase tracking-wider">
+                        OBSERVAÇÃO
+                      </span>
+                      <span className="text-xs sm:text-sm font-black text-white uppercase tracking-tight">
+                        Clique em "Ver Mais Modelos" ou role para ver tudo
+                      </span>
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-neutral-400 font-bold mt-0.5">
+                      Exibindo <strong className="text-white">{displayedModels.length}</strong> de <strong className="text-white">{filteredModels.length}</strong> modelos. Para carregar mais modelos na tela, clique no botão ao lado ou role a página até o fim.
+                    </p>
+                  </div>
+                </div>
+
+                {visibleCount < filteredModels.length ? (
+                  <button
+                    type="button"
+                    onClick={() => setVisibleCount(prev => Math.min(filteredModels.length, prev + 36))}
+                    className="w-full sm:w-auto px-5 py-2.5 bg-white hover:bg-neutral-200 text-black text-xs font-mono font-black uppercase tracking-wider rounded-lg transition-all shadow-md shrink-0 flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                  >
+                    <span>Ver Mais Modelos ({filteredModels.length - visibleCount} restantes)</span>
+                  </button>
+                ) : (
+                  <div className="px-3.5 py-1.5 bg-[#181818] border border-[#2e2e2e] rounded-lg text-[11px] font-mono font-bold text-neutral-300 shrink-0 flex items-center gap-1.5">
+                    <Check className="w-3.5 h-3.5 text-white" />
+                    <span>Todos os {filteredModels.length} modelos carregados</span>
+                  </div>
+                )}
+              </div>
+
               {/* Card Grid (Estilo Xadrez Preto e Branco - 6 Colunas) */}
               {filteredModels.length === 0 ? (
                 <div className="p-16 text-center border border-[#282828] rounded-xl bg-[#141414] space-y-4">
@@ -444,7 +486,7 @@ export default function App() {
                       <ModelCard
                         key={model.id}
                         model={model}
-                        priority={index < 24}
+                        priority={index < 36}
                         isFavorite={favorites.includes(model.id)}
                         onToggleFavorite={handleToggleFavorite}
                         onOpenDetails={handleOpenModel}

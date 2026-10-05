@@ -131,10 +131,11 @@ export const DownloadsTab: React.FC<DownloadsTabProps> = ({
                   href={model.driveUrl || VIP_DRIVE_MAIN_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-[#1e1e1e] hover:bg-[#282828] text-neutral-300 hover:text-white border border-[#353535] rounded-lg transition"
-                  title="Abrir pasta no Drive"
+                  className="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-mono font-bold text-xs uppercase rounded-lg transition flex items-center gap-1.5 shadow-sm"
+                  title="Acessar pasta no Drive"
                 >
-                  <ExternalLink className="w-4 h-4 stroke-[2.5]" />
+                  <ExternalLink className="w-3.5 h-3.5 stroke-[2.5]" />
+                  <span>Acessar Pasta</span>
                 </a>
               </div>
             </div>

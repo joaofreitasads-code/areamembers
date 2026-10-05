@@ -46,10 +46,10 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ favoriteCount, onClear
             href={VIP_DRIVE_MAIN_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="py-2.5 px-4 bg-yellow-400 hover:bg-yellow-300 text-black font-black text-xs font-mono uppercase tracking-wider rounded-xl flex items-center gap-2 transition cursor-pointer shadow-md"
+            className="py-2.5 px-4 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-black text-xs font-mono uppercase tracking-wider rounded-xl flex items-center gap-2 transition cursor-pointer shadow-md shadow-emerald-950/40"
           >
             <HardDrive className="w-4 h-4" />
-            <span>PASTA OFICIAL DRIVE</span>
+            <span>ACESSAR PASTA OFICIAL DRIVE</span>
           </a>
         </div>
       </section>

@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   Home, Zap, Coffee, Plane, Shield, Flame, 
   Puzzle, Trophy, Smile, Heart, Download, 
-  Folder, Calculator, Box, Lock, Key
+  Folder, Calculator, Box, Lock, Key, Play
 } from 'lucide-react';
 import { VIP_DRIVE_MAIN_URL, SECTIONS } from '../data/modelsData';
 
@@ -89,6 +89,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
         >
           <Home className={`w-4 h-4 ${activeTab === 'catalog' && selectedCategoryFilter === 'all' ? 'text-black stroke-[2.5]' : 'text-neutral-400'}`} />
           <span>Início / Catálogo Geral</span>
+        </button>
+
+        {/* Vídeo Aula Passo a Passo */}
+        <button
+          type="button"
+          onClick={() => {
+            onSelectTab('catalog');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-black transition-all text-left cursor-pointer text-emerald-400 hover:text-emerald-300 hover:bg-[#161616]"
+        >
+          <div className="flex items-center gap-3">
+            <Play className="w-4 h-4 fill-current stroke-[1.5]" />
+            <span>Vídeo Aula Passo a Passo</span>
+          </div>
+          <span className="text-[9px] font-mono font-black px-1.5 py-0.5 rounded bg-emerald-600/20 text-emerald-400 border border-emerald-500/30">
+            NOVO
+          </span>
         </button>
 
         {/* Categories Section Header */}

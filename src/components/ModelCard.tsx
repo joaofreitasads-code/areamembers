@@ -40,11 +40,12 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
     return getOptimizedCardImageUrl(rawSrc, fallbackAttempt, 220);
   }, [rawSrc, fallbackAttempt]);
 
+  const isCached = React.useMemo(() => (currentSrc ? isImageCached(currentSrc) : false), [currentSrc]);
   const [isLoaded, setIsLoaded] = useState(() => (currentSrc ? isImageCached(currentSrc) : false));
 
   // Instant detection callback when browser already has image in cache
   const imgRef = React.useCallback((node: HTMLImageElement | null) => {
-    if (node && node.complete && node.naturalWidth > 0) {
+    if (node && (node.complete && node.naturalWidth > 0)) {
       markImageCached(currentSrc);
       setIsLoaded(true);
     }
@@ -100,7 +101,7 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
       {/* Visual Image Container with Square Aspect Ratio */}
       <div className="w-full aspect-square relative overflow-hidden rounded-lg bg-[#0e0e0e] flex items-center justify-center group/image select-none border border-[#222222]">
         {/* Placeholder skeleton loader while image is loading */}
-        {hasPhoto && !isLoaded && !priority && (
+        {hasPhoto && !isLoaded && !priority && !isCached && (
           <div className="absolute inset-0 bg-[#141414] flex items-center justify-center z-0">
             <Box className="w-8 h-8 text-neutral-700 animate-pulse" />
           </div>
@@ -127,8 +128,8 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
                 setImageError(true);
               }
             }}
-            className={`w-full h-full object-cover object-center transition-opacity duration-100 group-hover:scale-105 ${
-              (isLoaded || priority) ? 'opacity-100 scale-100' : 'opacity-0 scale-98'
+            className={`w-full h-full object-cover object-center transition-opacity duration-150 group-hover:scale-105 ${
+              (isLoaded || priority || isCached) ? 'opacity-100 scale-100' : 'opacity-0 scale-98'
             }`}
           />
         ) : (
@@ -219,7 +220,7 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
           className={`w-full font-black text-xs uppercase tracking-wider py-2.5 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg transition-all cursor-pointer select-none active:scale-[0.98] mt-auto ${
             isVipCheckout
               ? 'bg-amber-400 hover:bg-amber-300 text-black'
-              : 'bg-white hover:bg-neutral-200 text-black'
+              : 'bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white shadow-emerald-950/40'
           }`}
         >
           {isVipCheckout && <Lock className="w-3.5 h-3.5 stroke-[2.5]" />}

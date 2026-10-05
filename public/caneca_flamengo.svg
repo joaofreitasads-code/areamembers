@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <!-- Background studio vignette -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1c1c1c"/>
+      <stop offset="60%" stop-color="#0e0e0e"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </radialGradient>
+
+    <!-- Pedestal gradient -->
+    <linearGradient id="pedestal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#121212"/>
+    </linearGradient>
+
+    <!-- Mug Body 3D Cylindrical lighting -->
+    <linearGradient id="mugGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="18%" stop-color="#1a1a1a"/>
+      <stop offset="35%" stop-color="#363636"/>
+      <stop offset="50%" stop-color="#242424"/>
+      <stop offset="75%" stop-color="#121212"/>
+      <stop offset="100%" stop-color="#080808"/>
+    </linearGradient>
+
+    <!-- Red Stripes 3D cylindrical lighting -->
+    <linearGradient id="redStripeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#660000"/>
+      <stop offset="25%" stop-color="#c41212"/>
+      <stop offset="42%" stop-color="#e82424"/>
+      <stop offset="60%" stop-color="#b01010"/>
+      <stop offset="100%" stop-color="#4d0000"/>
+    </linearGradient>
+
+    <!-- Handle 3D Lighting -->
+    <linearGradient id="handleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#444444"/>
+      <stop offset="30%" stop-color="#1a1a1a"/>
+      <stop offset="70%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#262626"/>
+    </linearGradient>
+
+    <!-- Rim ellipse inner shadow -->
+    <linearGradient id="innerMug" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#030303"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+
+    <filter id="reliefGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+
+  <!-- Studio Background -->
+  <rect width="800" height="800" fill="url(#bgGrad)"/>
+
+  <!-- Studio Floor & Shadow -->
+  <ellipse cx="400" cy="690" rx="280" ry="45" fill="#000000" opacity="0.7" filter="blur(15px)"/>
+  <ellipse cx="400" cy="670" rx="240" ry="25" fill="#000000" opacity="0.9"/>
+
+  <!-- Pedestal Base -->
+  <path d="M220,660 L580,660 L620,730 L180,730 Z" fill="url(#pedestal)" opacity="0.3"/>
+
+  <!-- Group: The Mug with Shadow -->
+  <g filter="url(#shadow)">
+    <!-- Mug Handle (Back/Side) -->
+    <path d="M490,310 C620,310 650,510 490,530 C480,530 475,505 485,500 C580,485 560,355 485,340 Z" 
+          fill="url(#handleGrad)" stroke="#111" stroke-width="2"/>
+
+    <!-- Handle Highlight Ridge (3D printed chamfer) -->
+    <path d="M495,322 C595,325 615,490 495,518" 
+          fill="none" stroke="#666666" stroke-width="3" opacity="0.6"/>
+
+    <!-- Mug Main Cylinder Outer Shell -->
+    <path d="M260,250 
+             L540,250 
+             C540,250 535,620 520,630 
+             C500,642 300,642 280,630 
+             C265,620 260,250 260,250 Z" 
+          fill="url(#mugGrad)"/>
+
+    <!-- Bottom Curvature -->
+    <path d="M280,630 C300,645 500,645 520,630 C535,620 520,648 400,652 C280,648 265,620 280,630 Z" 
+          fill="#0a0a0a"/>
+
+    <!-- Red Horizontal Stripes in 3D Relief (Flamengo Manto Rubro-Negro) -->
+    <!-- Top Red Stripe -->
+    <path d="M261,310 L539,310 L538,360 L262,360 Z" fill="url(#redStripeGrad)"/>
+    <line x1="261" y1="310" x2="539" y2="310" stroke="#ff4d4d" stroke-width="1.5" opacity="0.5"/>
+    <line x1="262" y1="360" x2="538" y2="360" stroke="#330000" stroke-width="2" opacity="0.8"/>
+
+    <!-- Middle Red Stripe -->
+    <path d="M263,420 L537,420 L536,470 L264,470 Z" fill="url(#redStripeGrad)"/>
+    <line x1="263" y1="420" x2="537" y2="420" stroke="#ff4d4d" stroke-width="1.5" opacity="0.5"/>
+    <line x1="264" y1="470" x2="536" y2="470" stroke="#330000" stroke-width="2" opacity="0.8"/>
+
+    <!-- Bottom Red Stripe -->
+    <path d="M266,530 L534,530 L532,580 L268,580 Z" fill="url(#redStripeGrad)"/>
+    <line x1="266" y1="530" x2="534" y2="530" stroke="#ff4d4d" stroke-width="1.5" opacity="0.5"/>
+    <line x1="268" y1="580" x2="532" y2="580" stroke="#330000" stroke-width="2" opacity="0.8"/>
+
+    <!-- FDM Layer Texture Overlay (Subtle 3D print lines) -->
+    <g opacity="0.1" stroke="#ffffff" stroke-width="0.75">
+      <line x1="260" y1="280" x2="540" y2="280"/>
+      <line x1="261" y1="300" x2="539" y2="300"/>
+      <line x1="262" y1="330" x2="538" y2="330"/>
+      <line x1="263" y1="380" x2="537" y2="380"/>
+      <line x1="264" y1="400" x2="536" y2="400"/>
+      <line x1="265" y1="450" x2="535" y2="450"/>
+      <line x1="266" y1="500" x2="534" y2="500"/>
+      <line x1="267" y1="550" x2="533" y2="550"/>
+      <line x1="269" y1="600" x2="531" y2="600"/>
+    </g>
+
+    <!-- Crest Medallion Shield (Alto Relevo Central) -->
+    <g filter="url(#reliefGlow)">
+      <!-- Shield Base (Extruded Black and Silver edge) -->
+      <path d="M340,360 L460,360 C460,360 465,450 400,490 C335,450 340,360 340,360 Z" 
+            fill="#080808" stroke="#ffffff" stroke-width="3" opacity="0.95"/>
+      <path d="M345,365 L455,365 C455,365 460,445 400,482 C340,445 345,365 345,365 Z" 
+            fill="#121212" stroke="#c41212" stroke-width="2.5"/>
+
+      <!-- Official CRF Monogram in High 3D Relief -->
+      <!-- Letter C -->
+      <path d="M385,395 C372,395 365,405 365,418 C365,432 372,442 385,442 C393,442 398,437 400,432 L392,428 C390,432 388,434 385,434 C378,434 374,428 374,418 C374,408 378,403 385,403 C388,403 391,405 393,408 L400,403 C397,398 392,395 385,395 Z" 
+            fill="#ffffff" stroke="#c41212" stroke-width="1.5"/>
+
+      <!-- Letter R -->
+      <path d="M392,398 L412,398 C418,398 423,402 423,408 C423,413 419,417 414,418 L424,438 L415,438 L406,420 L400,420 L400,438 L392,438 Z M400,414 L411,414 C414,414 416,412 416,408 C416,404 414,404 411,404 L400,404 Z" 
+            fill="#ffffff" stroke="#000000" stroke-width="1.2"/>
+
+      <!-- Letter F -->
+      <path d="M407,388 L428,388 L428,395 L415,395 L415,404 L426,404 L426,411 L415,411 L415,430 L407,430 Z" 
+            fill="#ffffff" stroke="#c41212" stroke-width="1.2"/>
+    </g>
+
+    <!-- Top Rim Opening and Lip (Smooth 3D Oval) -->
+    <!-- Inside cavity -->
+    <ellipse cx="400" cy="250" rx="140" ry="32" fill="url(#innerMug)"/>
+
+    <!-- Ceramic/Epoxy Inner Highlight -->
+    <ellipse cx="400" cy="250" rx="132" ry="26" fill="#050505"/>
+    <ellipse cx="380" cy="252" rx="110" ry="18" fill="#141414" opacity="0.5"/>
+
+    <!-- Outer Rim Highlight -->
+    <ellipse cx="400" cy="250" rx="140" ry="32" fill="none" stroke="#555555" stroke-width="4"/>
+    <ellipse cx="395" cy="248" rx="138" ry="30" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+
+    <!-- Specular Light Reflection Streak on Body -->
+    <path d="M330,255 L350,255 L345,635 L330,632 Z" fill="#ffffff" opacity="0.08" filter="blur(6px)"/>
+  </g>
+
+  <!-- High-end Badge Overlays -->
+  <g transform="translate(40, 50)">
+    <rect width="180" height="34" rx="8" fill="#000000" opacity="0.8" stroke="#333333"/>
+    <circle cx="20" cy="17" r="5" fill="#e82424"/>
+    <text x="35" y="22" fill="#ffffff" font-family="monospace, sans-serif" font-weight="900" font-size="12" letter-spacing="1.5">FLAMENGO 3D</text>
+  </g>
+
+  <g transform="translate(600, 50)">
+    <rect width="160" height="34" rx="8" fill="#c41212" opacity="0.9" stroke="#ff4d4d"/>
+    <text x="80" y="22" fill="#ffffff" font-family="monospace, sans-serif" font-weight="900" font-size="11" letter-spacing="1" text-anchor="middle">ALTO RELEVO STL</text>
+  </g>
+</svg>
