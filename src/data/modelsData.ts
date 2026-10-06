@@ -94,6 +94,16 @@ export const MONSTER_DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/
 
 export const SECTIONS: SectionCategory[] = [
   {
+    id: "sec-estadios",
+    title: "SESSÃO ESTÁDIOS DE FUTEBOL 3D (ARENAS & TEMPLOS DO FUTEBOL)",
+    shortTitle: "ESTÁDIOS DE FUTEBOL",
+    iconType: "trophy",
+    accentColor: "text-emerald-400",
+    description: "Coleção de maquetes 3D e réplicas fiéis de estádios de futebol (Maracanã, Neo Química Arena, Allianz Parque, Morumbi, Mineirão, Vila Belmiro, Arena MRV, Beira-Rio, Arena do Grêmio, São Januário e Monumental de Núñez) com arquivos STL e 3MF prontos para impressão 3D.",
+    count: 11,
+    driveFolderUrl: "https://drive.google.com/drive/folders/1Nm88DufMOS3XPtEwU1BW3DiMYjVISgdD?usp=drive_link",
+  },
+  {
     id: "sec-canecas",
     title: "SESSÃO CANECAS DE TIME 3D (BRASILEIRÃO, CLUBES & SELEÇÕES)",
     shortTitle: "CANECAS DE TIME",
@@ -30821,8 +30831,10 @@ import { RPG_MODELS } from './rpgModels';
 import { CENARIOS_MODELS } from './cenariosModels';
 import { DISNEY_MODELS } from './disneyModels';
 import { CANECAS_MODELS } from './canecasModels';
+import { ESTADIOS_MODELS } from './estadiosModels';
 
 export const ALL_MODELS: ModelItem[] = [
+  ...ESTADIOS_MODELS,
   ...CANECAS_MODELS,
   ...CHAVEIROS_MODELS,
   ...MASCOTES_MODELS,

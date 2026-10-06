@@ -168,6 +168,7 @@ export default function App() {
   // Horizontal filter pills (Black & White, based on actual collections)
   const categoryPills = [
     { id: 'all', label: 'Todos os Modelos' },
+    { id: 'sec-estadios', label: 'Estádios de Futebol (11)' },
     { id: 'sec-canecas', label: 'Canecas de Time (17)' },
     { id: 'sec-mascotes', label: 'Mascotes Futebol (31)' },
     { id: 'sec-rpg', label: 'RPG & Miniaturas (467)' },
