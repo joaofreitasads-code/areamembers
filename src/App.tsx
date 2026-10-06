@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef, useDeferredValue } from 'react';
 import { 
   Search, Bell, HardDrive, Heart, Download, Calculator, 
-  ExternalLink, ChevronDown, Menu, X, ArrowUpDown, Box, Check
+  ExternalLink, ChevronDown, Menu, X, ArrowUpDown, Box, Check, LogOut
 } from 'lucide-react';
 import { 
   SECTIONS, ALL_MODELS, VIP_DRIVE_MAIN_URL,
@@ -14,9 +14,39 @@ import { ProfitCalculator } from './components/ProfitCalculator';
 import { DownloadsTab } from './components/DownloadsTab';
 import { Sidebar, TabKey } from './components/Sidebar';
 import { VideoAulaSection } from './components/VideoAulaSection';
+import { LoginScreen } from './components/LoginScreen';
+import { MemberUser, STORAGE_USER_KEY } from './types/auth';
 import { preloadImageBatch, preloadPriorityImages, getOptimizedCardImageUrl } from './utils/imageOptimizer';
 
 export default function App() {
+  const [currentUser, setCurrentUser] = useState<MemberUser | null>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_USER_KEY);
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem(STORAGE_USER_KEY);
+    } catch (e) {
+      console.error(e);
+    }
+    setCurrentUser(null);
+    setIsUserMenuOpen(false);
+  };
+
+  const userInitials = useMemo(() => {
+    if (!currentUser?.name) return 'VIP';
+    const parts = currentUser.name.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }, [currentUser]);
+
   const [activeTab, setActiveTab] = useState<TabKey>('catalog');
   const [searchQuery, setSearchQuery] = useState('');
   const deferredSearchQuery = useDeferredValue(searchQuery);
@@ -28,6 +58,22 @@ export default function App() {
 
   const searchInputRef = useRef<HTMLInputElement>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const userMenuRef = useRef<HTMLDivElement | null>(null);
+
+  // Close user profile dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+    if (isUserMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isUserMenuOpen]);
 
   // Favorites state
   const [favorites, setFavorites] = useState<string[]>(() => {
@@ -222,6 +268,10 @@ export default function App() {
     return () => observer.disconnect();
   }, [filteredModels.length]);
 
+  if (!currentUser) {
+    return <LoginScreen onLogin={(user) => setCurrentUser(user)} />;
+  }
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white antialiased flex font-sans selection:bg-white selection:text-black">
       {/* Desktop Fixed Left Sidebar (Preto e Branco) */}
@@ -233,6 +283,8 @@ export default function App() {
           onSelectCategoryFilter={setSelectedSessionFilter}
           favoritesCount={favorites.length}
           downloadsCount={downloads.length}
+          currentUser={currentUser}
+          onLogout={handleLogout}
         />
       </div>
 
@@ -265,6 +317,8 @@ export default function App() {
               }}
               favoritesCount={favorites.length}
               downloadsCount={downloads.length}
+              currentUser={currentUser}
+              onLogout={handleLogout}
             />
           </div>
         </div>
@@ -337,22 +391,66 @@ export default function App() {
               <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-white shadow-[0_0_8px_#ffffff]" />
             </button>
 
-            {/* User Profile Component (Preto e Branco: joão freitas • Membro VIP) */}
-            <div className="flex items-center gap-2.5 pl-1 border-l border-[#242424]">
-              <div className="w-8 h-8 rounded-full bg-white text-black p-[1.5px] shadow-sm flex items-center justify-center font-black text-xs uppercase">
-                JF
-              </div>
+            {/* User Profile Component (Área de Membros VIP com Menu) */}
+            <div className="relative pl-1 border-l border-[#242424]" ref={userMenuRef}>
+              <button
+                type="button"
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                className="flex items-center gap-2.5 p-1 rounded-xl hover:bg-[#181818] transition cursor-pointer"
+                title="Meu Perfil de Membro"
+                aria-label="Perfil do Membro"
+              >
+                <div className="w-8 h-8 rounded-full bg-white text-black p-[1.5px] shadow-sm flex items-center justify-center font-black text-xs uppercase shrink-0">
+                  {userInitials}
+                </div>
 
-              <div className="hidden sm:block text-left leading-tight">
-                <span className="text-xs font-extrabold text-white block">
-                  joão freitas
-                </span>
-                <span className="text-[10px] font-mono font-black text-white uppercase tracking-wider bg-white/10 px-1.5 py-0.2 rounded">
-                  Membro VIP
-                </span>
-              </div>
+                <div className="hidden sm:block text-left leading-tight">
+                  <span className="text-xs font-extrabold text-white block max-w-[140px] truncate">
+                    {currentUser?.name || 'Membro VIP'}
+                  </span>
+                  <span className="text-[10px] font-mono font-black text-emerald-400 uppercase tracking-wider bg-emerald-950/60 border border-emerald-800/40 px-1.5 py-0.2 rounded">
+                    Membro VIP
+                  </span>
+                </div>
 
-              <ChevronDown className="w-3.5 h-3.5 text-neutral-400 hidden sm:block" />
+                <ChevronDown className={`w-3.5 h-3.5 text-neutral-400 hidden sm:block transition-transform duration-200 ${isUserMenuOpen ? 'rotate-180 text-white' : ''}`} />
+              </button>
+
+              {/* User Dropdown Menu */}
+              {isUserMenuOpen && (
+                <div className="absolute right-0 mt-2 w-72 bg-[#121212] border border-[#2c2c2c] rounded-2xl shadow-2xl p-3 z-50 text-left animate-in fade-in duration-150">
+                  <div className="p-2.5 border-b border-[#222222] space-y-1.5">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center font-black text-xs uppercase shrink-0">
+                        {userInitials}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-black text-white truncate">
+                          {currentUser?.name}
+                        </p>
+                        <p className="text-[11px] text-neutral-400 truncate font-mono">
+                          {currentUser?.email}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="pt-1.5 flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 font-bold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>Área de Membros VIP • Acesso Total</span>
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-2.5 px-3 py-2.5 text-xs font-bold text-neutral-300 hover:text-rose-400 hover:bg-[#1a1a1a] rounded-xl transition cursor-pointer"
+                    >
+                      <LogOut className="w-4 h-4 text-neutral-400 group-hover:text-rose-400" />
+                      <span>Sair / Trocar Usuário</span>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </header>

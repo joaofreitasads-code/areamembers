@@ -2,9 +2,10 @@ import React from 'react';
 import { 
   Home, Zap, Coffee, Plane, Shield, Flame, 
   Puzzle, Trophy, Smile, Heart, Download, 
-  Folder, Calculator, Box, Lock, Key, Play
+  Folder, Calculator, Box, Lock, Key, Play, LogOut
 } from 'lucide-react';
 import { VIP_DRIVE_MAIN_URL, SECTIONS } from '../data/modelsData';
+import { MemberUser } from '../types/auth';
 
 const CHECKOUT_VIP_URL = 'https://checkout.wiven.com.br/checkout/cmupyvej300i601pll6oi9cj1?offer=BX0N8TV';
 
@@ -17,6 +18,8 @@ interface SidebarProps {
   onSelectCategoryFilter: (catId: string) => void;
   favoritesCount: number;
   downloadsCount: number;
+  currentUser?: MemberUser | null;
+  onLogout?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -25,7 +28,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   selectedCategoryFilter,
   onSelectCategoryFilter,
   favoritesCount,
-  downloadsCount
+  downloadsCount,
+  currentUser,
+  onLogout
 }) => {
   // Navigation categories automatically synchronized with SECTIONS from modelsData
   const getSectionIcon = (iconType: string) => {
@@ -224,18 +229,43 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
 
-      {/* Footer Info in Sidebar (Área de Membros) */}
-      <div className="p-3 border-t border-[#242424] bg-[#080808] text-[11px] font-mono text-center">
-        <a 
-          href={CHECKOUT_VIP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-1.5 mb-0.5 text-white hover:text-amber-400 transition"
-        >
-          <Lock className="w-3 h-3 text-neutral-400" />
-          <p className="font-black text-white hover:text-amber-400">Área de Membros VIP</p>
-        </a>
-        <p className="text-[10px] text-neutral-400 font-bold">Acesso aos Arquivos STL</p>
+      {/* Footer Info in Sidebar (Área de Membros & User Profile) */}
+      <div className="p-3 border-t border-[#242424] bg-[#080808] text-[11px] font-mono space-y-2">
+        {currentUser ? (
+          <div className="flex items-center justify-between gap-2 p-2 rounded-xl bg-[#121212] border border-[#222222]">
+            <div className="min-w-0 text-left">
+              <span className="text-xs font-black text-white block truncate">
+                {currentUser.name}
+              </span>
+              <span className="text-[10px] text-neutral-400 block truncate">
+                {currentUser.email}
+              </span>
+            </div>
+            {onLogout && (
+              <button
+                type="button"
+                onClick={onLogout}
+                title="Sair / Trocar de Conta"
+                className="p-1.5 rounded-lg text-neutral-400 hover:text-red-400 hover:bg-[#1f1f1f] transition shrink-0 cursor-pointer"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+        ) : (
+          <div>
+            <a 
+              href={CHECKOUT_VIP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 mb-0.5 text-white hover:text-amber-400 transition"
+            >
+              <Lock className="w-3 h-3 text-neutral-400" />
+              <p className="font-black text-white hover:text-amber-400">Área de Membros VIP</p>
+            </a>
+            <p className="text-[10px] text-neutral-400 font-bold text-center">Acesso aos Arquivos STL</p>
+          </div>
+        )}
       </div>
     </aside>
   );
