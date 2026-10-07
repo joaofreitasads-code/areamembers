@@ -55,7 +55,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
     setTimeout(() => {
       setIsLoading(false);
       onLogin(user);
-    }, 400);
+    }, 60);
   };
 
   const handleQuickLogin = (demoName: string, demoEmail: string) => {

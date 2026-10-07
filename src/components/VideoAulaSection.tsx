@@ -16,9 +16,18 @@ export const VideoAulaSection: React.FC<VideoAulaSectionProps> = ({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  const localThumbnailUrl = '/youtube_video_aula_thumb.webp';
+  const remoteThumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   const fallbackThumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-  const [thumbSrc, setThumbSrc] = useState(thumbnailUrl);
+  const [thumbSrc, setThumbSrc] = useState(localThumbnailUrl);
+
+  const handleThumbError = () => {
+    if (thumbSrc === localThumbnailUrl) {
+      setThumbSrc(remoteThumbnailUrl);
+    } else if (thumbSrc === remoteThumbnailUrl) {
+      setThumbSrc(fallbackThumbnailUrl);
+    }
+  };
 
   const handleStartWithSound = () => {
     setIsPlaying(true);
@@ -118,7 +127,10 @@ export const VideoAulaSection: React.FC<VideoAulaSectionProps> = ({
                     {/* YouTube Video High-Res Thumbnail */}
                     <img
                       src={thumbSrc}
-                      onError={() => setThumbSrc(fallbackThumbnailUrl)}
+                      onError={handleThumbError}
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
                       alt="Miniatura do Vídeo Passo a Passo"
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-[0.85] group-hover:brightness-95"
                     />
