@@ -193,14 +193,14 @@ export const VideoAulaSection: React.FC<VideoAulaSectionProps> = ({
             </div>
 
             {/* SESSÃO AO LADO DO VÍDEO (QUER ACELERAR SEUS RESULTADOS? / CHAVEIROS 3D) */}
-            <div className="lg:col-span-5 xl:col-span-5 text-left flex flex-col bg-[#131313] border border-[#2c2c2c] hover:border-amber-400/50 rounded-xl overflow-hidden shadow-2xl transition-all">
+            <div className="lg:col-span-5 xl:col-span-5 text-left flex flex-col bg-[#101D35] border border-[#1b3158] hover:border-amber-400/50 rounded-xl overflow-hidden shadow-2xl transition-all">
               {/* Header da Sessão ao lado do vídeo */}
-              <div className="p-3.5 sm:p-4 bg-gradient-to-r from-[#171717] to-[#121212] border-b border-[#242424] space-y-2.5">
+              <div className="p-3.5 sm:p-4 bg-gradient-to-r from-[#14233f] to-[#101D35] border-b border-[#1b3158] space-y-2.5">
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-amber-400 text-black shadow-sm flex items-center gap-1">
                       <Zap className="w-3 h-3 fill-black stroke-black" />
-                      <span>SESSÃO EXCLUSIVA VIP</span>
+                      <span>FICHAS PRÁTICAS 3D</span>
                     </span>
                     <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
                   </div>
@@ -221,7 +221,7 @@ export const VideoAulaSection: React.FC<VideoAulaSectionProps> = ({
 
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-black text-white tracking-tight uppercase">
-                    {activeSideTab === 'vip' && 'Quer Acelerar Seus Resultados?'}
+                    {activeSideTab === 'vip' && 'Quer Evitar Erros nas Suas Impressões 3D?'}
                     {activeSideTab === 'sec-chaveiros' && 'Sessão Chaveiros & Keychains 3D'}
                     {activeSideTab === 'steps' && 'Passo a Passo Rápido'}
                   </h3>
@@ -231,8 +231,8 @@ export const VideoAulaSection: React.FC<VideoAulaSectionProps> = ({
                     </span>
                   )}
                   {activeSideTab === 'vip' && (
-                    <span className="text-[11px] font-bold text-amber-400">
-                      Acesso Vitalício
+                    <span className="text-[11px] font-black text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/30">
+                      R$ 37,90
                     </span>
                   )}
                 </div>
@@ -249,7 +249,7 @@ export const VideoAulaSection: React.FC<VideoAulaSectionProps> = ({
                     }`}
                   >
                     <Crown className={`w-3.5 h-3.5 ${activeSideTab === 'vip' ? 'text-black' : 'text-amber-400'}`} />
-                    <span>Acelerar Resultados</span>
+                    <span>Evitar Erros (R$ 37,90)</span>
                   </button>
 
                   <button
@@ -280,18 +280,18 @@ export const VideoAulaSection: React.FC<VideoAulaSectionProps> = ({
                 </div>
               </div>
 
-              {/* CONTEÚDO 1: CARD VIP SELECIONADO ("QUER ACELERAR SEUS RESULTADOS?") */}
+              {/* CONTEÚDO 1: CARD VIP SELECIONADO ("QUER EVITAR ERROS NAS SUAS IMPRESSÕES 3D?") */}
               {activeSideTab === 'vip' && (
-                <div className="flex-1 p-3.5 sm:p-4 flex flex-col justify-between space-y-3.5 bg-gradient-to-b from-[#141414] to-[#0f0f0f]">
+                <div className="flex-1 p-3.5 sm:p-4 flex flex-col justify-between space-y-3.5 bg-gradient-to-b from-[#101D35] to-[#0c172a]">
                   <div className="flex flex-col sm:flex-row gap-3.5 items-start">
                     {/* Imagem do Card Selecionado com Cadeado Centralizado */}
                     <div 
                       onClick={handleOpenVipCheckout}
-                      className="relative w-full sm:w-36 aspect-square shrink-0 rounded-xl overflow-hidden bg-[#0a0a0a] border border-amber-400/60 shadow-lg cursor-pointer group/card select-none"
+                      className="relative w-full sm:w-36 aspect-square shrink-0 rounded-xl overflow-hidden bg-[#08101e] border border-amber-400/60 shadow-lg cursor-pointer group/card select-none"
                     >
                       <img
                         src={VIP_CHECKOUT_MODEL.imageUrl}
-                        alt="Quer Acelerar Seus Resultados?"
+                        alt="Quer Evitar Erros nas Suas Impressões 3D?"
                         loading="eager"
                         decoding="async"
                         className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-300"
@@ -307,37 +307,37 @@ export const VideoAulaSection: React.FC<VideoAulaSectionProps> = ({
                     {/* Textos explicativos em Montserrat */}
                     <div className="space-y-1.5 flex-1 text-left">
                       <div className="inline-block px-2 py-0.5 rounded bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] font-black uppercase tracking-wider">
-                        ACESSO VITALÍCIO COMPLETO
+                        GUIA PRÁTICO & AJUSTES
                       </div>
                       <h4 
                         onClick={handleOpenVipCheckout}
                         className="text-sm sm:text-base font-black text-white uppercase tracking-tight leading-tight hover:text-amber-300 transition-colors cursor-pointer"
                       >
-                        QUER ACELERAR SEUS RESULTADOS?
+                        QUER EVITAR ERROS NAS SUAS IMPRESSÕES 3D?
                       </h4>
                       <p className="text-[11px] sm:text-xs text-neutral-300 leading-relaxed font-medium">
-                        Mais de <strong className="text-white font-bold">150.000 modelos 3D STL</strong> testados e aprovados, pastas no Google Drive com fotos reais e atualizações perpétuas sem mensalidades.
+                        <strong className="text-white font-bold">Pare de desperdiçar filamento e perder horas com configurações erradas!</strong> Tenha acesso a fichas práticas com os principais ajustes para imprimir com mais precisão e reduzir falhas.
                       </p>
                     </div>
                   </div>
 
                   {/* Benefícios Rápidos */}
-                  <div className="grid grid-cols-2 gap-2 pt-1 border-t border-[#222222] text-[11px] text-neutral-200 font-bold">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-[#222222] text-[11px] text-neutral-200 font-bold">
                     <div className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      <span>+150.000 Modelos STL</span>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>Configurações Prontas para Consultar</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      <span>Pastas Google Drive</span>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>Menos Erros e Filamento Desperdiçado</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      <span>Fotos Prontas de Venda</span>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>Ajustes de Temperatura, Velocidade e Qualidade</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      <span>Taxa Única Sem Mensalidade</span>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>Mais Praticidade em Cada Impressão</span>
                     </div>
                   </div>
 
@@ -349,7 +349,7 @@ export const VideoAulaSection: React.FC<VideoAulaSectionProps> = ({
                       className="w-full py-3 px-4 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:brightness-110 active:scale-[0.99] text-black text-xs font-black uppercase tracking-wider rounded-xl shadow-lg shadow-amber-950/50 flex items-center justify-center gap-2 transition-all cursor-pointer select-none"
                     >
                       <Lock className="w-4 h-4 stroke-[2.5]" />
-                      <span>GARANTIR ACESSO VITALÍCIO (R$ 97)</span>
+                      <span>GARANTIR ACESSO (R$ 37,90)</span>
                       <ExternalLink className="w-4 h-4 stroke-[2.5]" />
                     </button>
 
@@ -358,7 +358,7 @@ export const VideoAulaSection: React.FC<VideoAulaSectionProps> = ({
                         <ShieldCheck className="w-3 h-3 text-emerald-400" />
                         Compra 100% Segura
                       </span>
-                      <span>Liberação Imediata</span>
+                      <span className="text-amber-400 font-black">R$ 37,90 • Pagamento Único</span>
                     </div>
                   </div>
                 </div>
@@ -377,12 +377,12 @@ export const VideoAulaSection: React.FC<VideoAulaSectionProps> = ({
                       return (
                         <div
                           key={model.id}
-                          className="bg-[#171717] hover:bg-[#1c1c1c] border border-[#262626] hover:border-amber-400/60 rounded-lg p-2 flex flex-col justify-between transition-all group shadow-sm text-left"
+                          className="bg-[#101D35] hover:bg-[#152646] border border-[#1b3158] hover:border-amber-400/60 rounded-lg p-2 flex flex-col justify-between transition-all group shadow-sm text-left"
                         >
                           {/* Imagem Limpa */}
                           <div
                             onClick={() => onOpenModel?.(model)}
-                            className="relative aspect-square w-full rounded-md overflow-hidden bg-[#0d0d0d] mb-1.5 cursor-pointer"
+                            className="relative aspect-square w-full rounded-md overflow-hidden bg-[#08101e] mb-1.5 cursor-pointer"
                           >
                             {optImg ? (
                               <img

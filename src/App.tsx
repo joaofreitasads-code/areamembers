@@ -10,21 +10,25 @@ const MembersArea = lazy(() => import('./components/MembersArea'));
 export default function App() {
   const [currentUser, setCurrentUser] = useState<MemberUser | null>(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_USER_KEY);
+      // Clear legacy localStorage user so user is always presented with the Login Screen
+      localStorage.removeItem(STORAGE_USER_KEY);
+      // Active session in current browser tab
+      const saved = sessionStorage.getItem(STORAGE_USER_KEY);
       return saved ? JSON.parse(saved) : null;
     } catch {
       return null;
     }
   });
 
-  // Background preload: while the user is typing their name and email on the login screen,
-  // silently prefetch the heavy MembersArea chunk in the browser cache so login is instant!
+  // Background preload: while the user is viewing/typing on the login screen,
+  // silently prefetch the heavy MembersArea chunk and high-priority WebP images into browser cache so login is instant!
   useEffect(() => {
     if (!currentUser) {
       const preload = () => {
         import('./components/MembersArea');
         // Pre-warm featured top WebP images into browser cache silently
         const keyImages = [
+          '/product_checkout.webp',
           '/canecas-gamer/playstation.webp',
           '/canecas-gamer/mortal_kombat.webp',
           '/canecas-gamer/call_of_duty.webp',
@@ -44,18 +48,24 @@ export default function App() {
         const handle = (window as any).requestIdleCallback(preload, { timeout: 1200 });
         return () => (window as any).cancelIdleCallback(handle);
       } else {
-        const timer = setTimeout(preload, 600);
+        const timer = setTimeout(preload, 400);
         return () => clearTimeout(timer);
       }
     }
   }, [currentUser]);
 
   const handleLogin = (user: MemberUser) => {
+    try {
+      sessionStorage.setItem(STORAGE_USER_KEY, JSON.stringify(user));
+    } catch (e) {
+      console.error(e);
+    }
     setCurrentUser(user);
   };
 
   const handleLogout = () => {
     try {
+      sessionStorage.removeItem(STORAGE_USER_KEY);
       localStorage.removeItem(STORAGE_USER_KEY);
     } catch (e) {
       console.error(e);

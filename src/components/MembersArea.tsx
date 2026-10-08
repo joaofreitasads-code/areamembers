@@ -259,7 +259,7 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
 
     observer.observe(loadMoreRef.current);
     return () => observer.disconnect();
-  }, [filteredModels.length]);
+  }, [filteredModels.length, displayedModels.length]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white antialiased flex font-sans selection:bg-white selection:text-black">
@@ -381,7 +381,7 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
             </button>
 
             {/* User Profile Component (Área de Membros VIP com Menu) */}
-            <div className="relative pl-1 border-l border-[#242424]" ref={userMenuRef}>
+            <div className="relative pl-1 border-l border-[#242424] flex items-center gap-2" ref={userMenuRef}>
               <button
                 type="button"
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
@@ -403,6 +403,17 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                 </div>
 
                 <ChevronDown className={`w-3.5 h-3.5 text-neutral-400 hidden sm:block transition-transform duration-200 ${isUserMenuOpen ? 'rotate-180 text-white' : ''}`} />
+              </button>
+
+              {/* Direct Quick Logout Button */}
+              <button
+                type="button"
+                onClick={onLogout}
+                className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#141414] hover:bg-[#222222] border border-[#2c2c2c] hover:border-neutral-400 text-neutral-300 hover:text-white text-xs font-bold transition cursor-pointer ml-1"
+                title="Sair / Trocar Usuário (Voltar para Tela de Login)"
+              >
+                <LogOut className="w-3.5 h-3.5 text-neutral-400" />
+                <span>Sair</span>
               </button>
 
               {/* User Dropdown Menu */}

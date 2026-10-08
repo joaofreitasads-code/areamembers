@@ -94,16 +94,16 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
         }
       }}
       style={{ contentVisibility: 'auto', containIntrinsicSize: '320px' }}
-      className={`group bg-[#151515] hover:bg-[#1c1c1c] border rounded-xl overflow-hidden cursor-pointer transition-all duration-200 flex flex-col justify-between text-left p-3 shadow-md hover:shadow-[0_12px_32px_rgba(0,0,0,0.8)] relative will-change-transform ${
-        isVipCheckout ? 'border-amber-400/80 hover:border-amber-300' : 'border-[#282828] hover:border-white'
+      className={`group bg-[#101D35] hover:bg-[#152646] border rounded-xl overflow-hidden cursor-pointer transition-all duration-200 flex flex-col justify-between text-left p-3 shadow-md hover:shadow-[0_12px_32px_rgba(16,29,53,0.8)] relative will-change-transform ${
+        isVipCheckout ? 'border-amber-400/80 hover:border-amber-300' : 'border-[#1b3158] hover:border-white'
       }`}
     >
       {/* Visual Image Container with Square Aspect Ratio */}
-      <div className="w-full aspect-square relative overflow-hidden rounded-lg bg-[#0e0e0e] flex items-center justify-center group/image select-none border border-[#222222]">
+      <div className="w-full aspect-square relative overflow-hidden rounded-lg bg-[#0b1426] flex items-center justify-center group/image select-none border border-[#1b3158]">
         {/* Placeholder skeleton loader while image is loading */}
         {hasPhoto && !isLoaded && (
-          <div className="absolute inset-0 bg-[#121212] flex items-center justify-center z-0">
-            <Box className="w-8 h-8 text-neutral-700 animate-pulse" />
+          <div className="absolute inset-0 bg-[#0e192e] flex items-center justify-center z-0">
+            <Box className="w-8 h-8 text-neutral-400 animate-pulse" />
           </div>
         )}
 
@@ -157,7 +157,7 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
           className={`absolute top-2.5 right-2.5 p-2 rounded-full backdrop-blur-md transition-all z-20 border ${
             isFavorite
               ? 'bg-white text-black border-white shadow-md'
-              : 'bg-black/75 hover:bg-white text-white hover:text-black border-white/20 hover:border-white shadow-sm'
+              : 'bg-[#101D35]/80 hover:bg-white text-white hover:text-black border-white/20 hover:border-white shadow-sm'
           }`}
           title={isFavorite ? "Remover dos favoritos" : "Salvar nos favoritos"}
           aria-label={isFavorite ? "Remover dos favoritos" : "Salvar nos favoritos"}

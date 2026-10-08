@@ -7,8 +7,20 @@ interface LoginScreenProps {
 }
 
 export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(() => {
+    try {
+      return localStorage.getItem('universo3d_last_name') || 'João Freitas';
+    } catch {
+      return 'João Freitas';
+    }
+  });
+  const [email, setEmail] = useState(() => {
+    try {
+      return localStorage.getItem('universo3d_last_email') || 'joao.freitas.ads@gmail.com';
+    } catch {
+      return 'joao.freitas.ads@gmail.com';
+    }
+  });
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -38,29 +50,29 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
       vipStatus: true
     };
 
-    if (rememberMe) {
-      try {
-        localStorage.setItem(STORAGE_USER_KEY, JSON.stringify(user));
-      } catch (err) {
-        console.error('Failed to save user session', err);
+    try {
+      if (rememberMe) {
+        localStorage.setItem('universo3d_last_name', trimmedName);
+        localStorage.setItem('universo3d_last_email', trimmedEmail);
       }
-    } else {
-      try {
-        localStorage.removeItem(STORAGE_USER_KEY);
-      } catch (err) {
-        console.error('Failed to clear user session', err);
-      }
+      sessionStorage.setItem(STORAGE_USER_KEY, JSON.stringify(user));
+    } catch (err) {
+      console.error('Failed to save user session', err);
     }
 
-    setTimeout(() => {
-      setIsLoading(false);
-      onLogin(user);
-    }, 60);
+    setIsLoading(false);
+    onLogin(user);
   };
 
   const handleQuickLogin = (demoName: string, demoEmail: string) => {
     setName(demoName);
     setEmail(demoEmail);
+    setError('');
+  };
+
+  const handleClear = () => {
+    setName('');
+    setEmail('');
     setError('');
   };
 
@@ -178,13 +190,19 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             </button>
           </form>
 
-          {/* Quick Pre-fill Shortcut for João Freitas */}
-          <div className="pt-2 border-t border-[#222222] flex items-center justify-between">
-            <span className="text-[11px] text-neutral-500">Acesso rápido:</span>
+          {/* Quick Pre-fill Shortcut for João Freitas and Clear option */}
+          <div className="pt-2 border-t border-[#222222] flex items-center justify-between text-[11px]">
+            <button
+              type="button"
+              onClick={handleClear}
+              className="font-mono text-neutral-400 hover:text-white transition cursor-pointer"
+            >
+              Limpar Campos
+            </button>
             <button
               type="button"
               onClick={() => handleQuickLogin('João Freitas', 'joao.freitas.ads@gmail.com')}
-              className="text-[11px] font-mono text-emerald-400 hover:text-emerald-300 hover:underline transition cursor-pointer"
+              className="font-mono text-emerald-400 hover:text-emerald-300 hover:underline transition cursor-pointer font-bold"
             >
               Preencher João Freitas
             </button>

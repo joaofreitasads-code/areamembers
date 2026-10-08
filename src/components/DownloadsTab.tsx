@@ -81,13 +81,13 @@ export const DownloadsTab: React.FC<DownloadsTabProps> = ({
           {downloadedModels.map((model) => (
             <div
               key={model.id}
-              className="p-3.5 rounded-xl border border-[#282828] hover:border-white bg-[#151515] hover:bg-[#1c1c1c] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              className="p-3.5 rounded-xl border border-[#1b3158] hover:border-white bg-[#101D35] hover:bg-[#152646] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
             >
               <div 
                 className="flex items-center gap-3.5 cursor-pointer flex-1"
                 onClick={() => onOpenModel(model)}
               >
-                <div className="w-14 h-14 rounded-lg bg-[#0e0e0e] border border-[#2a2a2a] shrink-0 overflow-hidden flex items-center justify-center">
+                <div className="w-14 h-14 rounded-lg bg-[#0b1426] border border-[#1b3158] shrink-0 overflow-hidden flex items-center justify-center">
                   {model.imageUrl ? (
                     <img 
                       src={getOptimizedCardImageUrl(model.imageUrl, 0, 160)} 

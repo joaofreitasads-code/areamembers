@@ -27750,23 +27750,23 @@ const MODELS_PART_3: ModelItem[] = [
 
 export const VIP_CHECKOUT_MODEL: ModelItem = {
   id: "produto-vip-vitalicio-cadeado",
-  title: "QUER ACELERAR SEUS RESULTADOS?",
+  title: "QUER EVITAR ERROS NAS SUAS IMPRESSÕES 3D?",
   category: "Chaveiros & Keychains 3D",
   sectionId: "sec-chaveiros",
   isHot: true,
   driveUrl: "https://checkout.wiven.com.br/checkout/cmupyvej300i601pll6oi9cj1?offer=BX0N8TV",
   downloadUrl: "https://checkout.wiven.com.br/checkout/cmupyvej300i601pll6oi9cj1?offer=BX0N8TV",
-  imageUrl: "https://i.imgur.com/6Yw58DOm.png",
-  thumbnailUrl: "https://i.imgur.com/6Yw58DOm.png",
-  images: ["https://i.imgur.com/6Yw58DOm.png"],
+  imageUrl: "/product_checkout.webp",
+  thumbnailUrl: "/product_checkout.webp",
+  images: ["/product_checkout.webp", "https://i.imgur.com/6Yw58DOm.png"],
   filamentGrams: 0,
   printTimeHours: 0,
-  suggestedPrice: 97.0,
-  dimensions: "Acesso Vitalício Completo",
-  infill: "Acesso Ilimitado",
-  supports: "Liberação Imediata",
+  suggestedPrice: 37.9,
+  dimensions: "Fichas Práticas de Ajustes",
+  infill: "Acesso Imediato",
+  supports: "Configurações Prontas",
   colorTheme: "#F59E0B",
-  description: "Acesso total e vitalício à Área de Membros VIP do Universo 3D com mais de 150.000 modelos 3D STL, atualizações perpétuas, pastas no Google Drive liberadas e suporte prioritário.",
+  description: "Pare de desperdiçar filamento e perder horas com configurações erradas! Tenha acesso a fichas práticas com os principais ajustes para imprimir com mais precisão e reduzir falhas.",
   commercialPermitted: true
 };
 
