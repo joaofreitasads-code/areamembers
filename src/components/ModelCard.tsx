@@ -101,8 +101,8 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
       {/* Visual Image Container with Square Aspect Ratio */}
       <div className="w-full aspect-square relative overflow-hidden rounded-lg bg-[#0e0e0e] flex items-center justify-center group/image select-none border border-[#222222]">
         {/* Placeholder skeleton loader while image is loading */}
-        {hasPhoto && !isLoaded && !priority && !isCached && (
-          <div className="absolute inset-0 bg-[#141414] flex items-center justify-center z-0">
+        {hasPhoto && !isLoaded && (
+          <div className="absolute inset-0 bg-[#121212] flex items-center justify-center z-0">
             <Box className="w-8 h-8 text-neutral-700 animate-pulse" />
           </div>
         )}
@@ -110,7 +110,6 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
         {hasPhoto ? (
           <img
             ref={imgRef}
-            key={`${currentSrc}-${fallbackAttempt}`}
             src={currentSrc}
             alt={model.title}
             referrerPolicy="no-referrer"
@@ -129,7 +128,7 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
               }
             }}
             className={`w-full h-full object-cover object-center transition-opacity duration-150 group-hover:scale-105 ${
-              (isLoaded || priority || isCached) ? 'opacity-100 scale-100' : 'opacity-0 scale-98'
+              isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             }`}
           />
         ) : (
@@ -139,21 +138,13 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
           </div>
         )}
 
-        {/* Transparent Lock Centered in the middle (No meio) for VIP checkout */}
-        {isVipCheckout ? (
+        {/* Transparent Lock Centered in the middle (No meio) for VIP checkout only */}
+        {isVipCheckout && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
             <span className="p-3.5 sm:p-4 rounded-2xl bg-black/40 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-transform">
               <Lock className="w-8 h-8 sm:w-10 sm:h-10 text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] stroke-[1.8]" />
             </span>
           </div>
-        ) : (
-          model.badge && (
-            <div className="absolute top-2.5 left-2.5 z-20">
-              <span className="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded shadow-md tracking-wider flex items-center gap-1 bg-black/85 text-white border border-white/20">
-                {model.badge}
-              </span>
-            </div>
-          )
         )}
 
         {/* Top-Right: Circular Favorite Heart Button (Black & White) */}

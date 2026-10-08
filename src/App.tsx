@@ -23,13 +23,28 @@ export default function App() {
     if (!currentUser) {
       const preload = () => {
         import('./components/MembersArea');
+        // Pre-warm featured top WebP images into browser cache silently
+        const keyImages = [
+          '/canecas-gamer/playstation.webp',
+          '/canecas-gamer/mortal_kombat.webp',
+          '/canecas-gamer/call_of_duty.webp',
+          '/canecas-gamer/gta.webp',
+          '/canecas-gamer/minecraft.webp',
+          '/estadios/corinthians.webp',
+          '/estadios/flamengo.webp',
+          '/canecas/corinthians.webp'
+        ];
+        keyImages.forEach(src => {
+          const img = new Image();
+          img.src = src;
+        });
       };
 
       if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-        const handle = (window as any).requestIdleCallback(preload, { timeout: 1500 });
+        const handle = (window as any).requestIdleCallback(preload, { timeout: 1200 });
         return () => (window as any).cancelIdleCallback(handle);
       } else {
-        const timer = setTimeout(preload, 800);
+        const timer = setTimeout(preload, 600);
         return () => clearTimeout(timer);
       }
     }

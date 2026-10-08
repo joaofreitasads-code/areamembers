@@ -1,41 +1,49 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-montserrat: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
 @layer base {
   html, body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-weight: 700;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background-color: #0A0A0A; /* Fundo 100% plano, sem quadradinhos */
     color: #FFFFFF;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     letter-spacing: -0.01em;
   }
 
-  /* Todas as letras da página numa fonte grossa e marcante */
+  /* Letras da área de membros na fonte Montserrat: bem visíveis e fáceis de ler */
   body, p, span, div, a, button, input, select, textarea, label, li, td, th {
-    font-weight: 700;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
-  /* Títulos e cabeçalhos em peso ultra-pesado (800 / 900) */
+  /* Títulos com excelente peso, contraste e legibilidade */
   h1, h2, h3, h4, h5, h6, strong, b {
-    font-weight: 900 !important;
-    letter-spacing: -0.02em;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.015em;
   }
 
   button, input, select, textarea {
-    font-family: inherit;
-    font-weight: 800 !important;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 }
 
 @layer utilities {
+  .font-montserrat {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
   .font-cinzel {
     font-family: 'Cinzel', serif, ui-serif, Georgia;
     font-weight: 800;
   }
   .font-mono {
     font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-weight: 700;
+    font-weight: 600;
   }
 }
 

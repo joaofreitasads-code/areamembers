@@ -3,6 +3,40 @@
 // Session memory cache to track already-loaded image URLs
 const loadedImageUrls = new Set<string>();
 
+// Restore loaded URLs from sessionStorage for instant zero-flash renders
+try {
+  if (typeof window !== 'undefined' && window.sessionStorage) {
+    const raw = sessionStorage.getItem('universo3d_cached_images');
+    if (raw) {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr)) {
+        arr.forEach(url => { if (typeof url === 'string') loadedImageUrls.add(url); });
+      }
+    }
+  }
+} catch {
+  // Ignore storage access errors
+}
+
+let saveTimer: number | null = null;
+export function markImageCached(url: string): void {
+  if (!url || loadedImageUrls.has(url)) return;
+  loadedImageUrls.add(url);
+  try {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      if (!saveTimer) {
+        saveTimer = window.setTimeout(() => {
+          saveTimer = null;
+          const sample = Array.from(loadedImageUrls).slice(-250);
+          sessionStorage.setItem('universo3d_cached_images', JSON.stringify(sample));
+        }, 1200);
+      }
+    }
+  } catch {
+    // Ignore storage quota errors
+  }
+}
+
 /**
  * Extracts a Google Drive file ID from various URL patterns or bare IDs
  */
@@ -121,25 +155,18 @@ export function isImageCached(url: string): boolean {
 }
 
 /**
- * Mark an image URL as successfully loaded
- */
-export function markImageCached(url: string): void {
-  if (url) loadedImageUrls.add(url);
-}
-
-/**
  * Preloads the highest priority images (first visible viewport fold) immediately with high fetch priority
  */
 export function preloadPriorityImages(urls: string[]): void {
   if (typeof window === 'undefined') return;
-  const valid = urls.filter(u => u && !loadedImageUrls.has(u)).slice(0, 36);
+  const valid = urls.filter(u => u && !loadedImageUrls.has(u)).slice(0, 16);
   valid.forEach(url => {
     const img = new Image();
     img.referrerPolicy = 'no-referrer';
     (img as unknown as { fetchPriority?: string }).fetchPriority = 'high';
     img.decoding = 'async';
     img.onload = () => {
-      loadedImageUrls.add(url);
+      markImageCached(url);
       if ('decode' in img) img.decode().catch(() => {});
     };
     img.src = url;

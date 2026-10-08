@@ -151,7 +151,6 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
                         setIsMainLoaded(true);
                       }
                     }}
-                    key={`${currentSrc}-${fallbackAttempt}`}
                     src={currentSrc}
                     alt={model.title}
                     referrerPolicy="no-referrer"
@@ -179,17 +178,11 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
                   </div>
                 )}
 
-                {/* Transparent Centered Lock for VIP checkout or Popular Badge */}
-                {isVipCheckout ? (
+                {/* Transparent Centered Lock for VIP checkout only */}
+                {isVipCheckout && (
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
                     <span className="p-4 sm:p-5 rounded-2xl bg-black/40 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
                       <Lock className="w-10 h-10 sm:w-12 sm:h-12 text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] stroke-[1.8]" />
-                    </span>
-                  </div>
-                ) : (
-                  <div className="absolute top-2.5 left-2.5 z-20">
-                    <span className="bg-white text-black text-[10px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider shadow-md">
-                      POPULAR
                     </span>
                   </div>
                 )}
@@ -271,7 +264,7 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
             {/* Information Column */}
             <div className="space-y-4">
               <div>
-                <div className="flex items-center gap-2 text-xs font-mono text-neutral-400 mb-1 font-black">
+                <div className="flex items-center gap-2 text-xs text-neutral-400 mb-1 font-bold">
                   <span className="text-white">{model.category}</span>
                   {model.scale && (
                     <>
@@ -286,51 +279,51 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
               </div>
 
               {model.description && (
-                <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-bold">
+                <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-medium">
                   {model.description}
                 </p>
               )}
 
               {/* Technical Specifications */}
-              <div className="p-3.5 rounded-xl bg-[#0c0c0c] border border-[#262626] space-y-2.5 font-mono text-xs">
-                <span className="text-white font-black uppercase tracking-wider block text-[10px]">
+              <div className="p-3.5 rounded-xl bg-[#0c0c0c] border border-[#262626] space-y-2.5 text-xs">
+                <span className="text-white font-extrabold uppercase tracking-wider block text-[10px]">
                   Ficha Técnica da Impressão 3D
                 </span>
-                <div className="grid grid-cols-2 gap-2 text-neutral-300 font-bold">
+                <div className="grid grid-cols-2 gap-2 text-neutral-300 font-medium">
                   {model.printTimeHours && (
                     <div>
                       <span className="text-neutral-400 block text-[10px] font-bold">TEMPO ESTIMADO</span>
-                      <span className="text-white font-extrabold">{model.printTimeHours}h</span>
+                      <span className="text-white font-bold">{model.printTimeHours}h</span>
                     </div>
                   )}
                   {model.weightGrams && (
                     <div>
                       <span className="text-neutral-400 block text-[10px] font-bold">PESO FILAMENTO</span>
-                      <span className="text-white font-extrabold">~{model.weightGrams}g</span>
+                      <span className="text-white font-bold">~{model.weightGrams}g</span>
                     </div>
                   )}
                   {model.suggestedPrice && (
                     <div>
                       <span className="text-neutral-400 block text-[10px] font-bold">VALOR SUGERIDO</span>
-                      <span className="text-white font-black">R$ {model.suggestedPrice.toFixed(2)}</span>
+                      <span className="text-white font-extrabold">R$ {model.suggestedPrice.toFixed(2)}</span>
                     </div>
                   )}
                   {model.infill && (
                     <div>
                       <span className="text-neutral-400 block text-[10px] font-bold">PREENCHIMENTO</span>
-                      <span className="text-white font-extrabold">{model.infill}</span>
+                      <span className="text-white font-bold">{model.infill}</span>
                     </div>
                   )}
                   {model.walls && (
                     <div>
                       <span className="text-neutral-400 block text-[10px] font-bold">PAREDES</span>
-                      <span className="text-white font-extrabold">{model.walls} loops</span>
+                      <span className="text-white font-bold">{model.walls} loops</span>
                     </div>
                   )}
                   {model.amsSupport !== undefined && (
                     <div>
                       <span className="text-neutral-400 block text-[10px] font-bold">MULTICOLOR</span>
-                      <span className="font-black text-white">
+                      <span className="font-bold text-white">
                         {model.amsSupport ? 'Compatível com AMS' : 'Pintura/Mono'}
                       </span>
                     </div>
@@ -358,7 +351,7 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
                   <button
                     type="button"
                     onClick={handleDirectDownload}
-                    className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 bg-[#1e1e1e] hover:bg-[#282828] text-white font-mono font-bold text-xs uppercase tracking-wider rounded-lg border border-[#383838] hover:border-white transition-all cursor-pointer"
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 bg-[#1e1e1e] hover:bg-[#282828] text-white font-bold text-xs uppercase tracking-wider rounded-lg border border-[#383838] hover:border-white transition-all cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5 stroke-[2.5]" />
                     <span>Baixar STL</span>
@@ -367,7 +360,7 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
                   <button
                     type="button"
                     onClick={handleCopyLink}
-                    className="px-3 py-2.5 bg-[#1e1e1e] hover:bg-[#282828] text-neutral-300 hover:text-white border border-[#383838] hover:border-white rounded-lg transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono font-bold"
+                    className="px-3 py-2.5 bg-[#1e1e1e] hover:bg-[#282828] text-neutral-300 hover:text-white border border-[#383838] hover:border-white rounded-lg transition-all cursor-pointer flex items-center gap-1.5 text-xs font-bold"
                     title="Copiar link"
                   >
                     {copied ? <Check className="w-4 h-4 text-white stroke-[3]" /> : <Copy className="w-4 h-4 stroke-[2]" />}

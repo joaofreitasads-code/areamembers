@@ -153,6 +153,7 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
   // Horizontal filter pills (Black & White, based on actual collections)
   const categoryPills = [
     { id: 'all', label: 'Todos os Modelos' },
+    { id: 'sec-canecas-gamer', label: 'Canecas Gamer (5)' },
     { id: 'sec-estadios', label: 'Estádios de Futebol (11)' },
     { id: 'sec-canecas', label: 'Canecas de Time (17)' },
     { id: 'sec-mascotes', label: 'Mascotes Futebol (31)' },
@@ -209,9 +210,15 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
       if (sortBy === 'printTime') {
         return (a.printTimeHours || 99) - (b.printTimeHours || 99);
       }
+      if (selectedSessionFilter !== 'all') {
+        return 0; // Maintain custom curated order when viewing a specific section
+      }
+      if (a.isHot !== b.isHot) {
+        return (b.isHot ? 1 : 0) - (a.isHot ? 1 : 0);
+      }
       // 'recent' by default prioritizes models with real photos
-      const aHasPhoto = a.imageUrl ? 1 : 0;
-      const bHasPhoto = b.imageUrl ? 1 : 0;
+      const aHasPhoto = Boolean(a.imageUrl || (a.images && a.images.length > 0)) ? 1 : 0;
+      const bHasPhoto = Boolean(b.imageUrl || (b.images && b.images.length > 0)) ? 1 : 0;
       return bHasPhoto - aHasPhoto;
     });
   }, [deferredSearchQuery, selectedSessionFilter, onlyPhotosFilter, sortBy]);
@@ -232,11 +239,11 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
         return getOptimizedCardImageUrl(raw, 0, 220);
       }).filter(Boolean);
 
-      // Preload priority first 36 images immediately with high priority
-      preloadPriorityImages(allUrls.slice(0, 36));
+      // Preload priority first 12 images immediately with high priority
+      preloadPriorityImages(allUrls.slice(0, 12));
       // Preload next batch in background micro-chunks
-      if (allUrls.length > 36) {
-        preloadImageBatch(allUrls.slice(36, 108), 72);
+      if (allUrls.length > 12) {
+        preloadImageBatch(allUrls.slice(12, 60), 48);
       }
     }
   }, [displayedModels]);
@@ -390,7 +397,7 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                   <span className="text-xs font-extrabold text-white block max-w-[140px] truncate">
                     {currentUser?.name || 'Membro VIP'}
                   </span>
-                  <span className="text-[10px] font-mono font-black text-emerald-400 uppercase tracking-wider bg-emerald-950/60 border border-emerald-800/40 px-1.5 py-0.2 rounded">
+                  <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider bg-emerald-950/60 border border-emerald-800/40 px-1.5 py-0.2 rounded">
                     Membro VIP
                   </span>
                 </div>
@@ -442,8 +449,14 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
           {/* VIEW 1: CATALOG */}
           {activeTab === 'catalog' && (
             <div className="space-y-6 text-left">
-              {/* VÍDEO AULA PASSO A PASSO (NO COMEÇO) */}
-              <VideoAulaSection />
+              {/* VÍDEO AULA PASSO A PASSO (NO COMEÇO) COM A SESSÃO AO LADO */}
+              <VideoAulaSection 
+                onOpenModel={handleOpenModel}
+                onDirectDownload={handleDirectDownload}
+                onSelectCategoryFilter={(secId) => {
+                  setSelectedSessionFilter(secId);
+                }}
+              />
 
               {/* Page Title & Subtitle */}
               <div className="space-y-1">
@@ -515,15 +528,15 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-black text-black bg-white px-2 py-0.5 rounded uppercase tracking-wider">
+                      <span className="text-[10px] font-black text-black bg-white px-2 py-0.5 rounded uppercase tracking-wider">
                         OBSERVAÇÃO
                       </span>
                       <span className="text-xs sm:text-sm font-black text-white uppercase tracking-tight">
                         Clique em "Ver Mais Modelos" ou role para ver tudo
                       </span>
                     </div>
-                    <p className="text-[11px] sm:text-xs text-neutral-400 font-bold mt-0.5">
-                      Exibindo <strong className="text-white">{displayedModels.length}</strong> de <strong className="text-white">{filteredModels.length}</strong> modelos. Para carregar mais modelos na tela, clique no botão ao lado ou role a página até o fim.
+                    <p className="text-[11px] sm:text-xs text-neutral-300 font-medium mt-0.5">
+                      Exibindo <strong className="text-white font-bold">{displayedModels.length}</strong> de <strong className="text-white font-bold">{filteredModels.length}</strong> modelos. Para carregar mais modelos na tela, clique no botão ao lado ou role a página até o fim.
                     </p>
                   </div>
                 </div>
@@ -532,12 +545,12 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                   <button
                     type="button"
                     onClick={() => setVisibleCount(prev => Math.min(filteredModels.length, prev + 36))}
-                    className="w-full sm:w-auto px-5 py-2.5 bg-white hover:bg-neutral-200 text-black text-xs font-mono font-black uppercase tracking-wider rounded-lg transition-all shadow-md shrink-0 flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                    className="w-full sm:w-auto px-5 py-2.5 bg-white hover:bg-neutral-200 text-black text-xs font-black uppercase tracking-wider rounded-lg transition-all shadow-md shrink-0 flex items-center justify-center gap-2 cursor-pointer active:scale-95"
                   >
                     <span>Ver Mais Modelos ({filteredModels.length - visibleCount} restantes)</span>
                   </button>
                 ) : (
-                  <div className="px-3.5 py-1.5 bg-[#181818] border border-[#2e2e2e] rounded-lg text-[11px] font-mono font-bold text-neutral-300 shrink-0 flex items-center gap-1.5">
+                  <div className="px-3.5 py-1.5 bg-[#181818] border border-[#2e2e2e] rounded-lg text-[11px] font-bold text-neutral-200 shrink-0 flex items-center gap-1.5">
                     <Check className="w-3.5 h-3.5 text-white" />
                     <span>Todos os {filteredModels.length} modelos carregados</span>
                   </div>
@@ -566,7 +579,7 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                       <ModelCard
                         key={model.id}
                         model={model}
-                        priority={index < 36}
+                        priority={index < 8}
                         isFavorite={favorites.includes(model.id)}
                         onToggleFavorite={handleToggleFavorite}
                         onOpenDetails={handleOpenModel}

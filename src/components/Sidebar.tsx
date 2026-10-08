@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   Home, Zap, Coffee, Plane, Shield, Flame, 
   Puzzle, Trophy, Smile, Heart, Download, 
-  Folder, Calculator, Box, Lock, Key, Play, LogOut
+  Folder, Calculator, Box, Lock, Key, Play, LogOut, Gamepad2
 } from 'lucide-react';
 import { VIP_DRIVE_MAIN_URL, SECTIONS } from '../data/modelsData';
 import { MemberUser } from '../types/auth';
@@ -38,7 +38,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       case 'sparkles': return Flame;
       case 'zap': return Zap;
       case 'shield': return Shield;
-      case 'gamepad': return Puzzle;
+      case 'gamepad': return Gamepad2;
       case 'sword':
       case 'trophy': return Trophy;
       case 'key': return Key;
@@ -74,7 +74,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <h2 className="text-sm font-black text-white tracking-tight leading-tight">
             Biblioteca Central 3D
           </h2>
-          <span className="text-[9px] font-mono font-black text-white/90 tracking-wider uppercase block">
+          <span className="text-[9px] font-black text-white/90 tracking-wider uppercase block">
             O MAIOR ACERVO STL
           </span>
         </div>
@@ -109,14 +109,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <Play className="w-4 h-4 fill-current stroke-[1.5]" />
             <span>Vídeo Aula Passo a Passo</span>
           </div>
-          <span className="text-[9px] font-mono font-black px-1.5 py-0.5 rounded bg-emerald-600/20 text-emerald-400 border border-emerald-500/30">
+          <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-emerald-600/20 text-emerald-400 border border-emerald-500/30">
             NOVO
           </span>
         </button>
 
         {/* Categories Section Header */}
         <div className="pt-3 pb-1 px-3">
-          <span className="text-[10px] font-mono font-black uppercase tracking-wider text-neutral-400">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
             Coleções Oficiais
           </span>
         </div>
@@ -140,8 +140,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <Icon className={`w-4 h-4 shrink-0 ${isSelected ? 'text-black stroke-[2.5]' : 'text-neutral-400'}`} />
                 <span className="truncate">{item.label}</span>
               </div>
-              <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${
-                isSelected ? 'bg-black/10 text-black' : 'bg-[#181818] text-neutral-400 border border-[#2a2a2a]'
+              <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${
+                isSelected ? 'bg-black/10 text-black' : 'bg-[#181818] text-neutral-300 border border-[#2a2a2a]'
               }`}>
                 {item.count}
               </span>
@@ -168,7 +168,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <span>Meus Favoritos</span>
             </div>
             {favoritesCount > 0 && (
-              <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-black ${
+              <span className={`text-[10px] px-1.5 py-0.5 rounded font-black ${
                 activeTab === 'favorites' ? 'bg-black text-white' : 'bg-white text-black'
               }`}>
                 {favoritesCount}
@@ -190,7 +190,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <span>Meus Downloads</span>
             </div>
             {downloadsCount > 0 && (
-              <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-black ${
+              <span className={`text-[10px] px-1.5 py-0.5 rounded font-black ${
                 activeTab === 'downloads' ? 'bg-black text-white' : 'bg-white text-black'
               }`}>
                 {downloadsCount}

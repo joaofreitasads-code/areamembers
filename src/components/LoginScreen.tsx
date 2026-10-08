@@ -79,7 +79,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
       <div className="w-full max-w-md relative z-10 space-y-6">
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/40 text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider mb-2 shadow-lg shadow-emerald-950/40">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/40 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2 shadow-lg shadow-emerald-950/40">
             <ShieldCheck className="w-4 h-4 text-emerald-400 stroke-[2.5]" />
             <span>ÁREA DE MEMBROS VIP</span>
           </div>
@@ -93,8 +93,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             </h1>
           </div>
 
-          <p className="text-xs sm:text-sm text-neutral-400 max-w-xs mx-auto leading-relaxed">
-            Identifique-se com seu <strong className="text-white">Nome</strong> e <strong className="text-white">E-mail</strong> para acessar o catálogo de modelos STL e o Drive oficial.
+          <p className="text-xs sm:text-sm text-neutral-300 max-w-xs mx-auto leading-relaxed font-medium">
+            Identifique-se com seu <strong className="text-white font-bold">Nome</strong> e <strong className="text-white font-bold">E-mail</strong> para acessar o catálogo de modelos STL e o Drive oficial.
           </p>
         </div>
 
@@ -109,7 +109,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
           <form onSubmit={handleSubmit} className="space-y-4 text-left">
             {/* Input Nome */}
             <div className="space-y-1.5">
-              <label htmlFor="login-name" className="text-xs font-bold font-mono uppercase tracking-wider text-neutral-300 flex items-center gap-1.5">
+              <label htmlFor="login-name" className="text-xs font-bold uppercase tracking-wider text-neutral-200 flex items-center gap-1.5">
                 <User className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Seu Nome Completo</span>
               </label>
@@ -123,14 +123,14 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Ex: João Freitas"
-                  className="w-full bg-[#181818] border border-[#333333] focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 text-white placeholder-neutral-500 text-sm rounded-xl py-3 px-4 outline-none transition"
+                  className="w-full bg-[#181818] border border-[#333333] focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 text-white placeholder-neutral-500 text-sm font-medium rounded-xl py-3 px-4 outline-none transition"
                 />
               </div>
             </div>
 
             {/* Input E-mail */}
             <div className="space-y-1.5">
-              <label htmlFor="login-email" className="text-xs font-bold font-mono uppercase tracking-wider text-neutral-300 flex items-center gap-1.5">
+              <label htmlFor="login-email" className="text-xs font-bold uppercase tracking-wider text-neutral-200 flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Seu E-mail de Acesso</span>
               </label>
@@ -143,14 +143,14 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="seu.email@exemplo.com"
-                  className="w-full bg-[#181818] border border-[#333333] focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 text-white placeholder-neutral-500 text-sm rounded-xl py-3 px-4 outline-none transition"
+                  className="w-full bg-[#181818] border border-[#333333] focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 text-white placeholder-neutral-500 text-sm font-medium rounded-xl py-3 px-4 outline-none transition"
                 />
               </div>
             </div>
 
             {/* Remember Me Checkbox */}
             <div className="flex items-center justify-between text-xs pt-1">
-              <label className="flex items-center gap-2 cursor-pointer select-none text-neutral-400 hover:text-white transition">
+              <label className="flex items-center gap-2 cursor-pointer select-none text-neutral-300 hover:text-white transition font-medium">
                 <input
                   type="checkbox"
                   checked={rememberMe}
@@ -165,7 +165,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 disabled:opacity-50 text-white font-black text-xs font-mono uppercase tracking-wider rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/50 cursor-pointer active:scale-[0.99] mt-2"
+              className="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 disabled:opacity-50 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/50 cursor-pointer active:scale-[0.99] mt-2"
             >
               {isLoading ? (
                 <span>Acessando...</span>

@@ -94,6 +94,16 @@ export const MONSTER_DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/
 
 export const SECTIONS: SectionCategory[] = [
   {
+    id: "sec-canecas-gamer",
+    title: "SESSÃO CANECAS GAMER 3D (PLAYSTATION, GTA, CALL OF DUTY, MORTAL KOMBAT & MINECRAFT)",
+    shortTitle: "CANECAS GAMER",
+    iconType: "gamepad",
+    accentColor: "text-purple-400",
+    description: "Coleção de canecas temáticas gamer 3D multipartes com logos e relevos de games e consoles (PlayStation, Mortal Kombat, COD, GTA e Minecraft) com arquivos 3MF/STL completos para impressão 3D.",
+    count: 5,
+    driveFolderUrl: "https://drive.google.com/drive/folders/1uPhqdIyEli7Ih58lmmRMirUejzMkF5Q9?usp=sharing",
+  },
+  {
     id: "sec-estadios",
     title: "SESSÃO ESTÁDIOS DE FUTEBOL 3D (ARENAS & TEMPLOS DO FUTEBOL)",
     shortTitle: "ESTÁDIOS DE FUTEBOL",
@@ -30832,8 +30842,10 @@ import { CENARIOS_MODELS } from './cenariosModels';
 import { DISNEY_MODELS } from './disneyModels';
 import { CANECAS_MODELS } from './canecasModels';
 import { ESTADIOS_MODELS } from './estadiosModels';
+import { CANECAS_GAMER_MODELS } from './canecasGamerModels';
 
 export const ALL_MODELS: ModelItem[] = [
+  ...CANECAS_GAMER_MODELS,
   ...ESTADIOS_MODELS,
   ...CANECAS_MODELS,
   ...CHAVEIROS_MODELS,
