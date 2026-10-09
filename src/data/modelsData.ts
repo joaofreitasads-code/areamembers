@@ -144,6 +144,16 @@ export const SECTIONS: SectionCategory[] = [
     driveFolderUrl: "https://drive.google.com/drive/folders/1267CCso-VTh9r5rXAzTsbHD25gx85yhY?usp=drive_link",
   },
   {
+    id: "sec-pocketpals",
+    title: "SESSÃO POCKET PALS 3D (ANIMAIS ARTICULADOS & MINIATURAS)",
+    shortTitle: "POCKET PALS",
+    iconType: "sparkles",
+    accentColor: "text-amber-400",
+    description: "Coleção completa Pocket Pals 3D com 9 animais articulados colecionáveis (Cão, Capivara, Coelho, Gato, Girafa, Papagaio, Raposa, Tartaruga e Vaca) com arquivos 3MF/STL individuais oficiais.",
+    count: 9,
+    driveFolderUrl: "https://drive.google.com/drive/folders/1A06ElbuCLm--vF3l3EINTMKYsk8UEf-b?usp=sharing",
+  },
+  {
     id: "sec-rpg",
     title: "SESSÃO RPG & MINIATURAS FANTASIA (FINAL FANTASY, WARHAMMER, MONSTROS & HERÓIS)",
     shortTitle: "RPG & MINIATURAS",
@@ -30865,6 +30875,7 @@ import { ESTADIOS_MODELS } from './estadiosModels';
 import { CANECAS_GAMER_MODELS } from './canecasGamerModels';
 import { PORTA_COPOS_MODELS } from './portaCoposModels';
 import { VIRAIS_MODELS } from './viraisModels';
+import { POCKET_PALS_MODELS } from './pocketPalsModels';
 
 export const ALL_MODELS: ModelItem[] = [
   ...PORTA_COPOS_MODELS,
@@ -30872,6 +30883,7 @@ export const ALL_MODELS: ModelItem[] = [
   ...ESTADIOS_MODELS,
   ...CANECAS_MODELS,
   ...VIRAIS_MODELS,
+  ...POCKET_PALS_MODELS,
   ...CHAVEIROS_MODELS,
   ...MASCOTES_MODELS,
   ...RPG_MODELS,

@@ -35,7 +35,9 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
   const [imageError, setImageError] = useState(false);
   const [fallbackAttempt, setFallbackAttempt] = useState(0);
 
-  const rawSrc = allImages.length > 0 ? allImages[currentImageIndex] : (model.imageUrl || model.thumbnailUrl);
+  const rawSrc = currentImageIndex === 0
+    ? (model.thumbnailUrl || (allImages.length > 0 ? allImages[0] : model.imageUrl))
+    : (allImages[currentImageIndex] || model.imageUrl || model.thumbnailUrl);
   const currentSrc = React.useMemo(() => {
     return getOptimizedCardImageUrl(rawSrc, fallbackAttempt, 220);
   }, [rawSrc, fallbackAttempt]);
@@ -99,7 +101,10 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
       }`}
     >
       {/* Visual Image Container with Square Aspect Ratio */}
-      <div className="w-full aspect-square relative overflow-hidden rounded-lg bg-[#0b1426] flex items-center justify-center group/image select-none border border-[#1b3158]">
+      <div className="w-full aspect-square relative overflow-hidden rounded-lg bg-gradient-to-b from-[#111e38] to-[#080e1a] flex items-center justify-center group/image select-none border border-[#1b3158] p-2">
+        {/* Subtle radial spotlight glow behind model */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.12)_0%,_transparent_75%)] pointer-events-none" />
+
         {/* Subtle background placeholder while image streams in */}
         {hasPhoto && !isLoaded && (
           <div className="absolute inset-0 bg-[#0b1426] flex items-center justify-center z-0">
@@ -127,12 +132,19 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
                 setImageError(true);
               }
             }}
-            className="w-full h-full object-cover object-center relative z-10 transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full object-contain object-center relative z-10 transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
           />
         ) : (
-          <div className="flex flex-col items-center justify-center gap-2 text-neutral-400 p-4 text-center">
-            <Box className="w-10 h-10 text-neutral-400 group-hover:text-white transition-colors" />
-            <span className="text-[11px] font-mono tracking-widest uppercase text-white font-black">MODELO 3D</span>
+          <div className="flex flex-col items-center justify-center gap-2 text-neutral-400 p-4 text-center w-full h-full bg-gradient-to-b from-[#101d35] to-[#0a1322]">
+            <div className="w-14 h-14 rounded-2xl bg-[#152646] border border-[#254273] flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
+              <Box className="w-7 h-7 text-white stroke-[2]" />
+            </div>
+            <span className="text-[10px] font-mono tracking-widest uppercase text-white font-black px-2 py-0.5 rounded bg-[#162747] border border-[#233f6d]">
+              {model.category === 'Pocket Pals' ? 'POCKET PAL 3D' : 'MODELO 3D'}
+            </span>
+            <span className="text-[10px] font-bold text-neutral-300 line-clamp-1">
+              {model.stlFiles?.[0]?.name || 'ARQUIVO 3MF'}
+            </span>
           </div>
         )}
 

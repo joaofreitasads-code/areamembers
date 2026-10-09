@@ -147,11 +147,14 @@ export function getOptimizedModalImageUrl(
   }
 }
 
+// In-memory decoded image object cache (keeps hot bitmaps in GPU/compositor memory for 0ms paint)
+const imageBitmaps = new Map<string, HTMLImageElement>();
+
 /**
  * Check if an image URL was already loaded in this session
  */
 export function isImageCached(url: string): boolean {
-  return loadedImageUrls.has(url);
+  return loadedImageUrls.has(url) || imageBitmaps.has(url);
 }
 
 /**
@@ -159,7 +162,7 @@ export function isImageCached(url: string): boolean {
  */
 export function preloadPriorityImages(urls: string[]): void {
   if (typeof window === 'undefined') return;
-  const valid = urls.filter(u => u && !loadedImageUrls.has(u)).slice(0, 36);
+  const valid = urls.filter(u => u && !imageBitmaps.has(u)).slice(0, 48);
   valid.forEach(url => {
     const img = new Image();
     img.referrerPolicy = 'no-referrer';
@@ -167,6 +170,11 @@ export function preloadPriorityImages(urls: string[]): void {
     img.decoding = 'async';
     img.onload = () => {
       markImageCached(url);
+      imageBitmaps.set(url, img);
+      if (imageBitmaps.size > 200) {
+        const firstKey = imageBitmaps.keys().next().value;
+        if (firstKey) imageBitmaps.delete(firstKey);
+      }
       if ('decode' in img) img.decode().catch(() => {});
     };
     img.src = url;
@@ -176,15 +184,15 @@ export function preloadPriorityImages(urls: string[]): void {
 /**
  * Preload an array of image URLs silently in the background using micro-batched idle execution
  */
-export function preloadImageBatch(urls: string[], limit: number = 120): void {
+export function preloadImageBatch(urls: string[], limit: number = 150): void {
   if (typeof window === 'undefined') return;
 
-  const toPreload = urls.filter(u => u && !loadedImageUrls.has(u)).slice(0, limit);
+  const toPreload = urls.filter(u => u && !imageBitmaps.has(u)).slice(0, limit);
   if (toPreload.length === 0) return;
 
   const runBatch = () => {
     let idx = 0;
-    const chunk = 12;
+    const chunk = 16;
     const nextChunk = () => {
       if (idx >= toPreload.length) return;
       const slice = toPreload.slice(idx, idx + chunk);
@@ -196,6 +204,11 @@ export function preloadImageBatch(urls: string[], limit: number = 120): void {
         img.decoding = 'async';
         img.onload = () => {
           loadedImageUrls.add(url);
+          imageBitmaps.set(url, img);
+          if (imageBitmaps.size > 200) {
+            const firstKey = imageBitmaps.keys().next().value;
+            if (firstKey) imageBitmaps.delete(firstKey);
+          }
           if ('decode' in img) img.decode().catch(() => {});
         };
         img.src = url;
@@ -204,9 +217,9 @@ export function preloadImageBatch(urls: string[], limit: number = 120): void {
       if (idx < toPreload.length) {
         if ('requestIdleCallback' in window) {
           (window as unknown as { requestIdleCallback: (fn: () => void, opts: { timeout: number }) => void })
-            .requestIdleCallback(nextChunk, { timeout: 150 });
+            .requestIdleCallback(nextChunk, { timeout: 120 });
         } else {
-          setTimeout(nextChunk, 20);
+          setTimeout(nextChunk, 15);
         }
       }
     };
@@ -215,8 +228,8 @@ export function preloadImageBatch(urls: string[], limit: number = 120): void {
 
   if ('requestIdleCallback' in window) {
     (window as unknown as { requestIdleCallback: (fn: () => void, opts: { timeout: number }) => void })
-      .requestIdleCallback(runBatch, { timeout: 250 });
+      .requestIdleCallback(runBatch, { timeout: 200 });
   } else {
-    setTimeout(runBatch, 25);
+    setTimeout(runBatch, 20);
   }
 }

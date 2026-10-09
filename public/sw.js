@@ -1,5 +1,5 @@
 // Ultra-Fast Persistent Image & Media Cache Service Worker
-const CACHE_NAME = 'universo3d-media-v2';
+const CACHE_NAME = 'universo3d-media-v3';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
@@ -25,10 +25,11 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
 
-  // Match image assets from Google CDN, Imgur, and local static folders
+  // Match image assets from Google CDN, Google Drive, Imgur, and local static folders
   const isImageRequest =
     event.request.destination === 'image' ||
     url.hostname.includes('googleusercontent.com') ||
+    url.hostname.includes('drive.google.com') ||
     url.hostname.includes('imgur.com') ||
     url.pathname.match(/\.(webp|png|jpg|jpeg|svg|gif|avif)$/i);
 

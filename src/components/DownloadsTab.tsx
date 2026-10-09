@@ -95,7 +95,7 @@ export const DownloadsTab: React.FC<DownloadsTabProps> = ({
                       referrerPolicy="no-referrer"
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full object-cover" 
+                      className="w-full h-full object-contain object-center p-1" 
                     />
                   ) : (
                     <Box className="w-6 h-6 text-white" />

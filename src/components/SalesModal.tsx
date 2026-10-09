@@ -3,7 +3,7 @@ import { X, Check, ShieldCheck, Zap, HardDrive, Sparkles, HelpCircle, ArrowRight
 import { VIP_DRIVE_MAIN_URL } from '../data/modelsData';
 
 const CHECKOUT_VIP_URL = 'https://checkout.wiven.com.br/checkout/cmupyvej300i601pll6oi9cj1?offer=BX0N8TV';
-const PRODUCT_IMG_URL = 'https://i.imgur.com/6Yw58DOm.png';
+const PRODUCT_IMG_URL = '/product_checkout.webp';
 
 interface SalesModalProps {
   isOpen: boolean;

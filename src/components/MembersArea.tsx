@@ -158,6 +158,7 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
     { id: 'sec-estadios', label: 'Estádios de Futebol' },
     { id: 'sec-canecas', label: 'Canecas de Time' },
     { id: 'sec-virais', label: 'Modelos Virais 3D' },
+    { id: 'sec-pocketpals', label: 'Pocket Pals 3D' },
     { id: 'sec-mascotes', label: 'Mascotes Futebol' },
     { id: 'sec-rpg', label: 'RPG & Miniaturas' },
     { id: 'sec-veiculos', label: 'Veículos & Carros' },
@@ -237,15 +238,15 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
   useEffect(() => {
     if (displayedModels.length > 0) {
       const allUrls = displayedModels.map(m => {
-        const raw = (m.images && m.images[0]) || m.imageUrl || m.thumbnailUrl;
+        const raw = m.thumbnailUrl || (m.images && m.images[0]) || m.imageUrl;
         return getOptimizedCardImageUrl(raw, 0, 220);
       }).filter(Boolean);
 
-      // Preload priority first 36 images immediately with high priority
-      preloadPriorityImages(allUrls.slice(0, 36));
+      // Preload priority first 48 images immediately with high priority
+      preloadPriorityImages(allUrls.slice(0, 48));
       // Preload next batch in background micro-chunks
-      if (allUrls.length > 36) {
-        preloadImageBatch(allUrls.slice(36, 120), 84);
+      if (allUrls.length > 48) {
+        preloadImageBatch(allUrls.slice(48, 180), 132);
       }
     }
   }, [displayedModels]);
@@ -592,7 +593,7 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                       <ModelCard
                         key={model.id}
                         model={model}
-                        priority={index < 24}
+                        priority={index < 36}
                         isFavorite={favorites.includes(model.id)}
                         onToggleFavorite={handleToggleFavorite}
                         onOpenDetails={handleOpenModel}

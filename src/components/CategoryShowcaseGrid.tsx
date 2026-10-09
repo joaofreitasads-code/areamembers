@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, ChevronDown } from 'lucide-react';
+import { ChevronRight, ChevronDown, Box } from 'lucide-react';
 import { SECTIONS, ALL_MODELS } from '../data/modelsData';
 import { getOptimizedCardImageUrl } from '../utils/imageOptimizer';
 
@@ -12,8 +12,10 @@ interface CategoryShowcaseGridProps {
 const SECTION_PREVIEWS: Record<string, string> = (() => {
   const map: Record<string, string> = {};
   for (const sec of SECTIONS) {
-    const modelWithPhoto = ALL_MODELS.find(m => m.sectionId === sec.id && m.imageUrl);
-    const raw = modelWithPhoto?.imageUrl || '';
+    const modelWithPhoto = ALL_MODELS.find(
+      m => m.sectionId === sec.id && (m.thumbnailUrl || m.imageUrl || (m.images && m.images.length > 0))
+    );
+    const raw = modelWithPhoto?.thumbnailUrl || modelWithPhoto?.imageUrl || modelWithPhoto?.images?.[0] || '';
     if (raw) {
       map[sec.id] = getOptimizedCardImageUrl(raw, 0, 220);
     }
@@ -102,7 +104,11 @@ export const CategoryShowcaseGrid: React.FC<CategoryShowcaseGridProps> = ({
                   className="relative z-10 absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 opacity-60 group-hover:opacity-85 select-none"
                 />
               ) : (
-                <div className="absolute inset-0 bg-[#050505]" />
+                <div className="absolute inset-0 bg-[#071120] flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl bg-[#10203a] border border-[#1b3560] flex items-center justify-center">
+                    <Box className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
+                  </div>
+                </div>
               )}
 
               {/* Gradient Scrim */}

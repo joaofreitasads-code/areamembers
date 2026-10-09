@@ -136,7 +136,10 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
             {/* Visual with Full Gallery */}
             <div className="space-y-3">
-              <div className="w-full aspect-square rounded-xl overflow-hidden border border-[#2b2b2b] bg-[#0c0c0c] flex items-center justify-center relative group/modalImage">
+              <div className="w-full aspect-square rounded-xl overflow-hidden border border-[#2b2b2b] bg-gradient-to-b from-[#181818] to-[#0c0c0c] flex items-center justify-center relative group/modalImage p-3 sm:p-4">
+                {/* Subtle spotlight glow behind model */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.06)_0%,_transparent_75%)] pointer-events-none" />
+
                 {hasPhoto && !isMainLoaded && (
                   <div className="absolute inset-0 bg-[#161616] animate-pulse flex items-center justify-center z-0">
                     <Box className="w-12 h-12 text-neutral-700 animate-pulse" />
@@ -160,7 +163,7 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
                       markImageCached(currentSrc);
                       setIsMainLoaded(true);
                     }}
-                    className={`w-full h-full object-cover object-center transition-opacity duration-200 ${
+                    className={`w-full h-full object-contain object-center relative z-10 drop-shadow-[0_8px_24px_rgba(0,0,0,0.6)] transition-opacity duration-200 ${
                       isMainLoaded ? 'opacity-100' : 'opacity-0'
                     }`}
                     onError={() => {
@@ -172,9 +175,16 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
                     }}
                   />
                 ) : (
-                  <div className="flex flex-col items-center justify-center gap-2 text-neutral-400 p-6 text-center">
-                    <Box className="w-16 h-16 text-white" />
-                    <span className="text-xs font-mono font-black tracking-widest uppercase text-white">MODELO 3D STL</span>
+                  <div className="flex flex-col items-center justify-center gap-3 text-neutral-400 p-6 text-center w-full h-full bg-gradient-to-b from-[#181818] to-[#0d0d0d]">
+                    <div className="w-16 h-16 rounded-2xl bg-[#222222] border border-[#383838] flex items-center justify-center shadow-inner">
+                      <Box className="w-8 h-8 text-white stroke-[2]" />
+                    </div>
+                    <span className="text-xs font-mono font-black tracking-widest uppercase text-white px-3 py-1 rounded bg-[#242424] border border-[#3e3e3e]">
+                      {model.category === 'Pocket Pals' ? 'COLEÇÃO POCKET PALS 3D' : 'MODELO 3D STL'}
+                    </span>
+                    <span className="text-xs font-bold text-neutral-300">
+                      {model.stlFiles?.[0]?.name || 'Arquivo 3MF Oficial Pronto'}
+                    </span>
                   </div>
                 )}
 
@@ -252,7 +262,7 @@ export const ModelDetailModal: React.FC<ModelDetailModalProps> = ({
                           referrerPolicy="no-referrer"
                           loading="lazy"
                           decoding="async"
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain object-center p-1 bg-[#141414]"
                         />
                       </button>
                     ))}
