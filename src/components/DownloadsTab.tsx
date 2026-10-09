@@ -27,7 +27,7 @@ export const DownloadsTab: React.FC<DownloadsTabProps> = ({
             HISTÓRICO LOCAL
           </span>
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase">
-            MEUS DOWNLOADS ({downloadedModels.length})
+            MEUS DOWNLOADS
           </h1>
           <p className="text-neutral-400 text-xs sm:text-sm font-bold">
             Arquivos STL e 3MF acessados recentemente para reenviar ao fatiador ou baixar novamente.

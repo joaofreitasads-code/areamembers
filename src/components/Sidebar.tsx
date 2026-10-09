@@ -39,6 +39,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       case 'zap': return Zap;
       case 'shield': return Shield;
       case 'gamepad': return Gamepad2;
+      case 'cup': return Coffee;
       case 'sword':
       case 'trophy': return Trophy;
       case 'key': return Key;
@@ -140,11 +141,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <Icon className={`w-4 h-4 shrink-0 ${isSelected ? 'text-black stroke-[2.5]' : 'text-neutral-400'}`} />
                 <span className="truncate">{item.label}</span>
               </div>
-              <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${
-                isSelected ? 'bg-black/10 text-black' : 'bg-[#181818] text-neutral-300 border border-[#2a2a2a]'
-              }`}>
-                {item.count}
-              </span>
             </button>
           );
         })}
@@ -167,13 +163,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <Heart className={`w-4 h-4 ${activeTab === 'favorites' ? 'text-black fill-black' : 'text-neutral-400'}`} />
               <span>Meus Favoritos</span>
             </div>
-            {favoritesCount > 0 && (
-              <span className={`text-[10px] px-1.5 py-0.5 rounded font-black ${
-                activeTab === 'favorites' ? 'bg-black text-white' : 'bg-white text-black'
-              }`}>
-                {favoritesCount}
-              </span>
-            )}
           </button>
 
           <button
@@ -189,13 +178,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <Download className={`w-4 h-4 ${activeTab === 'downloads' ? 'text-black stroke-[2.5]' : 'text-neutral-400'}`} />
               <span>Meus Downloads</span>
             </div>
-            {downloadsCount > 0 && (
-              <span className={`text-[10px] px-1.5 py-0.5 rounded font-black ${
-                activeTab === 'downloads' ? 'bg-black text-white' : 'bg-white text-black'
-              }`}>
-                {downloadsCount}
-              </span>
-            )}
           </button>
 
           <button

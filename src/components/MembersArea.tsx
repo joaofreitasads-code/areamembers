@@ -153,18 +153,20 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
   // Horizontal filter pills (Black & White, based on actual collections)
   const categoryPills = [
     { id: 'all', label: 'Todos os Modelos' },
-    { id: 'sec-canecas-gamer', label: 'Canecas Gamer (5)' },
-    { id: 'sec-estadios', label: 'Estádios de Futebol (11)' },
-    { id: 'sec-canecas', label: 'Canecas de Time (17)' },
-    { id: 'sec-mascotes', label: 'Mascotes Futebol (31)' },
-    { id: 'sec-rpg', label: 'RPG & Miniaturas (467)' },
-    { id: 'sec-veiculos', label: 'Veículos & Carros (178)' },
-    { id: 'sec-natal', label: 'Especial Natal (41)' },
-    { id: 'sec-series', label: 'Séries & TV (148)' },
-    { id: 'sec-religiao', label: 'Arte Sacra (7)' },
-    { id: 'sec-minifiguras', label: 'Minifiguras (99)' },
-    { id: 'sec-bobesponja', label: 'Bob Esponja (500%)' },
-    { id: 'sec-dc-comics', label: 'DC Comics (Lego 500%)' },
+    { id: 'sec-portacopos', label: 'Porta Copos & Latas' },
+    { id: 'sec-canecas-gamer', label: 'Canecas Gamer' },
+    { id: 'sec-estadios', label: 'Estádios de Futebol' },
+    { id: 'sec-canecas', label: 'Canecas de Time' },
+    { id: 'sec-virais', label: 'Modelos Virais 3D' },
+    { id: 'sec-mascotes', label: 'Mascotes Futebol' },
+    { id: 'sec-rpg', label: 'RPG & Miniaturas' },
+    { id: 'sec-veiculos', label: 'Veículos & Carros' },
+    { id: 'sec-natal', label: 'Especial Natal' },
+    { id: 'sec-series', label: 'Séries & TV' },
+    { id: 'sec-religiao', label: 'Arte Sacra' },
+    { id: 'sec-minifiguras', label: 'Minifiguras' },
+    { id: 'sec-bobesponja', label: 'Bob Esponja' },
+    { id: 'sec-dc-comics', label: 'DC Comics' },
     { id: 'sec-dragonball', label: 'Dragon Ball 3D' },
     { id: 'sec-minecraft', label: 'Minecraft 3D' },
     { id: 'sec-fallout', label: 'Fallout 3D' },
@@ -239,11 +241,11 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
         return getOptimizedCardImageUrl(raw, 0, 220);
       }).filter(Boolean);
 
-      // Preload priority first 12 images immediately with high priority
-      preloadPriorityImages(allUrls.slice(0, 12));
+      // Preload priority first 36 images immediately with high priority
+      preloadPriorityImages(allUrls.slice(0, 36));
       // Preload next batch in background micro-chunks
-      if (allUrls.length > 12) {
-        preloadImageBatch(allUrls.slice(12, 60), 48);
+      if (allUrls.length > 36) {
+        preloadImageBatch(allUrls.slice(36, 120), 84);
       }
     }
   }, [displayedModels]);
@@ -479,8 +481,8 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                 </p>
               </div>
 
-              {/* Horizontal Category Filter Pills (Preto e Branco / Xadrez) */}
-              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none pt-1">
+              {/* Horizontal Category Filter Pills (Alta Visibilidade e Contraste) */}
+              <div className="flex items-center gap-2.5 overflow-x-auto p-2.5 sm:p-3 rounded-2xl bg-[#0a1424] border-2 border-[#1c3258] shadow-xl scrollbar-thin scrollbar-thumb-[#254275] scrollbar-track-transparent">
                 {categoryPills.map((pill) => {
                   const isSelected = selectedSessionFilter === pill.id;
                   return (
@@ -488,10 +490,10 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                       key={pill.id}
                       type="button"
                       onClick={() => setSelectedSessionFilter(pill.id)}
-                      className={`px-3.5 py-1.5 rounded-lg text-xs font-black shrink-0 transition-all cursor-pointer ${
+                      className={`px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider shrink-0 transition-all duration-200 cursor-pointer select-none shadow-md ${
                         isSelected
-                          ? 'bg-white text-black shadow-md'
-                          : 'bg-[#151515] hover:bg-[#202020] text-neutral-300 hover:text-white border border-[#282828]'
+                          ? 'bg-white text-black border-2 border-white shadow-xl shadow-white/20 scale-[1.03] z-10'
+                          : 'bg-[#13233f] hover:bg-[#1d355e] text-white hover:text-amber-300 border-2 border-[#254273] hover:border-white shadow-black/40'
                       }`}
                     >
                       {pill.label}
@@ -547,7 +549,7 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                       </span>
                     </div>
                     <p className="text-[11px] sm:text-xs text-neutral-300 font-medium mt-0.5">
-                      Exibindo <strong className="text-white font-bold">{displayedModels.length}</strong> de <strong className="text-white font-bold">{filteredModels.length}</strong> modelos. Para carregar mais modelos na tela, clique no botão ao lado ou role a página até o fim.
+                      Para carregar mais modelos na tela, clique no botão ao lado ou role a página até o fim.
                     </p>
                   </div>
                 </div>
@@ -558,12 +560,12 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                     onClick={() => setVisibleCount(prev => Math.min(filteredModels.length, prev + 36))}
                     className="w-full sm:w-auto px-5 py-2.5 bg-white hover:bg-neutral-200 text-black text-xs font-black uppercase tracking-wider rounded-lg transition-all shadow-md shrink-0 flex items-center justify-center gap-2 cursor-pointer active:scale-95"
                   >
-                    <span>Ver Mais Modelos ({filteredModels.length - visibleCount} restantes)</span>
+                    <span>Ver Mais Modelos</span>
                   </button>
                 ) : (
                   <div className="px-3.5 py-1.5 bg-[#181818] border border-[#2e2e2e] rounded-lg text-[11px] font-bold text-neutral-200 shrink-0 flex items-center gap-1.5">
                     <Check className="w-3.5 h-3.5 text-white" />
-                    <span>Todos os {filteredModels.length} modelos carregados</span>
+                    <span>Todos os modelos carregados</span>
                   </div>
                 )}
               </div>
@@ -590,7 +592,7 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                       <ModelCard
                         key={model.id}
                         model={model}
-                        priority={index < 8}
+                        priority={index < 24}
                         isFavorite={favorites.includes(model.id)}
                         onToggleFavorite={handleToggleFavorite}
                         onOpenDetails={handleOpenModel}
@@ -611,7 +613,7 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                         onClick={() => setVisibleCount(prev => prev + 36)}
                         className="px-8 py-3 bg-[#151515] hover:bg-[#202020] text-white border border-[#2c2c2c] hover:border-white text-xs font-mono font-black uppercase tracking-wider rounded-lg transition-all shadow-md cursor-pointer"
                       >
-                        Carregar Mais Modelos ({filteredModels.length - visibleCount} restantes)
+                        Carregar Mais Modelos
                       </button>
                     </div>
                   )}
@@ -629,7 +631,7 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                     MODELOS SALVOS
                   </span>
                   <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase">
-                    MEUS FAVORITOS ({favoriteModels.length})
+                    MEUS FAVORITOS
                   </h1>
                   <p className="text-neutral-400 text-xs sm:text-sm font-bold">
                     Modelos que você marcou para impressão posterior ou consulta rápida.
@@ -659,10 +661,11 @@ export const MembersArea: React.FC<MembersAreaProps> = ({ currentUser, onLogout 
                 </div>
               ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4">
-                  {favoriteModels.map((model) => (
+                  {favoriteModels.map((model, index) => (
                     <ModelCard
                       key={model.id}
                       model={model}
+                      priority={index < 18}
                       isFavorite={true}
                       onToggleFavorite={handleToggleFavorite}
                       onOpenDetails={handleOpenModel}

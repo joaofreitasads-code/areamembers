@@ -159,7 +159,7 @@ export function isImageCached(url: string): boolean {
  */
 export function preloadPriorityImages(urls: string[]): void {
   if (typeof window === 'undefined') return;
-  const valid = urls.filter(u => u && !loadedImageUrls.has(u)).slice(0, 16);
+  const valid = urls.filter(u => u && !loadedImageUrls.has(u)).slice(0, 36);
   valid.forEach(url => {
     const img = new Image();
     img.referrerPolicy = 'no-referrer';
@@ -176,7 +176,7 @@ export function preloadPriorityImages(urls: string[]): void {
 /**
  * Preload an array of image URLs silently in the background using micro-batched idle execution
  */
-export function preloadImageBatch(urls: string[], limit: number = 72): void {
+export function preloadImageBatch(urls: string[], limit: number = 120): void {
   if (typeof window === 'undefined') return;
 
   const toPreload = urls.filter(u => u && !loadedImageUrls.has(u)).slice(0, limit);
@@ -184,7 +184,7 @@ export function preloadImageBatch(urls: string[], limit: number = 72): void {
 
   const runBatch = () => {
     let idx = 0;
-    const chunk = 8;
+    const chunk = 12;
     const nextChunk = () => {
       if (idx >= toPreload.length) return;
       const slice = toPreload.slice(idx, idx + chunk);
@@ -204,9 +204,9 @@ export function preloadImageBatch(urls: string[], limit: number = 72): void {
       if (idx < toPreload.length) {
         if ('requestIdleCallback' in window) {
           (window as unknown as { requestIdleCallback: (fn: () => void, opts: { timeout: number }) => void })
-            .requestIdleCallback(nextChunk, { timeout: 200 });
+            .requestIdleCallback(nextChunk, { timeout: 150 });
         } else {
-          setTimeout(nextChunk, 25);
+          setTimeout(nextChunk, 20);
         }
       }
     };
@@ -215,8 +215,8 @@ export function preloadImageBatch(urls: string[], limit: number = 72): void {
 
   if ('requestIdleCallback' in window) {
     (window as unknown as { requestIdleCallback: (fn: () => void, opts: { timeout: number }) => void })
-      .requestIdleCallback(runBatch, { timeout: 350 });
+      .requestIdleCallback(runBatch, { timeout: 250 });
   } else {
-    setTimeout(runBatch, 30);
+    setTimeout(runBatch, 25);
   }
 }

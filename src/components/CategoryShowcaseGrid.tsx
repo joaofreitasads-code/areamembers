@@ -111,7 +111,7 @@ export const CategoryShowcaseGrid: React.FC<CategoryShowcaseGridProps> = ({
               {/* Category Content */}
               <div className="relative z-20 space-y-0.5">
                 <span className="text-[10px] font-mono font-black text-[#00A3FF] uppercase tracking-wider block">
-                  {section.count} {section.count === 1 ? 'modelo' : 'modelos'}
+                  COLEÇÃO EXCLUSIVA
                 </span>
                 <h4 className="text-xs font-black text-white group-hover:text-[#00A3FF] transition leading-tight line-clamp-1">
                   {section.shortTitle}

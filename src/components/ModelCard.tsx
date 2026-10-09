@@ -100,10 +100,10 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
     >
       {/* Visual Image Container with Square Aspect Ratio */}
       <div className="w-full aspect-square relative overflow-hidden rounded-lg bg-[#0b1426] flex items-center justify-center group/image select-none border border-[#1b3158]">
-        {/* Placeholder skeleton loader while image is loading */}
+        {/* Subtle background placeholder while image streams in */}
         {hasPhoto && !isLoaded && (
-          <div className="absolute inset-0 bg-[#0e192e] flex items-center justify-center z-0">
-            <Box className="w-8 h-8 text-neutral-400 animate-pulse" />
+          <div className="absolute inset-0 bg-[#0b1426] flex items-center justify-center z-0">
+            <Box className="w-7 h-7 text-neutral-500/60 animate-pulse" />
           </div>
         )}
 
@@ -127,9 +127,7 @@ const ModelCardComponent: React.FC<ModelCardProps> = ({
                 setImageError(true);
               }
             }}
-            className={`w-full h-full object-cover object-center transition-opacity duration-150 group-hover:scale-105 ${
-              isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-            }`}
+            className="w-full h-full object-cover object-center relative z-10 transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
           <div className="flex flex-col items-center justify-center gap-2 text-neutral-400 p-4 text-center">

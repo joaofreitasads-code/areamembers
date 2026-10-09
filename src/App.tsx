@@ -34,6 +34,10 @@ export default function App() {
           '/canecas-gamer/call_of_duty.webp',
           '/canecas-gamer/gta.webp',
           '/canecas-gamer/minecraft.webp',
+          'https://lh3.googleusercontent.com/d/1oZGQMdlviAQ-rinamSPXqcjctkNlTgmt=s220-rw',
+          'https://lh3.googleusercontent.com/d/1X120q3Z6e3BRYCYvI_XnnnKHhl7h0qop=s220-rw',
+          'https://lh3.googleusercontent.com/d/1dukxEHlYOyOvwGJmsKoTr0lxtYXFWf5w=s220-rw',
+          'https://lh3.googleusercontent.com/d/1i_tsKbThJfNOieRfeAty1wxcsAwOaRS_=s220-rw',
           '/estadios/corinthians.webp',
           '/estadios/flamengo.webp',
           '/canecas/corinthians.webp'

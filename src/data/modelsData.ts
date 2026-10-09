@@ -33,7 +33,7 @@ export interface SectionCategory {
   id: string;
   title: string;
   shortTitle: string;
-  iconType: 'box' | 'zap' | 'shield' | 'sparkles' | 'sword' | 'trophy' | 'key' | 'gamepad' | 'bot' | 'lightbulb';
+  iconType: 'box' | 'zap' | 'shield' | 'sparkles' | 'sword' | 'trophy' | 'key' | 'gamepad' | 'bot' | 'lightbulb' | 'cup';
   accentColor: string;
   description: string;
   count: number;
@@ -94,6 +94,16 @@ export const MONSTER_DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/
 
 export const SECTIONS: SectionCategory[] = [
   {
+    id: "sec-portacopos",
+    title: "SESSÃO PORTA COPOS & SUPORTES DE LATA 3D (MONSTER, CERVEJA, GEEK & MOTORES)",
+    shortTitle: "PORTA COPOS & LATAS",
+    iconType: "cup",
+    accentColor: "text-amber-400",
+    description: "Coleção exclusiva com 36 porta copos e suportes de latas 3D (Monster Energy, Motores V6/V8, Cerveja, Coca-Cola, Geek, Spiderman, Bakugou, Alien e muito mais) com imagens reais individuais sem repetição e arquivos STL/3MF para impressão 3D.",
+    count: 36,
+    driveFolderUrl: "https://drive.google.com/drive/folders/1gpQozpi8r-D7BbaZ2Qi6zx4bRihnwu3q?usp=sharing",
+  },
+  {
     id: "sec-canecas-gamer",
     title: "SESSÃO CANECAS GAMER 3D (PLAYSTATION, GTA, CALL OF DUTY, MORTAL KOMBAT & MINECRAFT)",
     shortTitle: "CANECAS GAMER",
@@ -122,6 +132,16 @@ export const SECTIONS: SectionCategory[] = [
     description: "Coleção completa de canecas 3D personalizadas com brasões e escudos de times em alto relevo, alças reforçadas e arquivos STL prontos para impressão 3D.",
     count: 17,
     driveFolderUrl: "https://drive.google.com/drive/folders/1Qu5KADTlKaJNFZytdJqkpPIwkIKn7Ie0?usp=sharing",
+  },
+  {
+    id: "sec-virais",
+    title: "SESSÃO MODELOS VIRAIS 3D (TENDÊNCIAS, PERSONAGENS & REDES SOCIAIS)",
+    shortTitle: "MODELOS VIRAIS 3D",
+    iconType: "zap",
+    accentColor: "text-amber-400",
+    description: "Coleção de 49 modelos 3D virais de alto engajamento nas redes sociais (Akuma, Alien, Arnold, Bart, Batman, Baymax, Blanka, Chucky, Demolidor, Goku, Mario, Meninas Superpoderosas e muito mais) com arquivos STL/3MF e fotos reais individuais.",
+    count: 49,
+    driveFolderUrl: "https://drive.google.com/drive/folders/1267CCso-VTh9r5rXAzTsbHD25gx85yhY?usp=drive_link",
   },
   {
     id: "sec-rpg",
@@ -216,8 +236,8 @@ export const SECTIONS: SectionCategory[] = [
 
   {
     id: "sec-minifiguras",
-    title: "SESSÃO MINIFIGURAS LEGO 500% (99 PERSONAGENS & ÍCONES POP)",
-    shortTitle: "MINIFIGURAS (99)",
+    title: "SESSÃO MINIFIGURAS LEGO 500% (PERSONAGENS & ÍCONES POP)",
+    shortTitle: "MINIFIGURAS",
     iconType: "sparkles",
     accentColor: "text-neutral-400",
     description: "Acervo monumental de 99 minifiguras em escala 500% (~22cm): Ayrton Senna, Harry Potter, Michael Jackson, Luffy, Goku, Darth Vader, Bob Ross, Homem-Aranha e muito mais.",
@@ -30843,11 +30863,15 @@ import { DISNEY_MODELS } from './disneyModels';
 import { CANECAS_MODELS } from './canecasModels';
 import { ESTADIOS_MODELS } from './estadiosModels';
 import { CANECAS_GAMER_MODELS } from './canecasGamerModels';
+import { PORTA_COPOS_MODELS } from './portaCoposModels';
+import { VIRAIS_MODELS } from './viraisModels';
 
 export const ALL_MODELS: ModelItem[] = [
+  ...PORTA_COPOS_MODELS,
   ...CANECAS_GAMER_MODELS,
   ...ESTADIOS_MODELS,
   ...CANECAS_MODELS,
+  ...VIRAIS_MODELS,
   ...CHAVEIROS_MODELS,
   ...MASCOTES_MODELS,
   ...RPG_MODELS,
